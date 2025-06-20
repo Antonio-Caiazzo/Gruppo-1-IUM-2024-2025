@@ -17,35 +17,6 @@ class QuizResultsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        elevation: 0,
-        leading: const SizedBox(), // Nessun pulsante indietro su questa schermata
-        centerTitle: true,
-        title: const Text(
-          '9:41',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 16,
-            fontWeight: FontWeight.w600,
-          ),
-        ),
-        actions: [
-          Container(
-            padding: const EdgeInsets.only(right: 16),
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: const [
-                Icon(Icons.signal_cellular_4_bar, color: Colors.black, size: 16),
-                SizedBox(width: 4),
-                Icon(Icons.wifi, color: Colors.black, size: 16),
-                SizedBox(width: 4),
-                Icon(Icons.battery_full, color: Colors.black, size: 16),
-              ],
-            ),
-          ),
-        ],
-      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
