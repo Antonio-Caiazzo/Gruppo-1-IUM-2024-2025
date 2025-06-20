@@ -69,6 +69,16 @@ flutter:
     - assets/lingua.png
     - assets/tevere.jpg
     - assets/augusto.jpg
+    - assets/francia.jpg
+    - assets/luigi.jpg
+    - assets/inizio.jpg
+    - assets/terrore.jpg
+    - assets/documento.jpg
+    - assets/generale.jpg
+    - assets/ghigliottina.jpg
+    - assets/organo.jpg
+    - assets/motto.jpg
+    - assets/battaglia.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
