@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="NONE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="." />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ClangdSettings">
+    <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Dart File" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="Choaib's-Workflow" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;RedMulaCrackIn&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/Antonio-Caiazzo/Gruppo-1-IUM-2024-2025.git&quot;,
+    &quot;accountId&quot;: &quot;e68fe292-a729-42aa-9132-50dd3a3dd674&quot;
+  }
+}</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
+  <component name="ProjectId" id="2ymMy602GQMNv4A2Yn7WgtZqmtE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.main.dart.executor": "Run",
+    "Flutter.quiz_runner.dart.executor": "Run",
+    "Flutter.quiz_screen.dart.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/flutter/bin/cache/dart-sdk",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
+  }
+}]]></component>
+  <component name="RunManager" selected="Flutter.quiz_runner.dart">
+    <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/main.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="quiz_runner.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/quiz_runner.dart" />
+      <method v="2" />
+    </configuration>
+    <configuration name="quiz_screen.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/screens/quiz_screen.dart" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Flutter.quiz_screen.dart" />
+        <item itemvalue="Flutter.quiz_runner.dart" />
+        <item itemvalue="Flutter.main.dart" />
+        <item itemvalue="Flutter.quiz_runner.dart" />
+        <item itemvalue="Flutter.quiz_screen.dart" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="" />
+      <created>1750435549513</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1750435549513</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Add assets for Roman history&#10;&#10;This commit adds the following assets:&#10;- colosseum.png&#10;- forum.png&#10;- trophy.png&#10;- caesar.png&#10;- rivoluzione.png&#10;- costantino.jpg&#10;- appia.jpg&#10;- lupo.jpg&#10;- venere.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- tevere.jpg&#10;- augusto.jpg&#10;&#10;These assets will be used to enhance the user experience and provide visual context for the Roman history content.">
+      <option name="closed" value="true" />
+      <created>1750459004546</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459004546</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Add Roman Empire and French Revolution quiz data&#10;&#10;This commit introduces two new lists of `QuizQuestion` objects:&#10;- `romanEmpireQuestions`: Contains questions related to the Roman Empire.&#10;- `frenchRevolutionQuestions`: Contains questions related to the French Revolution.&#10;&#10;Each question includes the question text, a list of possible answers, the index of the correct answer, and an optional image path.">
+      <option name="closed" value="true" />
+      <created>1750459031987</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459031987</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Create QuizIntroScreen&#10;&#10;This commit introduces the `QuizIntroScreen` widget, which serves as an introductory screen before starting a quiz.&#10;&#10;Key features:&#10;- Displays the quiz title, description, and an associated image dynamically.&#10;- Provides an &quot;Inizia il Quiz!&quot; button to navigate to the `QuizScreen`.&#10;- Implements an exit confirmation dialog when the back button is pressed.&#10;- Includes a bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; items.&#10;- &quot;Home&quot; navigates back to the `QuizSelectionScreen`.&#10;- &quot;Conversazioni&quot; and &quot;Impostazioni&quot; are placeholders for future functionality.&#10;- The design aims for a clean and user-friendly interface.">
+      <option name="closed" value="true" />
+      <created>1750459045834</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459045834</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Create quiz models&#10;&#10;This commit introduces two new classes: `QuizQuestion` and `QuizResult`.&#10;&#10;The `QuizQuestion` class represents a single quiz question and includes:&#10;- The question text (`question`)&#10;- A list of possible answers (`answers`)&#10;- The index of the correct answer (`correctAnswerIndex`)&#10;- An optional image path (`imagePath`)&#10;&#10;The `QuizResult` class stores the results of a quiz and includes:&#10;- The number of correct answers (`correctAnswers`)&#10;- The number of incorrect answers (`incorrectAnswers`)&#10;- The total number of questions (`totalQuestions`)&#10;- A list of the user's answers (`userAnswers`)&#10;- A list of the correct answer indices (`correctAnswerIndices`)">
+      <option name="closed" value="true" />
+      <created>1750459052581</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459052581</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Create quiz results screen&#10;&#10;This commit introduces a new `QuizResultsScreen` widget that displays the results of a completed quiz.&#10;&#10;The screen shows:&#10;- A &quot;Quiz completato!&quot; message.&#10;- Motivational text.&#10;- Statistics for correct and incorrect answers.&#10;- A trophy image.&#10;- A button to return to the quiz selection screen.&#10;- A bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; options.&#10;&#10;The `onQuizCompleted` callback is triggered when the user navigates back to the quiz selection screen.">
+      <option name="closed" value="true" />
+      <created>1750459061291</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459061291</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Create quiz_runner.dart&#10;&#10;This commit creates the `quiz_runner.dart` file.&#10;&#10;This file defines the main application widget `QuizApp`, which sets up the MaterialApp with a title, theme, initial route, and routes. It also imports the `QuizSelectionScreen` and sets it as the initial route.">
+      <option name="closed" value="true" />
+      <created>1750459068568</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459068568</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Create QuizScreen with enhanced UI and feedback&#10;&#10;This commit introduces the `QuizScreen` widget, which handles the quiz-taking experience.&#10;&#10;Key features include:&#10;- Display of questions with optional images.&#10;- Multiple-choice answers with visual feedback for selected, correct, and incorrect options.&#10;- Progress bar and question counter.&#10;- &quot;Controlla&quot; (Check) button to verify the answer and &quot;Avanti&quot; (Next) button to proceed.&#10;- Exit confirmation dialog.&#10;- Navigation to `QuizResultsScreen` upon quiz completion.&#10;- Callback functions `onQuizCompleted` and `onQuizExited` to notify parent widgets.&#10;&#10;The UI has been styled with rounded corners, shadows, and color-coded feedback for a more engaging user experience.">
+      <option name="closed" value="true" />
+      <created>1750459076469</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459076469</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Create QuizSelectionScreen&#10;&#10;This commit introduces a new screen, `QuizSelectionScreen`, which allows users to select a historical period for a quiz.&#10;&#10;The screen displays a list of available quizzes as cards, each with a title and an image. Tapping on a card navigates to the `QuizIntroScreen` for the selected quiz.&#10;&#10;The screen also includes a bottom navigation bar for navigating between Home, Conversations, and Settings (currently implemented with placeholder SnackBars for Conversations and Settings).&#10;&#10;Key features:&#10;- Displays a list of quiz options.&#10;- Navigates to the `QuizIntroScreen` upon selection.&#10;- Includes a bottom navigation bar.&#10;- Implements a method to return to the quiz selection screen after quiz completion or exit.">
+      <option name="closed" value="true" />
+      <created>1750459084019</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459084019</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Create QuizWidget&#10;&#10;This commit introduces the `QuizWidget` class, which serves as an entry point for the quiz functionality.&#10;&#10;The `QuizWidget`:&#10;- Takes optional `onQuizCompleted` and `onQuizExited` callbacks to notify the parent application about the quiz flow's state.&#10;- Directly displays the `QuizIntroScreen`.&#10;- Passes the quiz data (`romanEmpireQuestions`) and the callbacks to the `QuizIntroScreen`.&#10;&#10;Navigation within the quiz (Intro -&gt; Quiz -&gt; Results) is managed by pushing `MaterialPageRoute` instances.">
+      <option name="closed" value="true" />
+      <created>1750459092912</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459092912</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml">
+      <option name="closed" value="true" />
+      <created>1750459119999</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1750459119999</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Add assets for Roman history&#10;&#10;This commit adds the following assets:&#10;- colosseum.png&#10;- forum.png&#10;- trophy.png&#10;- caesar.png&#10;- rivoluzione.png&#10;- costantino.jpg&#10;- appia.jpg&#10;- lupo.jpg&#10;- venere.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- tevere.jpg&#10;- augusto.jpg&#10;&#10;These assets will be used to enhance the user experience and provide visual context for the Roman history content." />
+    <MESSAGE value="Add Roman Empire and French Revolution quiz data&#10;&#10;This commit introduces two new lists of `QuizQuestion` objects:&#10;- `romanEmpireQuestions`: Contains questions related to the Roman Empire.&#10;- `frenchRevolutionQuestions`: Contains questions related to the French Revolution.&#10;&#10;Each question includes the question text, a list of possible answers, the index of the correct answer, and an optional image path." />
+    <MESSAGE value="Create QuizIntroScreen&#10;&#10;This commit introduces the `QuizIntroScreen` widget, which serves as an introductory screen before starting a quiz.&#10;&#10;Key features:&#10;- Displays the quiz title, description, and an associated image dynamically.&#10;- Provides an &quot;Inizia il Quiz!&quot; button to navigate to the `QuizScreen`.&#10;- Implements an exit confirmation dialog when the back button is pressed.&#10;- Includes a bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; items.&#10;- &quot;Home&quot; navigates back to the `QuizSelectionScreen`.&#10;- &quot;Conversazioni&quot; and &quot;Impostazioni&quot; are placeholders for future functionality.&#10;- The design aims for a clean and user-friendly interface." />
+    <MESSAGE value="Create quiz models&#10;&#10;This commit introduces two new classes: `QuizQuestion` and `QuizResult`.&#10;&#10;The `QuizQuestion` class represents a single quiz question and includes:&#10;- The question text (`question`)&#10;- A list of possible answers (`answers`)&#10;- The index of the correct answer (`correctAnswerIndex`)&#10;- An optional image path (`imagePath`)&#10;&#10;The `QuizResult` class stores the results of a quiz and includes:&#10;- The number of correct answers (`correctAnswers`)&#10;- The number of incorrect answers (`incorrectAnswers`)&#10;- The total number of questions (`totalQuestions`)&#10;- A list of the user's answers (`userAnswers`)&#10;- A list of the correct answer indices (`correctAnswerIndices`)" />
+    <MESSAGE value="Create quiz results screen&#10;&#10;This commit introduces a new `QuizResultsScreen` widget that displays the results of a completed quiz.&#10;&#10;The screen shows:&#10;- A &quot;Quiz completato!&quot; message.&#10;- Motivational text.&#10;- Statistics for correct and incorrect answers.&#10;- A trophy image.&#10;- A button to return to the quiz selection screen.&#10;- A bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; options.&#10;&#10;The `onQuizCompleted` callback is triggered when the user navigates back to the quiz selection screen." />
+    <MESSAGE value="Create quiz_runner.dart&#10;&#10;This commit creates the `quiz_runner.dart` file.&#10;&#10;This file defines the main application widget `QuizApp`, which sets up the MaterialApp with a title, theme, initial route, and routes. It also imports the `QuizSelectionScreen` and sets it as the initial route." />
+    <MESSAGE value="Create QuizScreen with enhanced UI and feedback&#10;&#10;This commit introduces the `QuizScreen` widget, which handles the quiz-taking experience.&#10;&#10;Key features include:&#10;- Display of questions with optional images.&#10;- Multiple-choice answers with visual feedback for selected, correct, and incorrect options.&#10;- Progress bar and question counter.&#10;- &quot;Controlla&quot; (Check) button to verify the answer and &quot;Avanti&quot; (Next) button to proceed.&#10;- Exit confirmation dialog.&#10;- Navigation to `QuizResultsScreen` upon quiz completion.&#10;- Callback functions `onQuizCompleted` and `onQuizExited` to notify parent widgets.&#10;&#10;The UI has been styled with rounded corners, shadows, and color-coded feedback for a more engaging user experience." />
+    <MESSAGE value="Create QuizSelectionScreen&#10;&#10;This commit introduces a new screen, `QuizSelectionScreen`, which allows users to select a historical period for a quiz.&#10;&#10;The screen displays a list of available quizzes as cards, each with a title and an image. Tapping on a card navigates to the `QuizIntroScreen` for the selected quiz.&#10;&#10;The screen also includes a bottom navigation bar for navigating between Home, Conversations, and Settings (currently implemented with placeholder SnackBars for Conversations and Settings).&#10;&#10;Key features:&#10;- Displays a list of quiz options.&#10;- Navigates to the `QuizIntroScreen` upon selection.&#10;- Includes a bottom navigation bar.&#10;- Implements a method to return to the quiz selection screen after quiz completion or exit." />
+    <MESSAGE value="Create QuizWidget&#10;&#10;This commit introduces the `QuizWidget` class, which serves as an entry point for the quiz functionality.&#10;&#10;The `QuizWidget`:&#10;- Takes optional `onQuizCompleted` and `onQuizExited` callbacks to notify the parent application about the quiz flow's state.&#10;- Directly displays the `QuizIntroScreen`.&#10;- Passes the quiz data (`romanEmpireQuestions`) and the callbacks to the `QuizIntroScreen`.&#10;&#10;Navigation within the quiz (Intro -&gt; Quiz -&gt; Results) is managed by pushing `MaterialPageRoute` instances." />
+    <MESSAGE value="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
+  </component>
+</project>
