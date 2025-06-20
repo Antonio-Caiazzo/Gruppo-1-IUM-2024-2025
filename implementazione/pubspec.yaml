@@ -56,7 +56,19 @@ flutter:
   assets:
     - assets/teacher.png
     - assets/student.png
-
+    - assets/colosseum.png
+    - assets/forum.png
+    - assets/trophy.png
+    - assets/caesar.png
+    - assets/rivoluzione.png
+    - assets/costantino.jpg
+    - assets/appia.jpg
+    - assets/lupo.jpg
+    - assets/venere.jpg
+    - assets/gladiator.jpg
+    - assets/lingua.png
+    - assets/tevere.jpg
+    - assets/augusto.jpg
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
