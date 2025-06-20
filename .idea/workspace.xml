@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="" />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="." />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -52,25 +52,26 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
-    &quot;Flutter.quiz_runner.dart.executor&quot;: &quot;Run&quot;,
-    &quot;Flutter.quiz_screen.dart.executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
-    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
-    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
-    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
-    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
-    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;last_opened_file_path&quot;: &quot;C:/flutter/bin/cache/dart-sdk&quot;,
-    &quot;settings.editor.selected.configurable&quot;: &quot;AndroidSdkUpdater&quot;,
-    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "Flutter.main.dart.executor": "Run",
+    "Flutter.quiz_runner.dart.executor": "Run",
+    "Flutter.quiz_screen.dart.executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.cidr.known.project.marker": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "cf.first.check.clang-format": "false",
+    "cidr.known.project.marker": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "main",
+    "io.flutter.reload.alreadyRun": "true",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "C:/flutter/bin/cache/dart-sdk",
+    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "show.migrate.to.gradle.popup": "false"
   }
-}</component>
+}]]></component>
   <component name="RunManager" selected="Flutter.quiz_runner.dart">
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/main.dart" />
@@ -186,6 +187,44 @@
     <option name="localTasksCounter" value="11" />
     <servers />
   </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="main" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="main" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Add assets for Roman history&#10;&#10;This commit adds the following assets:&#10;- colosseum.png&#10;- forum.png&#10;- trophy.png&#10;- caesar.png&#10;- rivoluzione.png&#10;- costantino.jpg&#10;- appia.jpg&#10;- lupo.jpg&#10;- venere.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- tevere.jpg&#10;- augusto.jpg&#10;&#10;These assets will be used to enhance the user experience and provide visual context for the Roman history content." />
     <MESSAGE value="Add Roman Empire and French Revolution quiz data&#10;&#10;This commit introduces two new lists of `QuizQuestion` objects:&#10;- `romanEmpireQuestions`: Contains questions related to the Roman Empire.&#10;- `frenchRevolutionQuestions`: Contains questions related to the French Revolution.&#10;&#10;Each question includes the question text, a list of possible answers, the index of the correct answer, and an optional image path." />
@@ -197,6 +236,7 @@
     <MESSAGE value="Create QuizSelectionScreen&#10;&#10;This commit introduces a new screen, `QuizSelectionScreen`, which allows users to select a historical period for a quiz.&#10;&#10;The screen displays a list of available quizzes as cards, each with a title and an image. Tapping on a card navigates to the `QuizIntroScreen` for the selected quiz.&#10;&#10;The screen also includes a bottom navigation bar for navigating between Home, Conversations, and Settings (currently implemented with placeholder SnackBars for Conversations and Settings).&#10;&#10;Key features:&#10;- Displays a list of quiz options.&#10;- Navigates to the `QuizIntroScreen` upon selection.&#10;- Includes a bottom navigation bar.&#10;- Implements a method to return to the quiz selection screen after quiz completion or exit." />
     <MESSAGE value="Create QuizWidget&#10;&#10;This commit introduces the `QuizWidget` class, which serves as an entry point for the quiz functionality.&#10;&#10;The `QuizWidget`:&#10;- Takes optional `onQuizCompleted` and `onQuizExited` callbacks to notify the parent application about the quiz flow's state.&#10;- Directly displays the `QuizIntroScreen`.&#10;- Passes the quiz data (`romanEmpireQuestions`) and the callbacks to the `QuizIntroScreen`.&#10;&#10;Navigation within the quiz (Intro -&gt; Quiz -&gt; Results) is managed by pushing `MaterialPageRoute` instances." />
     <MESSAGE value="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml" />
-    <option name="LAST_COMMIT_MESSAGE" value="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml" />
+    <MESSAGE value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="." />
   </component>
 </project>
