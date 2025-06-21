@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="." />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/android/app/build.gradle.kts" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/android/app/build.gradle.kts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/quiz_runner.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/quiz_runner.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/quiz_intro_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/quiz_intro_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/quiz_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/quiz_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +20,18 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand />
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -61,13 +81,16 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "ScreenRecorder.SavePath": "C:\\Users\\sicka\\Downloads",
+    "android.gradle.sync.needed": "true",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/flutter/bin/cache/dart-sdk",
+    "last_opened_file_path": "C:/Users/sicka/StudioProjects/Gruppo-1-IUM-2024-2025/implementazione/android/settings.gradle.kts",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "show.migrate.to.gradle.popup": "false"
   }
@@ -87,11 +110,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Flutter.quiz_screen.dart" />
         <item itemvalue="Flutter.quiz_runner.dart" />
         <item itemvalue="Flutter.main.dart" />
-        <item itemvalue="Flutter.quiz_runner.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
+        <item itemvalue="Flutter.quiz_screen.dart" />
+        <item itemvalue="Flutter.quiz_runner.dart" />
       </list>
     </recent_temporary>
   </component>
@@ -237,6 +260,6 @@
     <MESSAGE value="Create QuizWidget&#10;&#10;This commit introduces the `QuizWidget` class, which serves as an entry point for the quiz functionality.&#10;&#10;The `QuizWidget`:&#10;- Takes optional `onQuizCompleted` and `onQuizExited` callbacks to notify the parent application about the quiz flow's state.&#10;- Directly displays the `QuizIntroScreen`.&#10;- Passes the quiz data (`romanEmpireQuestions`) and the callbacks to the `QuizIntroScreen`.&#10;&#10;Navigation within the quiz (Intro -&gt; Quiz -&gt; Results) is managed by pushing `MaterialPageRoute` instances." />
     <MESSAGE value="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <option name="LAST_COMMIT_MESSAGE" value="" />
   </component>
 </project>
