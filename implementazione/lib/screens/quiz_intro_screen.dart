@@ -146,7 +146,7 @@ class QuizIntroScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
                 children: [
-                  const TextSpan(text: 'Pronto per il '),
+                  const TextSpan(text: 'Pronto per '),
                   TextSpan(
                     text: '$quizTitle Quiz?', // Usa il titolo dinamico
                     style: const TextStyle(color: Colors.blue),
