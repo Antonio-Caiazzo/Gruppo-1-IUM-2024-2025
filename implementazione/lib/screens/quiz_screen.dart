@@ -127,7 +127,7 @@ class _QuizScreenState extends State<QuizScreen> {
                         child: ElevatedButton(
                           onPressed: () => Navigator.of(context).pop(), // Close dialog
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF007BFF),
+                            backgroundColor: const Color(0xFFFF3B30),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -136,7 +136,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             padding: EdgeInsets.zero,
                           ),
                           child: const Text(
-                            'Rimani nel Quiz',
+                            'Esci dal quiz',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
@@ -159,7 +159,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             });
                           },
                           style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFFF3B30),
+                            backgroundColor: const Color(0xFF007BFF),
                             foregroundColor: Colors.white,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(4),
@@ -168,7 +168,7 @@ class _QuizScreenState extends State<QuizScreen> {
                             padding: EdgeInsets.zero,
                           ),
                           child: const Text(
-                            'Esci dal Quiz',
+                            'Rimani nel Quiz',
                             style: TextStyle(
                               fontSize: 16,
                               fontWeight: FontWeight.w600,
