@@ -4,6 +4,7 @@ import '../screens/quiz_selection_screen.dart';
 import '../widgets/student_bottom_nav_bar.dart';
 import 'conversations_student_screen.dart';
 import 'settings_student_screen.dart';
+import 'schermata_domande.dart';
 
 class HomeStudentScreen extends StatefulWidget {
   final String name;
@@ -121,7 +122,12 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
                 _GridTile(
                   label: "Domande",
                   assetPath: "assets/domande.png",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => SchermataDomande()),
+                    );
+                  },
                 ),
               ],
             ),

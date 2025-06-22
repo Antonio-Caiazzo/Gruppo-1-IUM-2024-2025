@@ -1,7 +1,6 @@
-// lib/screens/schermata_conversazione.dart
-
 import 'package:flutter/material.dart';
 import '../models/domanda_model.dart';
+import '../constants/colors.dart';
 
 class SchermataConversazione extends StatefulWidget {
   final DomandaModel domanda;
@@ -31,6 +30,7 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
         widget.domanda.stato = StatoDomanda.incompleta;
         widget.onRispostaInviata(widget.domanda);
       }
+      _textController.text = widget.domanda.testo;
       _focusNode.requestFocus();
     });
   }
@@ -65,11 +65,7 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
                 ),
               ),
             ),
-
-            Expanded(
-              flex: 3,
-              child: _buildMessagesArea(),
-            ),
+            Expanded(flex: 3, child: _buildMessagesArea()),
             _buildInputArea(),
           ],
         ),
@@ -78,65 +74,82 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
   }
 
   Future<bool> _onWillPop() async {
-    return (await showDialog(
-      context: context,
-      builder: (context) => AlertDialog(
-        title: const Text(
-          'Attenzione !',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
-        ),
-        content: const Text(
-          'Se esci senza salvare, perderai la conversazione',
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 14),
-        ),
-        actions: <Widget>[
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              // Bottone "Torna indietro" - Ora a sinistra e ROSSO
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(true),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.red.shade400, // CAMBIATO: Rosso
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+    return await showDialog(
+          context: context,
+          builder: (_) => Dialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24.0),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Attenzione !',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  minimumSize: const Size(120, 40),
-                ),
-                child: const Text(
-                  'Torna indietro',
-                  style: TextStyle(fontSize: 14),
-                ),
-              ),
-              const SizedBox(width: 10),
-              // Bottone "Rimani in chat" - Ora a destra e BLU
-              TextButton(
-                onPressed: () => Navigator.of(context).pop(false),
-                style: TextButton.styleFrom(
-                  backgroundColor: Colors.blue.shade400, // CAMBIATO: Blu
-                  foregroundColor: Colors.white,
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(8),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Se esci senza salvare, perderai la conversazione',
+                    textAlign: TextAlign.center,
+                    style: TextStyle(fontSize: 14),
                   ),
-                  padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 10),
-                  minimumSize: const Size(120, 40),
-                ),
-                child: const Text(
-                  'Rimani in chat',
-                  style: TextStyle(fontSize: 14),
-                ),
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(false),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            elevation: 0,
+                          ),
+                          child: const Text(
+                            'Rimani in chat',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.of(context).pop(true),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFDF1818),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            elevation: 0,
+                          ),
+                          child: const Text(
+                            'Torna indietro',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-            ],
+            ),
           ),
-        ],
-      ),
-    )) ?? false;
+        ) ??
+        false;
   }
-
 
   PreferredSizeWidget _buildAppBar() {
     return AppBar(
@@ -172,21 +185,13 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 16),
       child: messaggiUtente.isEmpty
-          ? const Center(
-        child: Text(
-          'Inizia a scrivere la tua risposta...',
-          style: TextStyle(
-            color: Colors.grey,
-            fontSize: 16,
-          ),
-        ),
-      )
+          ? const SizedBox.shrink()
           : ListView.builder(
-        itemCount: messaggiUtente.length,
-        itemBuilder: (context, index) {
-          return _buildUserMessage(messaggiUtente[index]);
-        },
-      ),
+              itemCount: messaggiUtente.length,
+              itemBuilder: (context, index) {
+                return _buildUserMessage(messaggiUtente[index]);
+              },
+            ),
     );
   }
 
@@ -197,15 +202,12 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
         margin: const EdgeInsets.only(bottom: 8, left: 50),
         padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 12),
         decoration: BoxDecoration(
-          color: const Color(0xFF42A5F5),
+          color: AppColors.primary,
           borderRadius: BorderRadius.circular(18),
         ),
         child: Text(
           message,
-          style: const TextStyle(
-            color: Colors.white,
-            fontSize: 16,
-          ),
+          style: const TextStyle(color: Colors.white, fontSize: 16),
         ),
       ),
     );
@@ -273,11 +275,7 @@ class _SchermataConversazioneState extends State<SchermataConversazione> {
                 color: const Color(0xFF29B6F6),
                 borderRadius: BorderRadius.circular(20),
               ),
-              child: const Icon(
-                Icons.send,
-                color: Colors.white,
-                size: 20,
-              ),
+              child: const Icon(Icons.send, color: Colors.white, size: 20),
             ),
           ),
         ],
