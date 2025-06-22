@@ -58,7 +58,8 @@ class QuizIntroScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
                 children: [
-                  TextSpan(text: 'Pronto per il quiz ${getIntroPrefix()} '),
+TextSpan(text: 'Pronto per il quiz ${getIntroPrefix()} '),
+
                   TextSpan(
                     text: quizTitle,
                     style: const TextStyle(color: AppColors.primary),

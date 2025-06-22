@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: com.android.tools.analytics-library:tracker:31.7.3" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="com.android.tools.analytics-library" artifactId="tracker" version="31.7.3" baseVersion="31.7.3" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/31.7.3/4f92e4165dc453485633b1461e1b822451484000/tracker-31.7.3.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.android.tools.analytics-library/tracker/31.7.3/4c7b1dec6e284e147053b4c159b9b75151ca5010/tracker-31.7.3-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

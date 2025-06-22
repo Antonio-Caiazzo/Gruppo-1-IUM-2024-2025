@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="Gradle: org.jetbrains.kotlin:kotlin-build-common:1.8.0" type="java-imported" external-system-id="GRADLE">
+    <properties groupId="org.jetbrains.kotlin" artifactId="kotlin-build-common" version="1.8.0" baseVersion="1.8.0" />
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.8.0/90035b6ebbdbbd3c09300d9ba084ce8f5f03b81a/kotlin-build-common-1.8.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-build-common/1.8.0/457148bcc3aeed43ff527a40ff7f8b76a0c2a4f1/kotlin-build-common-1.8.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
