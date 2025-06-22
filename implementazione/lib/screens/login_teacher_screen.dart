@@ -27,25 +27,22 @@ class _LoginTeacherScreenState extends State<LoginTeacherScreen> {
       return;
     }
 
+    // Controllo credenziali fisse di default
+    if (email == "email@insegnante.com" && password == "Password123") {
+      _goToHome(name: "Mr. Clarke");
+      return;
+    }
+
+    // Controllo credenziali salvate da registrazione
     final prefs = await SharedPreferences.getInstance();
     final savedEmail = prefs.getString("teacher_email");
     final savedPassword = prefs.getString("teacher_password");
     final savedName = prefs.getString("teacher_name") ?? "Mr. Clarke";
 
-    if (savedEmail == null || savedPassword == null) {
-      // Nessun dato salvato → login come Mr. Clarke
-      _goToHome(name: "Mr. Clarke");
-    } else if (email == savedEmail) {
-      // Email corretta
-      if (password == savedPassword) {
-        _goToHome(name: savedName);
-      } else {
-        // Password errata
-        _showErrorDialog("Credenziali non valide.");
-      }
+    if (email == savedEmail && password == savedPassword) {
+      _goToHome(name: savedName);
     } else {
-      // Email non corrisponde → login come Mr. Clarke
-      _goToHome(name: "Mr. Clarke");
+      _showErrorDialog("Credenziali non valide.");
     }
   }
 

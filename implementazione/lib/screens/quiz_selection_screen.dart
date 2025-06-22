@@ -1,59 +1,70 @@
-// lib/screens/quiz_selection_screen.dart
 import 'package:flutter/material.dart';
 import '../data/quiz_data.dart';
+import '../models/quiz_models.dart';
+import '../constants/colors.dart';
 import 'quiz_intro_screen.dart';
+import '../widgets/student_bottom_nav_bar.dart';
+import 'home_student_screen.dart';
+import 'conversations_student_screen.dart';
+import 'settings_student_screen.dart';
 
-class QuizSelectionScreen extends StatefulWidget {
+class QuizSelectionScreen extends StatelessWidget {
   static const String routeName = '/quizSelection';
 
-  const QuizSelectionScreen({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+  final String classCode;
 
-  @override
-  State<QuizSelectionScreen> createState() => _QuizSelectionScreenState();
-}
+  const QuizSelectionScreen({
+    super.key,
+    required this.name,
+    required this.surname,
+    required this.classCode,
+  });
 
-class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
-  int _selectedIndex = 0;
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-    switch (index) {
-      case 0:
-      // Se sei già sulla Home/Quiz Selection, non fare nulla di specifico per ora
-        break;
-      case 1:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Conversazioni in arrivo')),
-        );
-        break;
-      case 2:
-        ScaffoldMessenger.of(context).showSnackBar(
-          const SnackBar(content: Text('Impostazioni in arrivo')),
-        );
-        break;
-    }
-  }
-
-  void _returnToQuizSelection() {
-    Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
+  void _navigateToQuiz(
+    BuildContext context, {
+    required String title,
+    required String description,
+    required String image,
+    required List<QuizQuestion> questions,
+  }) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => QuizIntroScreen(
+          quizTitle: title,
+          quizDescription: description,
+          quizImage: image,
+          questions: questions,
+          onQuizCompleted: () => Navigator.of(
+            context,
+          ).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName)),
+          onQuizExited: () => Navigator.of(
+            context,
+          ).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName)),
+        ),
+      ),
+    );
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Bianco come da design
+      backgroundColor: AppColors.background,
       appBar: AppBar(
-        backgroundColor: Colors.white,
+        backgroundColor: AppColors.background,
         elevation: 0,
         leading: const BackButton(color: Colors.black),
-        title: const Text(
-          'Quiz',
-          style: TextStyle(
-            color: Colors.black,
-            fontSize: 22,
-            fontWeight: FontWeight.bold,
+        title: const Padding(
+          padding: EdgeInsets.only(top: 8.0),
+          child: Text(
+            'Quiz',
+            style: TextStyle(
+              color: Colors.black,
+              fontSize: 28,
+              fontWeight: FontWeight.bold,
+            ),
           ),
         ),
         centerTitle: true,
@@ -61,95 +72,101 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            const SizedBox(height: 16),
-            const Center(
-              child: Text(
-                'Seleziona un periodo storico',
-                style: TextStyle(
-                  fontSize: 17,
-                  color: Colors.black87,
-                  fontWeight: FontWeight.normal,
-                ),
-              ),
+            const SizedBox(height: 12),
+            const Text(
+              'Seleziona un periodo storico',
+              style: TextStyle(fontSize: 18, color: Colors.black87),
+              textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
+            const SizedBox(height: 24),
             Expanded(
               child: ListView(
-                padding: EdgeInsets.zero,
                 children: [
                   _buildQuizCard(
+                    context,
                     title: 'Impero Romano',
                     imagePath: 'assets/colosseum.png',
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QuizIntroScreen(
-                            quizTitle: 'Impero Romano', // Passa il titolo corretto
-                            quizDescription: 'Inizia il quiz e dimostra la tua conoscenza sull\'Impero Romano.', // Passa la descrizione corretta
-                            quizImage: 'assets/colosseum.png', // Passa l'immagine corretta
-                            questions: romanEmpireQuestions,
-                            onQuizCompleted: _returnToQuizSelection,
-                            onQuizExited: _returnToQuizSelection,
-                          ),
-                        ),
-                      );
-                    },
+                    onTap: () => _navigateToQuiz(
+                      context,
+                      title: 'Impero Romano',
+                      description:
+                          'Inizia il quiz e dimostra la tua conoscenza sull\'Impero Romano.',
+                      image: 'assets/colosseum.png',
+                      questions: romanEmpireQuestions,
+                    ),
                   ),
-                  const SizedBox(height: 20),
+                  const SizedBox(height: 24),
                   _buildQuizCard(
+                    context,
                     title: 'Rivoluzione Francese',
-                    imagePath: 'assets/rivoluzione.png', // Modificato a 'assets/napoleon.png' per coerenza con i design
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => QuizIntroScreen(
-                            quizTitle: 'Rivoluzione Francese', // Passa il titolo corretto
-                            quizDescription: 'Metti alla prova le tue conoscenze sulla Rivoluzione Francese!', // Passa la descrizione corretta
-                            quizImage: 'assets/rivoluzione.png', // Passa l'immagine corretta
-                            questions: frenchRevolutionQuestions,
-                            onQuizCompleted: _returnToQuizSelection,
-                            onQuizExited: _returnToQuizSelection,
-                          ),
-                        ),
-                      );
-                    },
+                    imagePath: 'assets/rivoluzione.png',
+                    onTap: () => _navigateToQuiz(
+                      context,
+                      title: 'Rivoluzione Francese',
+                      description:
+                          'Metti alla prova le tue conoscenze sulla Rivoluzione Francese!',
+                      image: 'assets/rivoluzione.png',
+                      questions: frenchRevolutionQuestions,
+                    ),
                   ),
-                  const SizedBox(height: 20),
                 ],
               ),
             ),
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 28),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat, size: 28),
-            label: 'Conversazioni',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings, size: 28),
-            label: 'Impostazioni',
-          ),
-        ],
+      bottomNavigationBar: StudentBottomNavigationBar(
+        currentIndex: -1,
+        name: name,
+        surname: surname,
+        classCode: classCode,
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => HomeStudentScreen(
+                    name: name,
+                    surname: surname,
+                    classCode: classCode,
+                  ),
+                ),
+              );
+              break;
+            case 1:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => ConversationsStudentScreen(
+                    name: name,
+                    surname: surname,
+                    classCode: classCode,
+                  ),
+                ),
+              );
+              break;
+            case 2:
+              Navigator.pushReplacement(
+                context,
+                MaterialPageRoute(
+                  builder: (_) => SettingsStudentScreen(
+                    name: name,
+                    surname: surname,
+                    classCode: classCode,
+                  ),
+                ),
+              );
+              break;
+          }
+        },
       ),
     );
   }
 
-  Widget _buildQuizCard({
+  Widget _buildQuizCard(
+    BuildContext context, {
     required String title,
     required String imagePath,
     required VoidCallback onTap,
@@ -157,8 +174,7 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
     return GestureDetector(
       onTap: onTap,
       child: Container(
-        margin: const EdgeInsets.symmetric(vertical: 8),
-        height: 220,
+        height: 260,
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
@@ -173,32 +189,39 @@ class _QuizSelectionScreenState extends State<QuizSelectionScreen> {
         child: Column(
           children: [
             Expanded(
-              flex: 3,
+              flex: 4,
               child: ClipRRect(
-                borderRadius: const BorderRadius.vertical(top: Radius.circular(20)),
+                borderRadius: const BorderRadius.vertical(
+                  top: Radius.circular(20),
+                ),
                 child: Image.asset(
                   imagePath,
-                  fit: BoxFit.contain, // Modificato da .cover a .contain per adattarsi meglio al design
+                  fit: BoxFit.contain,
                   width: double.infinity,
                   errorBuilder: (context, error, stackTrace) {
                     return Container(
                       color: Colors.grey[200],
                       child: Center(
-                        child: Icon(Icons.broken_image, size: 50, color: Colors.grey[400]),
+                        child: Icon(
+                          Icons.broken_image,
+                          size: 50,
+                          color: Colors.grey[400],
+                        ),
                       ),
                     );
                   },
                 ),
               ),
             ),
+            const SizedBox(height: 6),
             Expanded(
               flex: 1,
               child: Center(
                 child: Text(
                   title,
                   style: const TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w700,
+                    fontSize: 24,
+                    fontWeight: FontWeight.w600,
                     color: Colors.black,
                   ),
                 ),

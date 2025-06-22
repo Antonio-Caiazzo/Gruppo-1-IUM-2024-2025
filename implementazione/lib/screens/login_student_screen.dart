@@ -24,13 +24,24 @@ class _LoginStudentScreenState extends State<LoginStudentScreen> {
       return;
     }
 
-    final firstName = fullName.split(" ").first;
+    if (classCode != "3C2025") {
+      _showErrorDialog("Codice classe sbagliato.");
+      return;
+    }
+
+    // Estrai nome e cognome
+    final nameParts = fullName.split(" ");
+    final firstName = nameParts.first;
+    final surname = nameParts.length > 1 ? nameParts.sublist(1).join(" ") : "";
 
     Navigator.pushReplacement(
       context,
       MaterialPageRoute(
-        builder: (_) =>
-            HomeStudentScreen(name: firstName, classCode: classCode),
+        builder: (_) => HomeStudentScreen(
+          name: firstName,
+          surname: surname,
+          classCode: classCode,
+        ),
       ),
     );
   }
@@ -116,7 +127,7 @@ class _LoginStudentScreenState extends State<LoginStudentScreen> {
             ),
             const SizedBox(height: 8),
             CustomTextField(
-              hintText: "Mario Rossi",
+              hintText: "Nome e Cognome",
               controller: nameController,
             ),
             const SizedBox(height: 16),
@@ -130,7 +141,7 @@ class _LoginStudentScreenState extends State<LoginStudentScreen> {
             ),
             const SizedBox(height: 8),
             CustomTextField(
-              hintText: "CA3C2025",
+              hintText: "Codice classe",
               controller: classCodeController,
             ),
             const SizedBox(height: 24),
