@@ -2,14 +2,21 @@
 import 'package:flutter/material.dart';
 import 'quiz_selection_screen.dart';
 import '../models/quiz_models.dart';
+import '../widgets/student_bottom_nav_bar.dart';
 
 class QuizResultsScreen extends StatelessWidget {
   final QuizResult result;
   final VoidCallback? onQuizCompleted;
+  final String name;
+  final String surname;
+  final String classCode;
 
   const QuizResultsScreen({
     Key? key,
     required this.result,
+    required this.name,
+    required this.surname,
+    required this.classCode,
     this.onQuizCompleted,
   }) : super(key: key);
 
@@ -117,10 +124,7 @@ class QuizResultsScreen extends StatelessWidget {
                             color: Colors.amber,
                           ),
                           SizedBox(height: 12),
-                          Text(
-                            '🎉',
-                            style: TextStyle(fontSize: 32),
-                          ),
+                          Text('🎉', style: TextStyle(fontSize: 32)),
                         ],
                       ),
                     );
@@ -137,7 +141,17 @@ class QuizResultsScreen extends StatelessWidget {
                     if (onQuizCompleted != null) {
                       onQuizCompleted!();
                     }
-                    Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
+                    Navigator.pushAndRemoveUntil(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuizSelectionScreen(
+                          name: name,
+                          surname: surname,
+                          classCode: classCode,
+                        ),
+                      ),
+                      (route) => false,
+                    );
                   },
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF00BFFF),
@@ -163,60 +177,11 @@ class QuizResultsScreen extends StatelessWidget {
           ),
         ),
       ),
-      bottomNavigationBar: Container(
-        decoration: const BoxDecoration(
-          border: Border(
-            top: BorderSide(color: Colors.grey, width: 0.5),
-          ),
-        ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          backgroundColor: Colors.white,
-          selectedItemColor: const Color(0xFF00BFFF),
-          unselectedItemColor: Colors.grey[600],
-          currentIndex: 0, // Imposta 0 per selezionare 'Home' all'inizio
-          selectedFontSize: 12,
-          unselectedFontSize: 12,
-          iconSize: 24,
-          onTap: (index) {
-            switch (index) {
-              case 0: // Home
-              // Se sei già sulla Home o vuoi tornare alla selezione quiz
-                Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
-                break;
-              case 1: // Conversazioni
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Conversazioni in arrivo'),
-                    backgroundColor: Color(0xFF00BFFF),
-                  ),
-                );
-                break;
-              case 2: // Impostazioni
-                ScaffoldMessenger.of(context).showSnackBar(
-                  const SnackBar(
-                    content: Text('Impostazioni in arrivo'),
-                    backgroundColor: Color(0xFF00BFFF),
-                  ),
-                );
-                break;
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home), // Icona per Home
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat), // Icona per Conversazioni
-              label: 'Conversazioni',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings), // Icona per Impostazioni
-              label: 'Impostazioni',
-            ),
-          ],
-        ),
+      bottomNavigationBar: StudentBottomNavigationBar(
+        currentIndex: 0,
+        name: name,
+        surname: surname,
+        classCode: classCode,
       ),
     );
   }

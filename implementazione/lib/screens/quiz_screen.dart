@@ -1,17 +1,23 @@
-// lib/screens/quiz_screen.dart
 import 'package:flutter/material.dart';
 import '../models/quiz_models.dart';
 import 'quiz_results_screen.dart';
-import 'quiz_selection_screen.dart'; // Import for routeName
+import 'quiz_selection_screen.dart';
+import '../constants/colors.dart';
 
 class QuizScreen extends StatefulWidget {
   final List<QuizQuestion> questions;
   final VoidCallback? onQuizCompleted;
   final VoidCallback? onQuizExited;
+  final String? name;
+  final String? surname;
+  final String? classCode;
 
   const QuizScreen({
     Key? key,
     required this.questions,
+    this.name,
+    this.surname,
+    this.classCode,
     this.onQuizCompleted,
     this.onQuizExited,
   }) : super(key: key);
@@ -34,9 +40,7 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void selectAnswer(int answerIndex) {
-    if (showFeedback) {
-      return;
-    }
+    if (showFeedback) return;
     setState(() {
       selectedAnswers[currentQuestionIndex] = answerIndex;
       lastSelectedAnswerIndex = answerIndex;
@@ -44,16 +48,15 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void handleButtonPress() {
-    if (selectedAnswers[currentQuestionIndex] == null && !showFeedback) {
-      return;
-    }
+    if (selectedAnswers[currentQuestionIndex] == null && !showFeedback) return;
 
     if (!showFeedback) {
       setState(() {
         showFeedback = true;
       });
     } else {
-      if (selectedAnswers[currentQuestionIndex] == widget.questions[currentQuestionIndex].correctAnswerIndex) {
+      if (selectedAnswers[currentQuestionIndex] ==
+          widget.questions[currentQuestionIndex].correctAnswerIndex) {
         score++;
       }
 
@@ -70,17 +73,14 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   void navigateToResults() {
-    List<int> correctAnswerIndices = [];
-    for (var q in widget.questions) {
-      correctAnswerIndices.add(q.correctAnswerIndex);
-    }
-
     final result = QuizResult(
       correctAnswers: score,
       incorrectAnswers: widget.questions.length - score,
       totalQuestions: widget.questions.length,
       userAnswers: selectedAnswers.map((e) => e ?? -1).toList(),
-      correctAnswerIndices: correctAnswerIndices,
+      correctAnswerIndices: widget.questions
+          .map((q) => q.correctAnswerIndex)
+          .toList(),
     );
 
     Navigator.push(
@@ -89,6 +89,9 @@ class _QuizScreenState extends State<QuizScreen> {
         builder: (context) => QuizResultsScreen(
           result: result,
           onQuizCompleted: widget.onQuizCompleted,
+          name: widget.name ?? 'Mario',
+          surname: widget.surname ?? 'Rossi',
+          classCode: widget.classCode ?? '3C',
         ),
       ),
     );
@@ -97,94 +100,83 @@ class _QuizScreenState extends State<QuizScreen> {
   void showExitConfirmation() {
     showDialog(
       context: context,
-      barrierColor: Colors.black.withOpacity(0.8),
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          content: Container(
-            width: MediaQuery.of(context).size.width * 0.85,
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                const Center(
-                  child: Text(
-                    'Vuoi davvero uscire dal Quiz?',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
+      builder: (_) => Dialog(
+        backgroundColor: Colors.white,
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
+        child: Padding(
+          padding: const EdgeInsets.all(24.0),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const Text(
+                'Vuoi davvero uscire dal Quiz?',
+                style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                textAlign: TextAlign.center,
+              ),
+              const SizedBox(height: 24),
+              Row(
+                children: [
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () => Navigator.pop(context),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: AppColors.primary,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'Rimani nel Quiz',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
+                        ),
+                      ),
                     ),
                   ),
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: [
-                    Expanded(
-                      child: SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: () => Navigator.of(context).pop(), // Close dialog
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFF007BFF),
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            elevation: 0,
-                            padding: EdgeInsets.zero,
-                          ),
-                          child: const Text(
-                            'Rimani nel Quiz',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                        widget.onQuizExited?.call();
+                        Navigator.pushAndRemoveUntil(
+                          context,
+                          MaterialPageRoute(
+                            builder: (context) => QuizSelectionScreen(
+                              name: widget.name ?? 'Mario',
+                              surname: widget.surname ?? 'Rossi',
+                              classCode: widget.classCode ?? '3C',
                             ),
                           ),
+                          (route) => false,
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: const Color(0xFFDF1818),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(16),
+                        ),
+                        padding: const EdgeInsets.symmetric(vertical: 14),
+                        elevation: 0,
+                      ),
+                      child: const Text(
+                        'Esci dal Quiz',
+                        style: TextStyle(
+                          color: Colors.white,
+                          fontWeight: FontWeight.bold,
                         ),
                       ),
                     ),
-                    const SizedBox(width: 10),
-                    Expanded(
-                      child: SizedBox(
-                        height: 48,
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.of(context).pop(); // Close dialog immediately
-
-                            WidgetsBinding.instance.addPostFrameCallback((_) {
-                              widget.onQuizExited?.call(); // Notify parent about exit
-                              Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
-                            });
-                          },
-                          style: ElevatedButton.styleFrom(
-                            backgroundColor: const Color(0xFFFF3B30),
-                            foregroundColor: Colors.white,
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(4),
-                            ),
-                            elevation: 0,
-                            padding: EdgeInsets.zero,
-                          ),
-                          child: const Text(
-                            'Esci dal Quiz',
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
+                  ),
+                ],
+              ),
+            ],
           ),
-          actions: [],
-        );
-      },
+        ),
+      ),
     );
   }
 
@@ -217,11 +209,7 @@ class _QuizScreenState extends State<QuizScreen> {
                   color: Colors.amber[100],
                 ),
                 child: const Center(
-                  child: Icon(
-                    Icons.image,
-                    size: 60,
-                    color: Colors.amber,
-                  ),
+                  child: Icon(Icons.image, size: 60, color: Colors.amber),
                 ),
               );
             },
@@ -234,9 +222,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Color? getAnswerBorderColor(int index) {
     if (!showFeedback) {
-      return selectedAnswers[currentQuestionIndex] == index ? Colors.blue : Colors.grey[300];
+      return selectedAnswers[currentQuestionIndex] == index
+          ? AppColors.primary
+          : Colors.grey[300];
     } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
+      int correctIndex =
+          widget.questions[currentQuestionIndex].correctAnswerIndex;
       if (index == correctIndex) {
         return Colors.green;
       } else if (index == lastSelectedAnswerIndex) {
@@ -249,9 +240,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Color? getAnswerBackgroundColor(int index) {
     if (!showFeedback) {
-      return selectedAnswers[currentQuestionIndex] == index ? Colors.blue[50] : Colors.white;
+      return selectedAnswers[currentQuestionIndex] == index
+          ? AppColors.primaryLight
+          : Colors.white;
     } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
+      int correctIndex =
+          widget.questions[currentQuestionIndex].correctAnswerIndex;
       if (index == correctIndex) {
         return Colors.green[50];
       } else if (index == lastSelectedAnswerIndex) {
@@ -264,9 +258,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Color getAnswerTextColor(int index) {
     if (!showFeedback) {
-      return selectedAnswers[currentQuestionIndex] == index ? Colors.blue[800]! : Colors.black87;
+      return selectedAnswers[currentQuestionIndex] == index
+          ? AppColors.primaryDark
+          : Colors.black87;
     } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
+      int correctIndex =
+          widget.questions[currentQuestionIndex].correctAnswerIndex;
       if (index == correctIndex) {
         return Colors.green[800]!;
       } else if (index == lastSelectedAnswerIndex) {
@@ -278,38 +275,35 @@ class _QuizScreenState extends State<QuizScreen> {
   }
 
   IconData? getAnswerIcon(int index) {
-    if (!showFeedback) {
-      return null;
-    } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
-      if (index == correctIndex) {
-        return Icons.check;
-      } else if (index == lastSelectedAnswerIndex) {
-        return Icons.close;
-      }
-      return null;
+    if (!showFeedback) return null;
+    int correctIndex =
+        widget.questions[currentQuestionIndex].correctAnswerIndex;
+    if (index == correctIndex) {
+      return Icons.check;
+    } else if (index == lastSelectedAnswerIndex) {
+      return Icons.close;
     }
+    return null;
   }
 
   Color? getAnswerIconColor(int index) {
-    if (!showFeedback) {
-      return null;
-    } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
-      if (index == correctIndex) {
-        return Colors.white;
-      } else if (index == lastSelectedAnswerIndex) {
-        return Colors.white;
-      }
-      return null;
+    if (!showFeedback) return null;
+    int correctIndex =
+        widget.questions[currentQuestionIndex].correctAnswerIndex;
+    if (index == correctIndex || index == lastSelectedAnswerIndex) {
+      return Colors.white;
     }
+    return null;
   }
 
   Color? getAnswerCircleColor(int index) {
     if (!showFeedback) {
-      return selectedAnswers[currentQuestionIndex] == index ? Colors.blue : Colors.transparent;
+      return selectedAnswers[currentQuestionIndex] == index
+          ? AppColors.primary
+          : Colors.transparent;
     } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
+      int correctIndex =
+          widget.questions[currentQuestionIndex].correctAnswerIndex;
       if (index == correctIndex) {
         return Colors.green;
       } else if (index == lastSelectedAnswerIndex) {
@@ -321,9 +315,12 @@ class _QuizScreenState extends State<QuizScreen> {
 
   Color getAnswerCircleBorderColor(int index) {
     if (!showFeedback) {
-      return selectedAnswers[currentQuestionIndex] == index ? Colors.blue : Colors.grey[400]!;
+      return selectedAnswers[currentQuestionIndex] == index
+          ? AppColors.primary
+          : Colors.grey[400]!;
     } else {
-      int correctIndex = widget.questions[currentQuestionIndex].correctAnswerIndex;
+      int correctIndex =
+          widget.questions[currentQuestionIndex].correctAnswerIndex;
       if (index == correctIndex) {
         return Colors.green;
       } else if (index == lastSelectedAnswerIndex) {
@@ -351,16 +348,19 @@ class _QuizScreenState extends State<QuizScreen> {
         crossAxisAlignment: CrossAxisAlignment.stretch,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 0.0),
+            padding: const EdgeInsets.symmetric(horizontal: 24.0),
             child: Row(
               children: [
                 Expanded(
                   child: ClipRRect(
                     borderRadius: BorderRadius.circular(10),
                     child: LinearProgressIndicator(
-                      value: (currentQuestionIndex + 1) / widget.questions.length,
+                      value:
+                          (currentQuestionIndex + 1) / widget.questions.length,
                       backgroundColor: Colors.grey[300],
-                      valueColor: const AlwaysStoppedAnimation<Color>(Colors.blue),
+                      valueColor: const AlwaysStoppedAnimation<Color>(
+                        AppColors.primary,
+                      ),
                       minHeight: 10,
                     ),
                   ),
@@ -378,7 +378,6 @@ class _QuizScreenState extends State<QuizScreen> {
             ),
           ),
           const SizedBox(height: 20),
-
           Expanded(
             child: SingleChildScrollView(
               padding: const EdgeInsets.symmetric(horizontal: 24.0),
@@ -386,7 +385,6 @@ class _QuizScreenState extends State<QuizScreen> {
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 children: [
                   buildQuestionImage(),
-
                   Text(
                     currentQuestion.question,
                     style: const TextStyle(
@@ -397,69 +395,73 @@ class _QuizScreenState extends State<QuizScreen> {
                     ),
                   ),
                   const SizedBox(height: 30),
-
-                  ...List.generate(
-                    currentQuestion.answers.length,
-                        (index) {
-                      return Padding(
-                        padding: const EdgeInsets.only(bottom: 12.0),
-                        child: Material(
-                          color: Colors.transparent,
-                          child: InkWell(
-                            onTap: showFeedback ? null : () => selectAnswer(index),
-                            borderRadius: BorderRadius.circular(12),
-                            child: Container(
-                              padding: const EdgeInsets.all(20),
-                              decoration: BoxDecoration(
-                                color: getAnswerBackgroundColor(index),
-                                borderRadius: BorderRadius.circular(12),
-                                border: Border.all(
-                                  color: getAnswerBorderColor(index)!,
-                                  width: 2,
+                  ...List.generate(currentQuestion.answers.length, (index) {
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 12.0),
+                      child: Material(
+                        color: Colors.transparent,
+                        child: InkWell(
+                          onTap: showFeedback
+                              ? null
+                              : () => selectAnswer(index),
+                          borderRadius: BorderRadius.circular(12),
+                          child: Container(
+                            padding: const EdgeInsets.all(20),
+                            decoration: BoxDecoration(
+                              color: getAnswerBackgroundColor(index),
+                              borderRadius: BorderRadius.circular(12),
+                              border: Border.all(
+                                color: getAnswerBorderColor(index)!,
+                                width: 2,
+                              ),
+                            ),
+                            child: Row(
+                              children: [
+                                Container(
+                                  width: 24,
+                                  height: 24,
+                                  decoration: BoxDecoration(
+                                    shape: BoxShape.circle,
+                                    color: getAnswerCircleColor(index),
+                                    border: Border.all(
+                                      color: getAnswerCircleBorderColor(index),
+                                      width: 2,
+                                    ),
+                                  ),
+                                  child: getAnswerIcon(index) != null
+                                      ? Icon(
+                                          getAnswerIcon(index),
+                                          size: 16,
+                                          color: getAnswerIconColor(index),
+                                        )
+                                      : null,
                                 ),
-                              ),
-                              child: Row(
-                                children: [
-                                  Container(
-                                    width: 24,
-                                    height: 24,
-                                    decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color: getAnswerCircleColor(index),
-                                      border: Border.all(
-                                        color: getAnswerCircleBorderColor(index),
-                                        width: 2,
-                                      ),
-                                    ),
-                                    child: getAnswerIcon(index) != null
-                                        ? Icon(
-                                      getAnswerIcon(index),
-                                      size: 16,
-                                      color: getAnswerIconColor(index),
-                                    )
-                                        : null,
-                                  ),
-                                  const SizedBox(width: 16),
-                                  Expanded(
-                                    child: Text(
-                                      currentQuestion.answers[index],
-                                      style: TextStyle(
-                                        fontSize: 16,
-                                        color: getAnswerTextColor(index),
-                                        fontWeight: (showFeedback && (index == currentQuestion.correctAnswerIndex || index == lastSelectedAnswerIndex))
-                                            ? FontWeight.w600
-                                            : FontWeight.normal,
-                                      ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Text(
+                                    currentQuestion.answers[index],
+                                    style: TextStyle(
+                                      fontSize: 16,
+                                      color: getAnswerTextColor(index),
+                                      fontWeight:
+                                          (showFeedback &&
+                                              (index ==
+                                                      currentQuestion
+                                                          .correctAnswerIndex ||
+                                                  index ==
+                                                      lastSelectedAnswerIndex))
+                                          ? FontWeight.w600
+                                          : FontWeight.normal,
                                     ),
                                   ),
-                                ],
-                              ),
+                                ),
+                              ],
                             ),
                           ),
                         ),
-                      );
-                    },
-                  ),
+                      ),
+                    );
+                  }),
                   const SizedBox(height: 20),
                 ],
               ),
@@ -471,9 +473,13 @@ class _QuizScreenState extends State<QuizScreen> {
               width: double.infinity,
               height: 56,
               child: ElevatedButton(
-                onPressed: (selectedAnswers[currentQuestionIndex] != null || showFeedback) ? handleButtonPress : null,
+                onPressed:
+                    (selectedAnswers[currentQuestionIndex] != null ||
+                        showFeedback)
+                    ? handleButtonPress
+                    : null,
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28),
@@ -482,7 +488,9 @@ class _QuizScreenState extends State<QuizScreen> {
                 ),
                 child: Text(
                   showFeedback
-                      ? (currentQuestionIndex < widget.questions.length - 1 ? 'Avanti' : 'Termina Quiz')
+                      ? (currentQuestionIndex < widget.questions.length - 1
+                            ? 'Avanti'
+                            : 'Termina Quiz')
                       : 'Controlla',
                   style: const TextStyle(
                     fontSize: 18,
