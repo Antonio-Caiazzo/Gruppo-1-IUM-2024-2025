@@ -39,7 +39,9 @@ class _RegisterTeacherScreenState extends State<RegisterTeacherScreen> {
     if (!mounted) return;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => HomeTeacherScreen(name: name)),
+      MaterialPageRoute(
+        builder: (_) => HomeTeacherScreen(name: name, surname: surname),
+      ),
     );
   }
 

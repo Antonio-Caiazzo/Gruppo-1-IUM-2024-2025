@@ -1,25 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../widgets/student_bottom_nav_bar.dart';
 import '../constants/colors.dart';
 import 'profile_selection_screen.dart';
 
-class SettingsStudentScreen extends StatelessWidget {
+class SettingsTeacherScreen extends StatelessWidget {
   final String name;
   final String surname;
-  final String classCode;
 
-  const SettingsStudentScreen({
+  const SettingsTeacherScreen({
     super.key,
     required this.name,
     required this.surname,
-    required this.classCode,
   });
 
   void _showExitDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false,
+      barrierDismissible: false, // impedisce la chiusura toccando fuori
       builder: (_) {
         return Dialog(
           backgroundColor: Colors.white,
@@ -110,29 +107,22 @@ class SettingsStudentScreen extends StatelessWidget {
   }
 
   Widget _buildField(String label, String value) {
-    return Column(
-      children: [
-        RichText(
-          textAlign: TextAlign.center,
-          text: TextSpan(
-            text: "$label: ",
-            style: const TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-              color: Colors.black,
-            ),
-            children: [
-              TextSpan(
-                text: value,
-                style: const TextStyle(
-                  fontWeight: FontWeight.normal,
-                  fontSize: 24,
-                ),
-              ),
-            ],
-          ),
+    return RichText(
+      textAlign: TextAlign.center,
+      text: TextSpan(
+        text: "$label: ",
+        style: const TextStyle(
+          fontSize: 24,
+          fontWeight: FontWeight.bold,
+          color: Colors.black,
         ),
-      ],
+        children: [
+          TextSpan(
+            text: value,
+            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 24),
+          ),
+        ],
+      ),
     );
   }
 
@@ -155,12 +145,11 @@ class SettingsStudentScreen extends StatelessWidget {
               _buildField("Nome", name),
               const SizedBox(height: 32),
               _buildField("Cognome", surname),
-              const SizedBox(height: 32),
-              _buildField("Classe", classCode),
               const Spacer(),
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
+                  onPressed: () => _showExitDialog(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -168,7 +157,6 @@ class SettingsStudentScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                   ),
-                  onPressed: () => _showExitDialog(context),
                   child: const Text(
                     "Esci",
                     style: TextStyle(
@@ -182,12 +170,6 @@ class SettingsStudentScreen extends StatelessWidget {
             ],
           ),
         ),
-      ),
-      bottomNavigationBar: StudentBottomNavigationBar(
-        currentIndex: 2,
-        name: name,
-        surname: surname,
-        classCode: classCode,
       ),
     );
   }

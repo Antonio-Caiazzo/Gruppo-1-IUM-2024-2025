@@ -27,30 +27,33 @@ class _LoginTeacherScreenState extends State<LoginTeacherScreen> {
       return;
     }
 
-    // Controllo credenziali fisse di default
+    // Credenziali di default
     if (email == "email@insegnante.com" && password == "Password123") {
-      _goToHome(name: "Mr. Clarke");
+      _goToHome(name: "Mr. Clarke", surname: "Johnson");
       return;
     }
 
-    // Controllo credenziali salvate da registrazione
+    // Credenziali salvate in SharedPreferences
     final prefs = await SharedPreferences.getInstance();
     final savedEmail = prefs.getString("teacher_email");
     final savedPassword = prefs.getString("teacher_password");
     final savedName = prefs.getString("teacher_name") ?? "Mr. Clarke";
+    final savedSurname = prefs.getString("teacher_surname") ?? "Johnson";
 
     if (email == savedEmail && password == savedPassword) {
-      _goToHome(name: savedName);
+      _goToHome(name: savedName, surname: savedSurname);
     } else {
       _showErrorDialog("Credenziali non valide.");
     }
   }
 
-  void _goToHome({required String name}) {
+  void _goToHome({required String name, required String surname}) {
     if (!mounted) return;
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (_) => HomeTeacherScreen(name: name)),
+      MaterialPageRoute(
+        builder: (_) => HomeTeacherScreen(name: name, surname: surname),
+      ),
     );
   }
 
@@ -75,7 +78,7 @@ class _LoginTeacherScreenState extends State<LoginTeacherScreen> {
               ),
               const SizedBox(height: 24),
               SizedBox(
-                width: 80, // larghezza fissa più snella
+                width: 80,
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: AppColors.primary,
@@ -172,7 +175,7 @@ class _LoginTeacherScreenState extends State<LoginTeacherScreen> {
                   "Registrati",
                   style: TextStyle(
                     color: AppColors.primary,
-                    decoration: TextDecoration.none, // rimuove sottolineatura
+                    decoration: TextDecoration.none,
                   ),
                 ),
               ),

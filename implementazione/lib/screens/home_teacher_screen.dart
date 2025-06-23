@@ -1,37 +1,110 @@
+// lib/screens/home_teacher_screen.dart
+
 import 'package:flutter/material.dart';
-import 'login_teacher_screen.dart';
+import '../constants/colors.dart';
+import '../widgets/teacher_bottom_nav_bar.dart';
 
-class HomeTeacherScreen extends StatelessWidget {
+class HomeTeacherScreen extends StatefulWidget {
   final String name;
+  final String surname;
 
-  const HomeTeacherScreen({super.key, this.name = "Mr. Clarke"});
+  const HomeTeacherScreen({
+    super.key,
+    required this.name,
+    required this.surname,
+  });
 
-  Future<void> _logout(BuildContext context) async {
-    // Nessuna cancellazione dei dati!
-    if (!context.mounted) return;
-    Navigator.pushReplacement(
-      context,
-      MaterialPageRoute(builder: (_) => const LoginTeacherScreen()),
-    );
-  }
+  @override
+  State<HomeTeacherScreen> createState() => _HomeTeacherScreenState();
+}
+
+class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
+  int _selectedIndex = 0;
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: const Text('Homepage'),
-        actions: [
-          IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => _logout(context),
+      backgroundColor: AppColors.background,
+      body: _buildHomeContent(),
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: _selectedIndex,
+        name: widget.name,
+        surname: widget.surname,
+      ),
+    );
+  }
+
+  Widget _buildHomeContent() {
+    return Column(
+      children: [
+        const SizedBox(height: 100),
+        Text(
+          'Benvenuto ${widget.name} 😀',
+          style: const TextStyle(fontSize: 28, fontWeight: FontWeight.bold),
+          textAlign: TextAlign.center,
+        ),
+        const SizedBox(height: 40),
+        Expanded(
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 16.0),
+            child: GridView.count(
+              crossAxisCount: 2,
+              crossAxisSpacing: 16,
+              mainAxisSpacing: 16,
+              children: [
+                _GridTile(
+                  label: "Conversazioni",
+                  assetPath: "assets/conversazioni.png",
+                  onTap: () {},
+                ),
+                _GridTile(
+                  label: "Domande",
+                  assetPath: "assets/domande.png",
+                  onTap: () {},
+                ),
+                _GridTile(
+                  label: "Classi",
+                  assetPath: "assets/nuova_conversazione.png",
+                  onTap: () {},
+                ),
+              ],
+            ),
+          ),
+        ),
+      ],
+    );
+  }
+}
+
+class _GridTile extends StatelessWidget {
+  final String label;
+  final String assetPath;
+  final VoidCallback onTap;
+
+  const _GridTile({
+    required this.label,
+    required this.assetPath,
+    required this.onTap,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return GestureDetector(
+      onTap: onTap,
+      child: Column(
+        children: [
+          Expanded(child: Image.asset(assetPath, fit: BoxFit.contain)),
+          const SizedBox(height: 8),
+          Text(
+            label,
+            textAlign: TextAlign.center,
+            style: const TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w600,
+              color: Colors.black,
+            ),
           ),
         ],
-      ),
-      body: Center(
-        child: Text(
-          "Benvenuto $name 😃",
-          style: Theme.of(context).textTheme.headlineMedium,
-        ),
       ),
     );
   }
