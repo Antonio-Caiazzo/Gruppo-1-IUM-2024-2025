@@ -1,8 +1,8 @@
-// lib/screens/quiz_intro_screen.dart
 import 'package:flutter/material.dart';
+import '../constants/colors.dart';
 import '../models/quiz_models.dart';
 import 'quiz_screen.dart';
-import 'quiz_selection_screen.dart';
+import '../widgets/student_bottom_nav_bar.dart';
 
 class QuizIntroScreen extends StatelessWidget {
   final String quizTitle;
@@ -22,123 +22,35 @@ class QuizIntroScreen extends StatelessWidget {
     this.onQuizExited,
   }) : super(key: key);
 
-  void _showExitConfirmation(BuildContext context) {
-    showDialog(
-      context: context,
-      barrierColor: Colors.black.withOpacity(0.8),
-      builder: (BuildContext context) {
-        return AlertDialog(
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(16),
-          ),
-          // Rimosso il Container con width fissa per lasciare l'AlertDialog dimensionarsi automaticamente
-          // Il Column interno si adatterà al contenuto
-          content: Column( // Era un Container, ora è direttamente il Column
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              const Center(
-                child: Text(
-                  'Vuoi davvero uscire dal Quiz?',
-                  style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 18,
-                  ),
-                ),
-              ),
-              const SizedBox(height: 20),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  Expanded(
-                    child: SizedBox(
-                      height: 48,
-                      child: ElevatedButton(
-                        onPressed: () => Navigator.of(context).pop(), // Close dialog
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFF007BFF),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          elevation: 0,
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: const Text(
-                          'Rimani nel Quiz',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(width: 10),
-                  Expanded(
-                    child: SizedBox(
-                      height: 48,
-                      child: ElevatedButton(
-                        onPressed: () {
-                          Navigator.of(context).pop(); // Close dialog immediately
-                          WidgetsBinding.instance.addPostFrameCallback((_) {
-                            onQuizExited?.call(); // Notify parent about exit
-                            Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
-                          });
-                        },
-                        style: ElevatedButton.styleFrom(
-                          backgroundColor: const Color(0xFFFF3B30),
-                          foregroundColor: Colors.white,
-                          shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.circular(4),
-                          ),
-                          elevation: 0,
-                          padding: EdgeInsets.zero,
-                        ),
-                        child: const Text(
-                          'Esci dal Quiz',
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                      ),
-                    ),
-                  ),
-                ],
-              ),
-            ],
-          ),
-          // Lascio actions vuoti, dato che i pulsanti sono nel content
-          actions: const [],
-        );
-      },
-    );
+  String getIntroPrefix() {
+    final lower = quizTitle.toLowerCase();
+    return lower.contains('rivoluzione') ? 'sulla' : "sull'";
   }
 
   @override
   Widget build(BuildContext context) {
+    // Recupera i parametri di navigazione (es. nome, cognome, classe)
+    final args =
+        ModalRoute.of(context)!.settings.arguments as Map<String, String>?;
+
+    final name = args?['name'] ?? 'Mario';
+    final surname = args?['surname'] ?? 'Rossi';
+    final classCode = args?['classCode'] ?? '3C';
+
     return Scaffold(
-      backgroundColor: Colors.white, // Sfondo bianco come da design
-      appBar: AppBar( // AppBar con solo il tasto indietro come da design
-        backgroundColor: Colors.white,
+      backgroundColor: AppColors.background,
+      appBar: AppBar(
+        backgroundColor: AppColors.background,
         elevation: 0,
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.black),
-          onPressed: () => _showExitConfirmation(context),
-        ),
-        // Rimossa la sezione 'title' con l'ora e le icone di segnale
-        // Rimossa la sezione 'actions' con le icone di segnale/wifi/batteria
-        // Questo rende l'AppBar pulita come richiesto.
+        leading: BackButton(color: Colors.black),
       ),
       body: Padding(
         padding: const EdgeInsets.all(24.0),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             const SizedBox(height: 40),
-            RichText( // Titolo "Pronto per il Quiz?" dinamico
+            RichText(
               textAlign: TextAlign.center,
-              // Rimosso 'const' qui perché contiene un TextSpan dinamico
               text: TextSpan(
                 style: const TextStyle(
                   fontSize: 28,
@@ -146,16 +58,18 @@ class QuizIntroScreen extends StatelessWidget {
                   color: Colors.black,
                 ),
                 children: [
-                  const TextSpan(text: 'Pronto per il '),
+TextSpan(text: 'Pronto per il quiz ${getIntroPrefix()} '),
+
                   TextSpan(
-                    text: '$quizTitle Quiz?', // Usa il titolo dinamico
-                    style: const TextStyle(color: Colors.blue),
+                    text: quizTitle,
+                    style: const TextStyle(color: AppColors.primary),
                   ),
+                  const TextSpan(text: '?'),
                 ],
               ),
             ),
-            const SizedBox(height: 40),
-            Text( // Descrizione dinamica
+            const SizedBox(height: 32),
+            Text(
               quizDescription,
               style: const TextStyle(
                 fontSize: 16,
@@ -164,17 +78,16 @@ class QuizIntroScreen extends StatelessWidget {
               ),
               textAlign: TextAlign.center,
             ),
-            const SizedBox(height: 20),
-            const Text( // "Buona fortuna!"
+            const SizedBox(height: 16),
+            const Text(
               'Buona fortuna!',
               style: TextStyle(
                 fontSize: 16,
-                color: Colors.blue,
                 fontWeight: FontWeight.w600,
+                color: AppColors.primary,
               ),
             ),
             const Spacer(),
-            // Immagine dinamica basata su quizImage
             Container(
               height: 200,
               width: 200,
@@ -191,28 +104,14 @@ class QuizIntroScreen extends StatelessWidget {
               child: ClipRRect(
                 borderRadius: BorderRadius.circular(12),
                 child: Image.asset(
-                  quizImage, // Usa l'immagine passata dinamicamente
-                  height: 200,
-                  width: 200,
+                  quizImage,
                   fit: BoxFit.cover,
-                  errorBuilder: (context, error, stackTrace) {
-                    // Fallback se l'immagine non viene trovata
-                    return Container(
-                      height: 200,
-                      width: 200,
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(12),
-                        color: Colors.grey[300],
-                      ),
-                      child: const Center(
-                        child: Icon(
-                          Icons.image_not_supported,
-                          size: 80,
-                          color: Colors.grey,
-                        ),
-                      ),
-                    );
-                  },
+                  errorBuilder: (context, error, stackTrace) => Container(
+                    color: Colors.grey[300],
+                    child: const Center(
+                      child: Icon(Icons.image_not_supported, size: 80),
+                    ),
+                  ),
                 ),
               ),
             ),
@@ -225,7 +124,7 @@ class QuizIntroScreen extends StatelessWidget {
                   Navigator.push(
                     context,
                     MaterialPageRoute(
-                      builder: (context) => QuizScreen(
+                      builder: (_) => QuizScreen(
                         questions: questions,
                         onQuizCompleted: onQuizCompleted,
                         onQuizExited: onQuizExited,
@@ -234,7 +133,7 @@ class QuizIntroScreen extends StatelessWidget {
                   );
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.blue,
+                  backgroundColor: AppColors.primary,
                   foregroundColor: Colors.white,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(28),
@@ -243,10 +142,7 @@ class QuizIntroScreen extends StatelessWidget {
                 ),
                 child: const Text(
                   'Inizia il Quiz!',
-                  style: TextStyle(
-                    fontSize: 18,
-                    fontWeight: FontWeight.w600,
-                  ),
+                  style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
                 ),
               ),
             ),
@@ -254,42 +150,11 @@ class QuizIntroScreen extends StatelessWidget {
           ],
         ),
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        type: BottomNavigationBarType.fixed,
-        selectedItemColor: Colors.blue,
-        unselectedItemColor: Colors.grey,
-        currentIndex: 0, // Rimane 0 per Home
-        onTap: (index) {
-          switch (index) {
-            case 0: // Home
-              Navigator.of(context).popUntil(ModalRoute.withName(QuizSelectionScreen.routeName));
-              break;
-            case 1: // Conversazioni
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Conversazioni in arrivo')),
-              );
-              break;
-            case 2: // Impostazioni
-              ScaffoldMessenger.of(context).showSnackBar(
-                const SnackBar(content: Text('Impostazioni in arrivo')),
-              );
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat),
-            label: 'Conversazioni',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings),
-            label: 'Impostazioni',
-          ),
-        ],
+      bottomNavigationBar: StudentBottomNavigationBar(
+        currentIndex: -1,
+        name: name,
+        surname: surname,
+        classCode: classCode,
       ),
     );
   }

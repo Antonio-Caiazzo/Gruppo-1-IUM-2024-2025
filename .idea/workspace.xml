@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="." />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`.">
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/schermata_domande.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,6 +14,29 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="ExecutionTargetManager" SELECTED_TARGET="device_and_snapshot_combo_box_target[DeviceId(pluginId=LocalEmulator, isTemplate=false, identifier=path=C:\Users\sicka\.android\avd\Pixel_9_Pro_XL.avd)]" />
+  <component name="ExternalProjectsData">
+    <projectState path="$PROJECT_DIR$/implementazione/android">
+      <ProjectState />
+    </projectState>
+  </component>
+  <component name="ExternalProjectsManager">
+    <system id="GRADLE">
+      <state>
+        <projects_view>
+          <tree_state>
+            <expand>
+              <path>
+                <item name="" type="6a2764b6:ExternalProjectsStructure$RootNode" />
+                <item name="android" type="f1a62948:ProjectNode" />
+              </path>
+            </expand>
+            <select />
+          </tree_state>
+        </projects_view>
+      </state>
+    </system>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -54,6 +79,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Flutter.domande_runner.dart.executor": "Run",
     "Flutter.main.dart.executor": "Run",
     "Flutter.quiz_runner.dart.executor": "Run",
     "Flutter.quiz_screen.dart.executor": "Run",
@@ -61,18 +87,97 @@
     "RunOnceActivity.cidr.known.project.marker": "true",
     "RunOnceActivity.git.unshallow": "true",
     "RunOnceActivity.readMode.enableVisualFormatting": "true",
+    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
+    "ScreenRecorder.SavePath": "C:\\Users\\sicka\\Downloads",
     "cf.first.check.clang-format": "false",
     "cidr.known.project.marker": "true",
+    "com.google.services.firebase.aqiPopupShown": "true",
     "dart.analysis.tool.window.visible": "false",
     "git-widget-placeholder": "main",
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/flutter/bin/cache/dart-sdk",
+    "last_opened_file_path": "C:/Users/sicka/Downloads",
     "settings.editor.selected.configurable": "AndroidSdkUpdater",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-  <component name="RunManager" selected="Flutter.quiz_runner.dart">
+  <component name="RunManager" selected="Flutter.domande_runner.dart">
+    <configuration name="android.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
+      <module name="android.app" />
+      <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
+      <option name="DEPLOY" value="true" />
+      <option name="DEPLOY_APK_FROM_BUNDLE" value="false" />
+      <option name="DEPLOY_AS_INSTANT" value="false" />
+      <option name="ARTIFACT_NAME" value="" />
+      <option name="PM_INSTALL_OPTIONS" value="" />
+      <option name="ALL_USERS" value="false" />
+      <option name="ALWAYS_INSTALL_WITH_PM" value="false" />
+      <option name="ALLOW_ASSUME_VERIFIED" value="false" />
+      <option name="CLEAR_APP_STORAGE" value="false" />
+      <option name="DYNAMIC_FEATURES_DISABLED_LIST" value="" />
+      <option name="ACTIVITY_EXTRA_FLAGS" value="" />
+      <option name="MODE" value="default_activity" />
+      <option name="RESTORE_ENABLED" value="false" />
+      <option name="RESTORE_FILE" value="" />
+      <option name="RESTORE_FRESH_INSTALL_ONLY" value="false" />
+      <option name="CLEAR_LOGCAT" value="false" />
+      <option name="SHOW_LOGCAT_AUTOMATICALLY" value="false" />
+      <option name="TARGET_SELECTION_MODE" value="DEVICE_AND_SNAPSHOT_COMBO_BOX" />
+      <option name="SELECTED_CLOUD_MATRIX_CONFIGURATION_ID" value="-1" />
+      <option name="SELECTED_CLOUD_MATRIX_PROJECT_ID" value="" />
+      <option name="DEBUGGER_TYPE" value="Auto" />
+      <Auto>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Auto>
+      <Hybrid>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Hybrid>
+      <Java>
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Java>
+      <Native>
+        <option name="USE_JAVA_AWARE_DEBUGGER" value="false" />
+        <option name="SHOW_STATIC_VARS" value="true" />
+        <option name="WORKING_DIR" value="" />
+        <option name="TARGET_LOGGING_CHANNELS" value="lldb process:gdb-remote packets" />
+        <option name="SHOW_OPTIMIZED_WARNING" value="true" />
+        <option name="ATTACH_ON_WAIT_FOR_DEBUGGER" value="false" />
+        <option name="DEBUG_SANDBOX_SDK" value="false" />
+      </Native>
+      <Profilers>
+        <option name="ADVANCED_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_ENABLED" value="false" />
+        <option name="STARTUP_CPU_PROFILING_CONFIGURATION_NAME" value="Java/Kotlin Method Sample (legacy)" />
+        <option name="STARTUP_NATIVE_MEMORY_PROFILING_ENABLED" value="false" />
+        <option name="NATIVE_MEMORY_SAMPLE_RATE_BYTES" value="2048" />
+      </Profilers>
+      <option name="DEEP_LINK" value="" />
+      <option name="ACTIVITY" value="" />
+      <option name="ACTIVITY_CLASS" value="" />
+      <option name="SEARCH_ACTIVITY_IN_GLOBAL_SCOPE" value="false" />
+      <option name="SKIP_ACTIVITY_VALIDATION" value="false" />
+      <method v="2">
+        <option name="Android.Gradle.BeforeRunTask" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="domande_runner.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
+      <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/domande_runner.dart" />
+      <method v="2" />
+    </configuration>
     <configuration name="main.dart" type="FlutterRunConfigurationType" factoryName="Flutter" temporary="true" nameIsGenerated="true">
       <option name="filePath" value="$PROJECT_DIR$/implementazione/lib/main.dart" />
       <method v="2" />
@@ -87,10 +192,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.domande_runner.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
         <item itemvalue="Flutter.quiz_runner.dart" />
         <item itemvalue="Flutter.main.dart" />
-        <item itemvalue="Flutter.quiz_runner.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
       </list>
     </recent_temporary>
@@ -184,7 +289,31 @@
       <option name="project" value="LOCAL" />
       <updated>1750459119999</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="fix">
+      <option name="closed" value="true" />
+      <created>1750547107338</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547107338</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Implement DomandaModel&#10;&#10;This commit introduces the `DomandaModel` class, which represents a question in the application.&#10;&#10;The `DomandaModel` includes the following properties:&#10;- `testo`: The text of the question.&#10;- `data`: The date the question was created.&#10;- `stato`: The status of the question (nuova, incompleta, completa), managed by the `StatoDomanda` enum.&#10;- `personaggio`: The character or topic associated with the chat.&#10;- `immagineAsset`: The path to the asset image for the character/topic.&#10;&#10;The class also provides methods to:&#10;- Change the question's status.&#10;- Mark a question as opened or completed.&#10;- Get a label for the current status.&#10;- Create a copy of the model with updated values using `copyWith`.">
+      <option name="closed" value="true" />
+      <created>1750547122884</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547122884</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`.">
+      <option name="closed" value="true" />
+      <created>1750547148273</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547148273</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -237,6 +366,9 @@
     <MESSAGE value="Create QuizWidget&#10;&#10;This commit introduces the `QuizWidget` class, which serves as an entry point for the quiz functionality.&#10;&#10;The `QuizWidget`:&#10;- Takes optional `onQuizCompleted` and `onQuizExited` callbacks to notify the parent application about the quiz flow's state.&#10;- Directly displays the `QuizIntroScreen`.&#10;- Passes the quiz data (`romanEmpireQuestions`) and the callbacks to the `QuizIntroScreen`.&#10;&#10;Navigation within the quiz (Intro -&gt; Quiz -&gt; Results) is managed by pushing `MaterialPageRoute` instances." />
     <MESSAGE value="Add new assets and IDEA project files&#10;&#10;This commit introduces several new image assets:&#10;- appia.jpg&#10;- augusto.jpg&#10;- costantino.jpg&#10;- gladiator.jpg&#10;- lingua.png&#10;- lupo.jpg&#10;- tevere.jpg&#10;- venere.jpg&#10;&#10;Additionally, this commit adds IntelliJ IDEA project configuration files:&#10;- .idea/.gitignore&#10;- .idea/libraries/Dart_Packages.xml&#10;- .idea/libraries/Dart_SDK.xml&#10;- .idea/caches/deviceStreaming.xml&#10;- .idea/Gruppo-1-IUM-2024-2025.iml&#10;- .idea/misc.xml&#10;- .idea/modules.xml&#10;- .idea/vcs.xml" />
     <MESSAGE value="." />
-    <option name="LAST_COMMIT_MESSAGE" value="." />
+    <MESSAGE value="fix" />
+    <MESSAGE value="Implement DomandaModel&#10;&#10;This commit introduces the `DomandaModel` class, which represents a question in the application.&#10;&#10;The `DomandaModel` includes the following properties:&#10;- `testo`: The text of the question.&#10;- `data`: The date the question was created.&#10;- `stato`: The status of the question (nuova, incompleta, completa), managed by the `StatoDomanda` enum.&#10;- `personaggio`: The character or topic associated with the chat.&#10;- `immagineAsset`: The path to the asset image for the character/topic.&#10;&#10;The class also provides methods to:&#10;- Change the question's status.&#10;- Mark a question as opened or completed.&#10;- Get a label for the current status.&#10;- Create a copy of the model with updated values using `copyWith`." />
+    <MESSAGE value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
   </component>
 </project>
