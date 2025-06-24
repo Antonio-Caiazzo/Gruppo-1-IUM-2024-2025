@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`.">
-      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/schermata_domande.dart" afterDir="false" />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment=".">
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/aggiungi_classe_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/classi_screen.dart" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.main.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.main.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.test.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.test.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +64,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -97,11 +110,11 @@
     "io.flutter.reload.alreadyRun": "true",
     "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/sicka/Downloads",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
+    "settings.editor.selected.configurable": "org.jetbrains.plugins.github.ui.GithubSettingsConfigurable",
     "show.migrate.to.gradle.popup": "false"
   }
 }]]></component>
-  <component name="RunManager" selected="Flutter.domande_runner.dart">
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="android.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="android.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -192,10 +205,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.domande_runner.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
         <item itemvalue="Flutter.quiz_runner.dart" />
-        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
       </list>
     </recent_temporary>
@@ -313,7 +326,23 @@
       <option name="project" value="LOCAL" />
       <updated>1750547148273</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status.">
+      <option name="closed" value="true" />
+      <created>1750547172247</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547172247</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status.">
+      <option name="closed" value="true" />
+      <created>1750547178388</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547178389</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -369,6 +398,7 @@
     <MESSAGE value="fix" />
     <MESSAGE value="Implement DomandaModel&#10;&#10;This commit introduces the `DomandaModel` class, which represents a question in the application.&#10;&#10;The `DomandaModel` includes the following properties:&#10;- `testo`: The text of the question.&#10;- `data`: The date the question was created.&#10;- `stato`: The status of the question (nuova, incompleta, completa), managed by the `StatoDomanda` enum.&#10;- `personaggio`: The character or topic associated with the chat.&#10;- `immagineAsset`: The path to the asset image for the character/topic.&#10;&#10;The class also provides methods to:&#10;- Change the question's status.&#10;- Mark a question as opened or completed.&#10;- Get a label for the current status.&#10;- Create a copy of the model with updated values using `copyWith`." />
     <MESSAGE value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
+    <MESSAGE value="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status." />
+    <option name="LAST_COMMIT_MESSAGE" value="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status." />
   </component>
 </project>
