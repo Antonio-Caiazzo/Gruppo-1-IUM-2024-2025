@@ -28,8 +28,8 @@
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-stdlib/2.0.21/618b539767b4899b4660a83006e052b63f1db551/kotlin-stdlib-2.0.21.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains/annotations/13.0/919f0dfe192fb4e063e7dacadee7f8bb9a2672a9/annotations-13.0.jar</arg>
                 <arg>$USER_HOME$/.gradle/caches/modules-2/files-2.1/org.jetbrains.kotlin/kotlin-script-runtime/2.0.21/c9b044380ad41f89aa89aa896c2d32a8c0b2129d/kotlin-script-runtime-2.0.21.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Google/AndroidStudio2024.3.2/kotlin-dist-for-ide/2.0.21/lib/assignment-compiler-plugin.jar</arg>
-                <arg>$USER_HOME$/AppData/Local/Google/AndroidStudio2024.3.2/kotlin-dist-for-ide/2.0.21/lib/sam-with-receiver-compiler-plugin.jar</arg>
+                <arg>$KOTLIN_BUNDLED$/lib/assignment-compiler-plugin.jar</arg>
+                <arg>$KOTLIN_BUNDLED$/lib/sam-with-receiver-compiler-plugin.jar</arg>
               </args>
             </arrayArg>
             <arrayArg name="pluginOptions">
