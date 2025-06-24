@@ -81,7 +81,7 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
           const Padding(
             padding: EdgeInsets.all(20.0),
             child: Text(
-              'Seleziona una classe per avviare una conversazione',
+              'Seleziona una classe',
               textAlign: TextAlign.center,
               style: TextStyle(
                 fontSize: 16,
