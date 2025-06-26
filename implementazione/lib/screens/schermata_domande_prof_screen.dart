@@ -65,7 +65,7 @@ class ClassSelectorScreen extends StatelessWidget {
                       context,
                       MaterialPageRoute(
                         builder: (_) =>
-                            QuestionScreen(name: name, surname: surname),
+                            QuestionScreen(name: name, surname: surname, className: classe['name']!),
                       ),
                     );
                   },
