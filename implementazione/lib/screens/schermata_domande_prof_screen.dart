@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
+import "domande_prof_screen.dart";
 
 class ClassSelectorScreen extends StatelessWidget {
   final String name;
@@ -60,7 +61,13 @@ class ClassSelectorScreen extends StatelessWidget {
                 final classe = classi[index];
                 return GestureDetector(
                   onTap: () {
-                    // TODO: Naviga alla schermata relativa alla classe selezionata
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) =>
+                            QuestionScreen(name: name, surname: surname),
+                      ),
+                    );
                   },
                   child: Container(
                     decoration: BoxDecoration(
@@ -92,6 +99,7 @@ class ClassSelectorScreen extends StatelessWidget {
                   ),
                 );
               },
+
             ),
           ),
         ],
