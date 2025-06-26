@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
 
 class QuestionScreen extends StatelessWidget {
-  final String className = "III-B 2025";
+  final String className;
   final String name;
   final String surname;
 
-  QuestionScreen({required this.name, required this.surname});
+  QuestionScreen({required this.name, required this.surname, required this.className});
 
   final List<Map<String, String>> questions = [
     {
