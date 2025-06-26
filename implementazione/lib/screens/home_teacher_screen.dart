@@ -3,6 +3,7 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
+import "schermata_domande_prof_screen.dart";
 
 class HomeTeacherScreen extends StatefulWidget {
   final String name;
@@ -60,7 +61,17 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                 _GridTile(
                   label: "Domande",
                   assetPath: "assets/domande.png",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ClassSelectorScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                        ),
+                      ),
+                    );
+                  },
                 ),
                 _GridTile(
                   label: "Classi",
