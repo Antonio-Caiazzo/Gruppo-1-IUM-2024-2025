@@ -5,6 +5,7 @@ import '../widgets/student_bottom_nav_bar.dart';
 import 'conversations_student_screen.dart';
 import 'settings_student_screen.dart';
 import 'schermata_domande.dart';
+import 'conversation_period_selection_screen.dart';
 
 class HomeStudentScreen extends StatefulWidget {
   final String name;
@@ -40,7 +41,7 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
 
           switch (index) {
             case 0:
-              break; // siamo già in home
+              break; // già in home
             case 1:
               Navigator.pushReplacement(
                 context,
@@ -82,7 +83,7 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Classe 3C',
+          'Classe ${widget.classCode}',
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),
@@ -98,7 +99,16 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
                 _GridTile(
                   label: "Nuova\nconversazione",
                   assetPath: "assets/nuova_conversazione.png",
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ConversationPeriodSelectionScreen(
+                        name: widget.name,
+                        surname: widget.surname,
+                        classCode: widget.classCode,
+                      ),
+                    ),
+                  ),
                 ),
                 _GridTile(
                   label: "Quiz",
@@ -117,17 +127,24 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
                 _GridTile(
                   label: "Conversazioni",
                   assetPath: "assets/conversazioni.png",
-                  onTap: () {},
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => ConversationsStudentScreen(
+                        name: widget.name,
+                        surname: widget.surname,
+                        classCode: widget.classCode,
+                      ),
+                    ),
+                  ),
                 ),
                 _GridTile(
                   label: "Domande",
                   assetPath: "assets/domande.png",
-                  onTap: () {
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (_) => SchermataDomande()),
-                    );
-                  },
+                  onTap: () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => SchermataDomande()),
+                  ),
                 ),
               ],
             ),
