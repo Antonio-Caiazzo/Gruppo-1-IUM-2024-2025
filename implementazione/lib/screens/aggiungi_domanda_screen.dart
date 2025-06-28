@@ -31,40 +31,64 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              DropdownButtonFormField<String>(
-                decoration: InputDecoration(
-                  labelText: "Periodo Storico",
-                  border: OutlineInputBorder(),
-                ),
-                value: _selectedPeriod,
-                items: periods
-                    .map(
-                      (period) =>
-                          DropdownMenuItem(value: period, child: Text(period)),
-                    )
-                    .toList(),
-                onChanged: (value) {
-                  setState(() {
-                    _selectedPeriod = value;
-                  });
-                },
-                validator: (value) =>
-                    value == null ? 'Seleziona un periodo' : null,
+              Row(
+                children: [
+                  Expanded(
+                    flex: 2,
+                    child: DropdownButtonFormField<String>(
+                      decoration: InputDecoration(
+                        labelText: "Periodo Storico",
+                        border: OutlineInputBorder(),
+                      ),
+                      value: _selectedPeriod,
+                      items: periods
+                          .map(
+                            (period) => DropdownMenuItem(
+                              value: period,
+                              child: Text(period),
+                            ),
+                          )
+                          .toList(),
+                      onChanged: (value) {
+                        setState(() {
+                          _selectedPeriod = value;
+                        });
+                      },
+                      validator: (value) =>
+                          value == null ? 'Seleziona un periodo' : null,
+                    ),
+                  ),
+                  Spacer(flex: 1), // Distanza extra a destra
+                ],
               ),
-              SizedBox(height: 16),
-              TextFormField(
-                decoration: InputDecoration(
-                  labelText: "Domanda",
-                  border: OutlineInputBorder(),
-                ),
-                maxLines: 3,
-                onChanged: (value) {
-                  _questionText = value;
-                },
-                validator: (value) => value == null || value.isEmpty
-                    ? 'Inserisci una domanda'
-                    : null,
+              SizedBox(height: 24),
+              Text(
+                "Domanda",
+                style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
               ),
+              SizedBox(height: 8),
+              Container(
+                decoration: BoxDecoration(
+                  color: Color(0xFFF5F5F5), // Gray/01
+                  borderRadius: BorderRadius.circular(8),
+                  border: Border.all(color: Colors.grey.shade400),
+                ),
+                padding: EdgeInsets.symmetric(horizontal: 12),
+                child: TextFormField(
+                  maxLines: 5,
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'Inserisci la tua domanda...',
+                  ),
+                  onChanged: (value) {
+                    _questionText = value;
+                  },
+                  validator: (value) => value == null || value.isEmpty
+                      ? 'Inserisci una domanda'
+                      : null,
+                ),
+              ),
+
               SizedBox(height: 20),
               ElevatedButton(
                 onPressed: () {
@@ -79,7 +103,10 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: Text('Aggiungi', style: TextStyle(fontSize: 16, color: Colors.white)),
+                child: Text(
+                  'Aggiungi',
+                  style: TextStyle(fontSize: 16, color: Colors.white),
+                ),
               ),
             ],
           ),
