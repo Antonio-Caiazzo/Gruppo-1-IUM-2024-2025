@@ -38,6 +38,71 @@ class _QuestionScreenState extends State<QuestionScreen> {
     }
   }
 
+  void _showDeleteConfirmationDialog(String question) {
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return AlertDialog(
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(16),
+          ),
+          contentPadding: EdgeInsets.symmetric(vertical: 24, horizontal: 16),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Text(
+                'Attenzione !',
+                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 8),
+              Text('Confermare l\'eliminazione?', textAlign: TextAlign.center),
+              SizedBox(height: 24),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ElevatedButton(
+                    onPressed: () {
+                      setState(() {
+                        questions.remove(question);
+                      });
+                      Navigator.of(context).pop();
+                    },
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF5555),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text("Elimina"),
+                  ),
+                  ElevatedButton(
+                    onPressed: () => Navigator.of(context).pop(),
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF2CBDFB),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 24,
+                        vertical: 10,
+                      ),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(20),
+                      ),
+                    ),
+                    child: Text("Annulla"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -167,7 +232,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () => _showDeleteConfirmationDialog(question),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFFF5555),
                       padding: EdgeInsets.symmetric(
