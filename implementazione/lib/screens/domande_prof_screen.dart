@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
+import 'aggiungi_domanda_screen.dart';
 
 class QuestionScreen extends StatefulWidget {
   final String className;
@@ -24,6 +25,18 @@ class _QuestionScreenState extends State<QuestionScreen> {
     "Come hanno costruito il Foro i romani?",
     "Dove è nato Giulio Cesare?",
   ];
+
+  void _navigateToAddQuestionScreen() async {
+    final newQuestion = await Navigator.push(
+      context,
+      MaterialPageRoute(builder: (_) => AddQuestionScreen()),
+    );
+    if (newQuestion != null && newQuestion is String) {
+      setState(() {
+        questions.add(newQuestion);
+      });
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +68,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
                 ElevatedButton(
-                  onPressed: () {},
+                  onPressed: _navigateToAddQuestionScreen,
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Color(0xFF2CBDFB),
                     shape: RoundedRectangleBorder(
