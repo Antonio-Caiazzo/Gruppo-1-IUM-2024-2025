@@ -78,7 +78,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text("Elimina"),
+                    child: Text(
+                      "Elimina",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                   ElevatedButton(
                     onPressed: () => Navigator.of(context).pop(),
@@ -92,7 +95,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         borderRadius: BorderRadius.circular(20),
                       ),
                     ),
-                    child: Text("Annulla"),
+                    child: Text(
+                      "Annulla",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
                 ],
               ),

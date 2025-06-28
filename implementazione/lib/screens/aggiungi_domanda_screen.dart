@@ -79,7 +79,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                     borderRadius: BorderRadius.circular(30),
                   ),
                 ),
-                child: Text('Aggiungi', style: TextStyle(fontSize: 16)),
+                child: Text('Aggiungi', style: TextStyle(fontSize: 16, color: Colors.white)),
               ),
             ],
           ),
