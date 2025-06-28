@@ -62,7 +62,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       borderRadius: BorderRadius.circular(8),
                     ),
                   ),
-                  child: Text("Aggiungi"),
+                  child: Text(
+                    "Aggiungi",
+                    style: TextStyle(color: Colors.white),
+                  ),
                 ),
               ],
             ),
@@ -112,10 +115,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
       decoration: BoxDecoration(
         color: Colors.white,
         borderRadius: BorderRadius.circular(12),
-        border: Border.all(
-          color: isSelected ? Color(0xFF2CBDFB) : Colors.lightBlueAccent,
-          width: 2,
-        ),
+        border: Border.all(color: Color(0xFF2CBDFB), width: isSelected ? 4 : 2),
         boxShadow: [
           BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2)),
         ],
@@ -146,9 +146,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         horizontal: 12,
                         vertical: 6,
                       ),
-                      textStyle: TextStyle(fontSize: 12),
                     ),
-                    child: Text("Modifica"),
+                    child: Text(
+                      "Modifica",
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
@@ -159,9 +161,12 @@ class _QuestionScreenState extends State<QuestionScreen> {
                         horizontal: 12,
                         vertical: 6,
                       ),
-                      textStyle: TextStyle(fontSize: 12),
+                      textStyle: TextStyle(fontSize: 12, color: Colors.white),
                     ),
-                    child: Text("Elimina"),
+                    child: Text(
+                      "Elimina",
+                      style: TextStyle(fontSize: 12, color: Colors.white),
+                    ),
                   ),
                 ],
               ),
