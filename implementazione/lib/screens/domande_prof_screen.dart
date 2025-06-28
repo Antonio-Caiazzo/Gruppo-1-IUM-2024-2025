@@ -1,55 +1,63 @@
 import 'package:flutter/material.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
 
-class QuestionScreen extends StatelessWidget {
+class QuestionScreen extends StatefulWidget {
   final String className;
   final String name;
   final String surname;
 
-  QuestionScreen({required this.name, required this.surname, required this.className});
+  QuestionScreen({
+    required this.className,
+    required this.name,
+    required this.surname,
+  });
 
-  final List<Map<String, String>> questions = [
-    {
-      "text": "Come hanno costruito il Colosseo i romani?",
-      "time": "17/04/2025 16:40",
-    },
-    {
-      "text": "Come hanno costruito il Foro i romani?",
-      "time": "17/04/2025 16:40",
-    },
-    {"text": "Dove è nato Giulio Cesare?", "time": "17/04/2025 16:40"},
+  @override
+  _QuestionScreenState createState() => _QuestionScreenState();
+}
+
+class _QuestionScreenState extends State<QuestionScreen> {
+  int selectedIndex = -1;
+
+  final List<String> questions = [
+    "Come hanno costruito il Colosseo i romani?",
+    "Come hanno costruito il Foro i romani?",
+    "Dove è nato Giulio Cesare?",
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(className),
-        backgroundColor: Colors.deepPurple[400],
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text(
+          widget.className,
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        centerTitle: true,
+        elevation: 0,
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            // Barra di ricerca e bottone Aggiungi
             Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(
-                  child: TextField(
-                    decoration: InputDecoration(
-                      hintText: "Cerca domanda",
-                      border: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                      ),
-                      contentPadding: EdgeInsets.symmetric(horizontal: 12),
-                    ),
-                  ),
+                Text(
+                  "Cerca domanda",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
                 ),
-                SizedBox(width: 10),
                 ElevatedButton(
                   onPressed: () {},
                   style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.deepPurple,
+                    backgroundColor: Color(0xFF2CBDFB),
                     shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(8),
                     ),
@@ -58,65 +66,30 @@ class QuestionScreen extends StatelessWidget {
                 ),
               ],
             ),
+            SizedBox(height: 10),
+            TextField(
+              decoration: InputDecoration(
+                hintText: 'Domanda',
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                contentPadding: EdgeInsets.symmetric(horizontal: 12),
+              ),
+            ),
             SizedBox(height: 20),
-
-            // Elenco delle domande
             Expanded(
               child: ListView.builder(
                 itemCount: questions.length,
                 itemBuilder: (context, index) {
-                  final q = questions[index];
-                  return Card(
-                    shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(12),
-                    ),
-                    elevation: 2,
-                    margin: EdgeInsets.only(bottom: 16),
-                    child: Padding(
-                      padding: const EdgeInsets.all(16.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            q["text"]!,
-                            style: TextStyle(
-                              fontSize: 16,
-                              fontWeight: FontWeight.w600,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            "Aggiunta il ${q["time"]}",
-                            style: TextStyle(color: Colors.grey[700]),
-                          ),
-                          SizedBox(height: 12),
-                          Row(
-                            children: [
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.orange,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                child: Text("Modifica"),
-                              ),
-                              SizedBox(width: 10),
-                              ElevatedButton(
-                                onPressed: () {},
-                                style: ElevatedButton.styleFrom(
-                                  backgroundColor: Colors.red,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                ),
-                                child: Text("Elimina"),
-                              ),
-                            ],
-                          ),
-                        ],
-                      ),
+                  return GestureDetector(
+                    onTap: () {
+                      setState(() {
+                        selectedIndex = index;
+                      });
+                    },
+                    child: _questionCard(
+                      questions[index],
+                      isSelected: selectedIndex == index,
                     ),
                   );
                 },
@@ -125,12 +98,76 @@ class QuestionScreen extends StatelessWidget {
           ],
         ),
       ),
-
-      // Bottom Navigation personalizzata
       bottomNavigationBar: TeacherBottomNavigationBar(
         currentIndex: 0,
-        name: name,
-        surname: surname,
+        name: widget.name,
+        surname: widget.surname,
+      ),
+    );
+  }
+
+  Widget _questionCard(String question, {bool isSelected = false}) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 8),
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(12),
+        border: Border.all(
+          color: isSelected ? Color(0xFF2CBDFB) : Colors.lightBlueAccent,
+          width: 2,
+        ),
+        boxShadow: [
+          BoxShadow(color: Colors.black12, blurRadius: 6, offset: Offset(0, 2)),
+        ],
+      ),
+      padding: EdgeInsets.all(16),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            question,
+            style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+          ),
+          SizedBox(height: 10),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                "17/04/2025 16:40",
+                style: TextStyle(color: Colors.grey[600], fontSize: 12),
+              ),
+              Row(
+                children: [
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF2CBDFB),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      textStyle: TextStyle(fontSize: 12),
+                    ),
+                    child: Text("Modifica"),
+                  ),
+                  SizedBox(width: 8),
+                  ElevatedButton(
+                    onPressed: () {},
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFFFF5555),
+                      padding: EdgeInsets.symmetric(
+                        horizontal: 12,
+                        vertical: 6,
+                      ),
+                      textStyle: TextStyle(fontSize: 12),
+                    ),
+                    child: Text("Elimina"),
+                  ),
+                ],
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }
