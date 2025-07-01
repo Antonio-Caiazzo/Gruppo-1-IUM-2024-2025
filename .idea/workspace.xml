@@ -1,11 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AndroidLayouts">
+    <shared>
+      <config />
+    </shared>
+  </component>
   <component name="AutoImportSettings">
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`.">
-      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/schermata_domande.dart" afterDir="false" />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes.">
+      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/domande_insegnante_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,6 +64,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
   &quot;lastFilter&quot;: {
@@ -77,31 +90,31 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "Flutter.domande_runner.dart.executor": "Run",
-    "Flutter.main.dart.executor": "Run",
-    "Flutter.quiz_runner.dart.executor": "Run",
-    "Flutter.quiz_screen.dart.executor": "Run",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.cidr.known.project.marker": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "RunOnceActivity.readMode.enableVisualFormatting": "true",
-    "SHARE_PROJECT_CONFIGURATION_FILES": "true",
-    "ScreenRecorder.SavePath": "C:\\Users\\sicka\\Downloads",
-    "cf.first.check.clang-format": "false",
-    "cidr.known.project.marker": "true",
-    "com.google.services.firebase.aqiPopupShown": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "main",
-    "io.flutter.reload.alreadyRun": "true",
-    "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "C:/Users/sicka/Downloads",
-    "settings.editor.selected.configurable": "AndroidSdkUpdater",
-    "show.migrate.to.gradle.popup": "false"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Flutter.domande_runner.dart.executor&quot;: &quot;Run&quot;,
+    &quot;Flutter.main.dart.executor&quot;: &quot;Run&quot;,
+    &quot;Flutter.quiz_runner.dart.executor&quot;: &quot;Run&quot;,
+    &quot;Flutter.quiz_screen.dart.executor&quot;: &quot;Run&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.readMode.enableVisualFormatting&quot;: &quot;true&quot;,
+    &quot;SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;ScreenRecorder.SavePath&quot;: &quot;C:\\Users\\sicka\\Downloads&quot;,
+    &quot;cf.first.check.clang-format&quot;: &quot;false&quot;,
+    &quot;cidr.known.project.marker&quot;: &quot;true&quot;,
+    &quot;com.google.services.firebase.aqiPopupShown&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;main&quot;,
+    &quot;io.flutter.reload.alreadyRun&quot;: &quot;true&quot;,
+    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;C:/Users/sicka/Downloads&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;org.jetbrains.plugins.github.ui.GithubSettingsConfigurable&quot;,
+    &quot;show.migrate.to.gradle.popup&quot;: &quot;false&quot;
   }
-}]]></component>
-  <component name="RunManager" selected="Flutter.domande_runner.dart">
+}</component>
+  <component name="RunManager" selected="Flutter.main.dart">
     <configuration name="android.app" type="AndroidRunConfigurationType" factoryName="Android App" activateToolWindowBeforeRun="false">
       <module name="android.app" />
       <option name="ANDROID_RUN_CONFIGURATION_SCHEMA_VERSION" value="1" />
@@ -192,10 +205,10 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.domande_runner.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
         <item itemvalue="Flutter.quiz_runner.dart" />
-        <item itemvalue="Flutter.main.dart" />
         <item itemvalue="Flutter.quiz_screen.dart" />
       </list>
     </recent_temporary>
@@ -313,7 +326,79 @@
       <option name="project" value="LOCAL" />
       <updated>1750547148273</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status.">
+      <option name="closed" value="true" />
+      <created>1750547172247</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547172247</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status.">
+      <option name="closed" value="true" />
+      <created>1750547178388</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1750547178389</updated>
+    </task>
+    <task id="LOCAL-00016" summary="Add Git mapping for Flutter SDK&#10;&#10;This commit updates the VCS configuration to include a mapping for the Flutter SDK directory. Additionally, it introduces new screens and modifies existing ones:&#10;&#10;- **New Screens:**&#10;    - `AggiungiClasseScreen`: Likely for adding new classes.&#10;    - `ClassiScreen`: Likely for displaying existing classes.&#10;    - `ConversazioniScreen`: Likely for managing conversations.&#10;&#10;- **Modified Screen:**&#10;    - `HomeTeacherScreen`: Updated, potentially to integrate with the new class and conversation screens.&#10;&#10;The Gradle module files have also been updated, likely due to dependency changes or project structure adjustments.">
+      <option name="closed" value="true" />
+      <created>1750725616524</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725616524</updated>
+    </task>
+    <task id="LOCAL-00017" summary="Update Kotlin plugin paths in Gradle module files&#10;&#10;Replaced hardcoded paths to Kotlin compiler plugins (`assignment-compiler-plugin.jar` and `sam-with-receiver-compiler-plugin.jar`) with the `C:/Users/sicka/AppData/Local/Google/AndroidStudio2024.3.2/kotlin-dist-for-ide/2.0.21` variable in `gradle.main.iml` and `gradle.test.iml`. This makes the paths more portable and less dependent on the user's specific Android Studio installation directory.">
+      <option name="closed" value="true" />
+      <created>1750725626784</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725626784</updated>
+    </task>
+    <task id="LOCAL-00018" summary="Create AggiungiClasseScreen&#10;&#10;This commit introduces the `AggiungiClasseScreen` widget, which allows users to add a new class by providing its name and academic year.&#10;&#10;Key features of this screen include:&#10;- A form with two `TextFormField` widgets for entering the class name and academic year.&#10;- Validation for both fields to ensure they are not empty and that the year is a number.&#10;- A &quot;Aggiungi&quot; (Add) button that saves the new class information and navigates back to the previous screen.&#10;- Styling consistent with the application's theme, using `AppColors.background` and specific font styles.">
+      <option name="closed" value="true" />
+      <created>1750725636771</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725636771</updated>
+    </task>
+    <task id="LOCAL-00019" summary="Create AggiungiClasseScreen&#10;&#10;This commit introduces the `AggiungiClasseScreen` widget, which allows users to add a new class by providing its name and academic year.&#10;&#10;Key features of this screen include:&#10;- A form with two `TextFormField` widgets for entering the class name and academic year.&#10;- Validation for both fields to ensure they are not empty and that the year is a number.&#10;- A &quot;Aggiungi&quot; (Add) button that saves the new class information and navigates back to the previous screen.&#10;- Styling consistent with the application's theme, using `AppColors.background` and specific font styles.">
+      <option name="closed" value="true" />
+      <created>1750725645783</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725645783</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Create ConversazioniScreen&#10;&#10;This commit introduces the `ConversazioniScreen` widget, which displays a grid of classes and allows users to select a class to start a conversation.&#10;&#10;Key features of this screen include:&#10;- Loads a list of classes from `SharedPreferences`. If no saved classes are found, it loads a default list and saves it for future use.&#10;- Displays classes in a `GridView` with 3 columns.&#10;- Each class is represented by a card showing its name and year.&#10;- Tapping on a class card currently shows a `SnackBar` indicating the selection (TODO: implement navigation to a chat screen).&#10;- Includes an app bar with a title &quot;Conversazioni&quot; and a back button.&#10;- Provides a bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; options. &quot;Conversazioni&quot; is the active tab.&#10;&#10;The screen loads class data from `SharedPreferences` upon initialization. If no data is found, it populates the list with default class values and saves them.">
+      <option name="closed" value="true" />
+      <created>1750725656496</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725656496</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Enable navigation to ConversazioniScreen and ClassiScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to allow navigation to `ConversazioniScreen` and `ClassiScreen` when the respective grid tiles are tapped.&#10;&#10;Specifically:&#10;- Tapping the &quot;Conversazioni&quot; tile now navigates to `ConversazioniScreen`.&#10;- Tapping the &quot;Classi&quot; tile now navigates to `ClassiScreen`.&#10;- A TODO comment has been added for implementing navigation for the &quot;Domande&quot; tile.">
+      <option name="closed" value="true" />
+      <created>1750725667604</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725667604</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes.">
+      <option name="closed" value="true" />
+      <created>1750725680349</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1750725680349</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -369,6 +454,13 @@
     <MESSAGE value="fix" />
     <MESSAGE value="Implement DomandaModel&#10;&#10;This commit introduces the `DomandaModel` class, which represents a question in the application.&#10;&#10;The `DomandaModel` includes the following properties:&#10;- `testo`: The text of the question.&#10;- `data`: The date the question was created.&#10;- `stato`: The status of the question (nuova, incompleta, completa), managed by the `StatoDomanda` enum.&#10;- `personaggio`: The character or topic associated with the chat.&#10;- `immagineAsset`: The path to the asset image for the character/topic.&#10;&#10;The class also provides methods to:&#10;- Change the question's status.&#10;- Mark a question as opened or completed.&#10;- Get a label for the current status.&#10;- Create a copy of the model with updated values using `copyWith`." />
     <MESSAGE value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
-    <option name="LAST_COMMIT_MESSAGE" value="Create domande_runner.dart&#10;&#10;This commit introduces a new Dart file, `domande_runner.dart`, which defines a simple Flutter application.&#10;&#10;The `DomandeApp` widget serves as the root of the application and displays the `SchermataDomande` widget as its home screen.&#10;&#10;The application has the following characteristics:&#10;- Debug banner is hidden.&#10;- Title is set to 'Runner Domande'.&#10;- Primary theme color is set to `Colors.indigo`." />
+    <MESSAGE value="Create SchermataDomande&#10;&#10;This commit introduces the `SchermataDomande` widget, which displays a list of questions related to historical topics.&#10;&#10;Key features of this screen include:&#10;- A list of `DomandaModel` objects, each representing a question with its text, date, status, associated character/topic, and image.&#10;- A responsive card layout for each question, displaying its details and a play button to navigate to the conversation screen.&#10;- A bottom navigation bar for navigating to different sections of the app (Home, Conversazioni, Impostazioni).&#10;- Status chips that visually indicate whether a question is new, incomplete, or completed.&#10;- Navigation to `SchermataConversazione` when a question card is tapped, passing the selected question and a callback to update its status." />
+    <MESSAGE value="Add Git mapping for Flutter SDK&#10;&#10;This commit updates the VCS configuration to include a mapping for the Flutter SDK directory. Additionally, it introduces new screens and modifies existing ones:&#10;&#10;- **New Screens:**&#10;    - `AggiungiClasseScreen`: Likely for adding new classes.&#10;    - `ClassiScreen`: Likely for displaying existing classes.&#10;    - `ConversazioniScreen`: Likely for managing conversations.&#10;&#10;- **Modified Screen:**&#10;    - `HomeTeacherScreen`: Updated, potentially to integrate with the new class and conversation screens.&#10;&#10;The Gradle module files have also been updated, likely due to dependency changes or project structure adjustments." />
+    <MESSAGE value="Update Kotlin plugin paths in Gradle module files&#10;&#10;Replaced hardcoded paths to Kotlin compiler plugins (`assignment-compiler-plugin.jar` and `sam-with-receiver-compiler-plugin.jar`) with the `C:/Users/sicka/AppData/Local/Google/AndroidStudio2024.3.2/kotlin-dist-for-ide/2.0.21` variable in `gradle.main.iml` and `gradle.test.iml`. This makes the paths more portable and less dependent on the user's specific Android Studio installation directory." />
+    <MESSAGE value="Create AggiungiClasseScreen&#10;&#10;This commit introduces the `AggiungiClasseScreen` widget, which allows users to add a new class by providing its name and academic year.&#10;&#10;Key features of this screen include:&#10;- A form with two `TextFormField` widgets for entering the class name and academic year.&#10;- Validation for both fields to ensure they are not empty and that the year is a number.&#10;- A &quot;Aggiungi&quot; (Add) button that saves the new class information and navigates back to the previous screen.&#10;- Styling consistent with the application's theme, using `AppColors.background` and specific font styles." />
+    <MESSAGE value="Create ConversazioniScreen&#10;&#10;This commit introduces the `ConversazioniScreen` widget, which displays a grid of classes and allows users to select a class to start a conversation.&#10;&#10;Key features of this screen include:&#10;- Loads a list of classes from `SharedPreferences`. If no saved classes are found, it loads a default list and saves it for future use.&#10;- Displays classes in a `GridView` with 3 columns.&#10;- Each class is represented by a card showing its name and year.&#10;- Tapping on a class card currently shows a `SnackBar` indicating the selection (TODO: implement navigation to a chat screen).&#10;- Includes an app bar with a title &quot;Conversazioni&quot; and a back button.&#10;- Provides a bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; options. &quot;Conversazioni&quot; is the active tab.&#10;&#10;The screen loads class data from `SharedPreferences` upon initialization. If no data is found, it populates the list with default class values and saves them." />
+    <MESSAGE value="Enable navigation to ConversazioniScreen and ClassiScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to allow navigation to `ConversazioniScreen` and `ClassiScreen` when the respective grid tiles are tapped.&#10;&#10;Specifically:&#10;- Tapping the &quot;Conversazioni&quot; tile now navigates to `ConversazioniScreen`.&#10;- Tapping the &quot;Classi&quot; tile now navigates to `ClassiScreen`.&#10;- A TODO comment has been added for implementing navigation for the &quot;Domande&quot; tile." />
+    <MESSAGE value="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes." />
+    <option name="LAST_COMMIT_MESSAGE" value="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes." />
   </component>
 </project>

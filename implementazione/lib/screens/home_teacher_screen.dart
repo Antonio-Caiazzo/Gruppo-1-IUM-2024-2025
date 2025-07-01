@@ -1,8 +1,9 @@
-// lib/screens/home_teacher_screen.dart
-
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
+import 'classi_screen.dart';
+import 'conversazioni_screen.dart';
+import 'domande_insegnante_screen.dart'; // Import the new screen
 
 class HomeTeacherScreen extends StatefulWidget {
   final String name;
@@ -55,17 +56,32 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                 _GridTile(
                   label: "Conversazioni",
                   assetPath: "assets/conversazioni.png",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ConversazioniScreen()),
+                    );
+                  },
                 ),
                 _GridTile(
                   label: "Domande",
                   assetPath: "assets/domande.png",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const DomandeInsegnanteScreen()), // Navigate to DomandeInsegnanteScreen
+                    );
+                  },
                 ),
                 _GridTile(
                   label: "Classi",
                   assetPath: "assets/nuova_conversazione.png",
-                  onTap: () {},
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => const ClassiScreen()),
+                    );
+                  },
                 ),
               ],
             ),
