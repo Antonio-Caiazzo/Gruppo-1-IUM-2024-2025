@@ -31,10 +31,9 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 🔄 MODIFICATO: Dropdown centrato
               Center(
                 child: SizedBox(
-                  width: 300, // Puoi anche usare MediaQuery se preferisci
+                  width: 300,
                   child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       labelText: "Periodo Storico",
@@ -74,7 +73,8 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                 ),
                 padding: EdgeInsets.symmetric(horizontal: 12),
                 child: TextFormField(
-                  maxLines: 5,
+                  minLines: 8,
+                  maxLines: null,
                   decoration: InputDecoration(
                     border: InputBorder.none,
                     hintText: 'Inserisci la tua domanda...',
