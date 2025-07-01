@@ -50,56 +50,87 @@ class ClassSelectorScreen extends StatelessWidget {
           ),
           Expanded(
             child: GridView.builder(
-              padding: const EdgeInsets.all(16),
-              itemCount: classi.length,
+              padding: const EdgeInsets.symmetric(horizontal: 20),
               gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
                 crossAxisCount: 3,
-                crossAxisSpacing: 12,
-                mainAxisSpacing: 12,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                childAspectRatio: 1.0,
               ),
+              itemCount: classi.length,
               itemBuilder: (context, index) {
                 final classe = classi[index];
+
                 return GestureDetector(
                   onTap: () {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) =>
-                            QuestionScreen(name: name, surname: surname, className: classe['name']!),
+                        builder: (_) => QuestionScreen(
+                          name: name,
+                          surname: surname,
+                          className: classe['name']!,
+                        ),
                       ),
                     );
                   },
                   child: Container(
+                    width: 100,
+                    height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.lightBlue[100],
-                      borderRadius: BorderRadius.circular(16),
+                      color: Colors.white, // Card background
+                      borderRadius: BorderRadius.circular(12),
+                      border: Border.all(
+                        color:
+                            Colors.grey.shade300, // Always a light grey border
+                        width: 1,
+                      ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.grey.withOpacity(0.3),
-                          blurRadius: 5,
-                          offset: const Offset(2, 4),
+                          color: Colors.black.withOpacity(0.1),
+                          spreadRadius: 1,
+                          blurRadius: 3,
+                          offset: const Offset(0, 2),
                         ),
                       ],
                     ),
                     child: Center(
-                      child: Column(
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            classe['name']!,
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 18,
+                      child: Container(
+                        width: 90,
+                        height: 90,
+                        decoration: BoxDecoration(
+                          color: const Color(
+                            0x472CBDFB,
+                          ), // Light blue background for the inner square
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              classe['name']!,
+                              style: const TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: Color(0xFF0277BD),
+                              ),
                             ),
-                          ),
-                          Text(classe['year']!),
-                        ],
+                            const SizedBox(height: 4),
+                            Text(
+                              classe['year']!,
+                              style: const TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: Color(0xFF0277BD),
+                              ),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   ),
                 );
               },
-
             ),
           ),
         ],
