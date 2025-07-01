@@ -91,7 +91,11 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
               ElevatedButton(
                 onPressed: () {
                   if (_formKey.currentState!.validate()) {
-                    Navigator.pop(context, _questionText);
+                    Navigator.pop(context, {
+                      'text': _questionText,
+                      'period': _selectedPeriod!,
+                    });
+
                   }
                 },
                 style: ElevatedButton.styleFrom(

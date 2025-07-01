@@ -39,12 +39,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
       context,
       MaterialPageRoute(builder: (_) => AddQuestionScreen()),
     );
-    if (newQuestion != null && newQuestion is String) {
+    if (newQuestion != null && newQuestion is Map<String, String>) {
       setState(() {
-        questions.add({
-          "text": newQuestion,
-          "period": "Impero Romano", // oppure passa il periodo corretto
-        });
+        questions.add(newQuestion);
       });
     }
   }
