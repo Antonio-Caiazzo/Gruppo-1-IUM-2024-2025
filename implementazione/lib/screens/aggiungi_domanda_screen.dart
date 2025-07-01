@@ -31,36 +31,35 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              Row(
-                children: [
-                  Expanded(
-                    flex: 2,
-                    child: DropdownButtonFormField<String>(
-                      decoration: InputDecoration(
-                        labelText: "Periodo Storico",
-                        border: OutlineInputBorder(),
-                      ),
-                      value: _selectedPeriod,
-                      items: periods
-                          .map(
-                            (period) => DropdownMenuItem(
-                              value: period,
-                              child: Text(period),
-                            ),
-                          )
-                          .toList(),
-                      onChanged: (value) {
-                        setState(() {
-                          _selectedPeriod = value;
-                        });
-                      },
-                      validator: (value) =>
-                          value == null ? 'Seleziona un periodo' : null,
+              // 🔄 MODIFICATO: Dropdown centrato
+              Center(
+                child: SizedBox(
+                  width: 300, // Puoi anche usare MediaQuery se preferisci
+                  child: DropdownButtonFormField<String>(
+                    decoration: InputDecoration(
+                      labelText: "Periodo Storico",
+                      border: OutlineInputBorder(),
                     ),
+                    value: _selectedPeriod,
+                    items: periods
+                        .map(
+                          (period) => DropdownMenuItem(
+                            value: period,
+                            child: Text(period),
+                          ),
+                        )
+                        .toList(),
+                    onChanged: (value) {
+                      setState(() {
+                        _selectedPeriod = value;
+                      });
+                    },
+                    validator: (value) =>
+                        value == null ? 'Seleziona un periodo' : null,
                   ),
-                  Spacer(flex: 1), // Distanza extra a destra
-                ],
+                ),
               ),
+
               SizedBox(height: 24),
               Text(
                 "Domanda",
@@ -69,7 +68,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
               SizedBox(height: 8),
               Container(
                 decoration: BoxDecoration(
-                  color: Color(0xFFF5F5F5), // Gray/01
+                  color: Color(0xFFF6F6F6), // Gray/01
                   borderRadius: BorderRadius.circular(8),
                   border: Border.all(color: Colors.grey.shade400),
                 ),
