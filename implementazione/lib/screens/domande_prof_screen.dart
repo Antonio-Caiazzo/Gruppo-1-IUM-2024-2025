@@ -20,11 +20,19 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int selectedIndex = -1;
 
-  final List<String> questions = [
-    "Come hanno costruito il Colosseo i romani?",
-    "Come hanno costruito il Foro i romani?",
-    "Dove è nato Giulio Cesare?",
+  List<Map<String, String>> questions = [
+    {
+      "text": "Come hanno costruito il Colosseo i romani?",
+      "period": "Impero Romano",
+    },
+    {
+      "text": "Come hanno costruito il Foro i romani?",
+      "period": "Impero Romano",
+    },
+    {"text": "Dove è nato Giulio Cesare?", "period": "Impero Romano"},
   ];
+
+  List<String> selectedPeriods = []; // ← per il filtro attivo
 
   void _navigateToAddQuestionScreen() async {
     final newQuestion = await Navigator.push(
@@ -33,7 +41,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
     if (newQuestion != null && newQuestion is String) {
       setState(() {
-        questions.add(newQuestion);
+        questions.add({
+          "text": newQuestion,
+          "period": "Impero Romano", // oppure passa il periodo corretto
+        });
       });
     }
   }
@@ -163,11 +174,40 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 contentPadding: EdgeInsets.symmetric(horizontal: 12),
               ),
             ),
-            SizedBox(height: 20),
+            SizedBox(height: 10), // spazio tra input e pulsante nuovo
+            ElevatedButton(
+              onPressed: _showFilterDialog,
+              style: ElevatedButton.styleFrom(
+                backgroundColor: Color(0xFF2CBDFB),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8),
+                ),
+              ),
+              child: Text(
+                "Filtra per periodo storico",
+                style: TextStyle(color: Colors.white),
+              ),
+            ),
+            SizedBox(height: 20), // spazio tra pulsante e lista
+
             Expanded(
               child: ListView.builder(
-                itemCount: questions.length,
+                itemCount: questions
+                    .where(
+                      (q) =>
+                          selectedPeriods.isEmpty ||
+                          selectedPeriods.contains(q['period']),
+                    )
+                    .length,
                 itemBuilder: (context, index) {
+                  final filteredQuestions = questions
+                      .where(
+                        (q) =>
+                            selectedPeriods.isEmpty ||
+                            selectedPeriods.contains(q['period']),
+                      )
+                      .toList();
+
                   return GestureDetector(
                     onTap: () {
                       setState(() {
@@ -175,7 +215,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       });
                     },
                     child: _questionCard(
-                      questions[index],
+                      filteredQuestions[index]['text']!,
                       isSelected: selectedIndex == index,
                     ),
                   );
@@ -259,5 +299,68 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ],
       ),
     );
+  }
+
+  void _showFilterDialog() {
+    List<String> tempSelected = List.from(selectedPeriods);
+
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return StatefulBuilder(
+          builder: (BuildContext context, StateSetter setInnerState) {
+            return AlertDialog(
+              title: Text("Seleziona periodi storici"),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(16),
+              ),
+              content: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  CheckboxListTile(
+                    title: Text("Impero Romano"),
+                    value: tempSelected.contains("Impero Romano"),
+                    onChanged: (bool? value) {
+                      setInnerState(() {
+                        value!
+                            ? tempSelected.add("Impero Romano")
+                            : tempSelected.remove("Impero Romano");
+                      });
+                    },
+                  ),
+                  CheckboxListTile(
+                    title: Text("Rivoluzione Francese"),
+                    value: tempSelected.contains("Rivoluzione Francese"),
+                    onChanged: (bool? value) {
+                      setInnerState(() {
+                        value!
+                            ? tempSelected.add("Rivoluzione Francese")
+                            : tempSelected.remove("Rivoluzione Francese");
+                      });
+                    },
+                  ),
+                ],
+              ),
+              actions: [
+                TextButton(
+                  onPressed: () {
+                    Navigator.of(
+                      context,
+                    ).pop(tempSelected); // restituisco i filtri selezionati
+                  },
+                  child: Text("Applica"),
+                ),
+              ],
+            );
+          },
+        );
+      },
+    ).then((selected) {
+      if (selected != null && selected is List<String>) {
+        setState(() {
+          selectedPeriods = selected;
+        });
+      }
+    });
   }
 }
