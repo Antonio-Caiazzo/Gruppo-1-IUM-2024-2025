@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
 import 'aggiungi_domanda_screen.dart';
+import '../data/question_storage_data.dart';
 
 class QuestionScreen extends StatefulWidget {
   final String className;
@@ -20,17 +21,16 @@ class QuestionScreen extends StatefulWidget {
 class _QuestionScreenState extends State<QuestionScreen> {
   int selectedIndex = -1;
 
-  List<Map<String, String>> questions = [
-    {
-      "text": "Come hanno costruito il Colosseo i romani?",
-      "period": "Impero Romano",
-    },
-    {
-      "text": "Come hanno costruito il Foro i romani?",
-      "period": "Impero Romano",
-    },
-    {"text": "Dove è nato Giulio Cesare?", "period": "Impero Romano"},
-  ];
+  late List<Map<String, String>> questions;
+
+  @override
+  void initState() {
+    super.initState();
+    // Carica le domande specifiche per la classe selezionata
+    questions = List.from(
+      QuestionStorage.getQuestionsForClass(widget.className),
+    );
+  }
 
   List<String> selectedPeriods = []; // ← per il filtro attivo
 
@@ -42,6 +42,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     if (newQuestion != null && newQuestion is Map<String, String>) {
       setState(() {
         questions.add(newQuestion);
+        QuestionStorage.updateQuestionsForClass(widget.className, questions);
       });
     }
   }
@@ -74,6 +75,10 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       setState(() {
                         questions.removeWhere(
                           (q) => q['text'] == question['text'],
+                        );
+                        QuestionStorage.updateQuestionsForClass(
+                          widget.className,
+                          questions,
                         );
                       });
                       Navigator.of(context).pop();
