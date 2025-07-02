@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import '../widgets/teacher_bottom_nav_bar.dart';
 
 class AddQuestionScreen extends StatefulWidget {
   @override
