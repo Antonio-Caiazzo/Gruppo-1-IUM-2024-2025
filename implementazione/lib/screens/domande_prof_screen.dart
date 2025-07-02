@@ -42,9 +42,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
     if (newQuestion != null && newQuestion is Map<String, String>) {
       setState(() {
         questions.add(newQuestion);
+        selectedIndex = questions.length - 1;
         QuestionStorage.updateQuestionsForClass(widget.className, questions);
       });
     }
+
   }
 
   void _showDeleteConfirmationDialog(Map<String, String> question) {
