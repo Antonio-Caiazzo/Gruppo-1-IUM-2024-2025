@@ -46,7 +46,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
         QuestionStorage.updateQuestionsForClass(widget.className, questions);
       });
     }
-
   }
 
   void _showDeleteConfirmationDialog(Map<String, String> question) {
@@ -190,10 +189,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   borderRadius: BorderRadius.circular(8),
                 ),
               ),
-              child: Text(
-                "Filtra per periodo storico",
-                style: TextStyle(color: Colors.white),
-              ),
+              child: Text("Filtra", style: TextStyle(color: Colors.white)),
             ),
             SizedBox(height: 20), // spazio tra pulsante e lista
 
@@ -321,7 +317,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setInnerState) {
             return AlertDialog(
-              title: Text("Seleziona periodi storici"),
+              title: Text("Filtra per periodo"),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
               ),
@@ -352,16 +348,58 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                 ],
               ),
+              actionsPadding: EdgeInsets.only(
+                bottom: 12,
+              ), // aggiunto padding inferiore
               actions: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.of(
-                      context,
-                    ).pop(tempSelected); // restituisco i filtri selezionati
-                  },
-                  child: Text("Applica"),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  children: [
+                    ElevatedButton(
+                      onPressed: () {
+                        setState(() {
+                          selectedPeriods = []; // azzera i filtri
+                        });
+                        Navigator.of(context).pop(); // chiudi il dialog
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFFFF5555),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 10,
+                        ),
+                      ),
+                      child: Text(
+                        "Annulla filtro",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.of(context).pop(tempSelected);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Color(0xFF2CBDFB),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        padding: EdgeInsets.symmetric(
+                          horizontal: 24,
+                          vertical: 10,
+                        ),
+                      ),
+                      child: Text(
+                        "Applica",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ],
                 ),
               ],
+
             );
           },
         );
