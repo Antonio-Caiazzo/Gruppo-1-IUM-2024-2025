@@ -46,7 +46,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
     }
   }
 
-  void _showDeleteConfirmationDialog(String question) {
+  void _showDeleteConfirmationDialog(Map<String, String> question) {
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -72,7 +72,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ElevatedButton(
                     onPressed: () {
                       setState(() {
-                        questions.remove(question);
+                        questions.removeWhere(
+                          (q) => q['text'] == question['text'],
+                        );
                       });
                       Navigator.of(context).pop();
                     },
@@ -275,7 +277,11 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ),
                   SizedBox(width: 8),
                   ElevatedButton(
-                    onPressed: () => _showDeleteConfirmationDialog(question),
+                    onPressed: () => _showDeleteConfirmationDialog({
+                      "text": question,
+                      "period":
+                          "", // Puoi passare il periodo corretto se disponibile
+                    }),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Color(0xFFFF5555),
                       padding: EdgeInsets.symmetric(
