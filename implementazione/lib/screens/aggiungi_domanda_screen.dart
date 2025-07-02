@@ -16,6 +16,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.white,
       appBar: AppBar(
         leading: BackButton(),
         title: Text("Aggiungi domanda"),
@@ -33,7 +34,7 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
             children: [
               Center(
                 child: SizedBox(
-                  width: 300, 
+                  width: 300,
                   child: DropdownButtonFormField<String>(
                     decoration: InputDecoration(
                       labelText: "Periodo Storico",
@@ -95,7 +96,6 @@ class _AddQuestionScreenState extends State<AddQuestionScreen> {
                       'text': _questionText,
                       'period': _selectedPeriod!,
                     });
-
                   }
                 },
                 style: ElevatedButton.styleFrom(
