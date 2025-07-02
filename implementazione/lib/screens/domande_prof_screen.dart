@@ -194,15 +194,8 @@ class _QuestionScreenState extends State<QuestionScreen> {
             SizedBox(height: 20), // spazio tra pulsante e lista
 
             Expanded(
-              child: ListView.builder(
-                itemCount: questions
-                    .where(
-                      (q) =>
-                          selectedPeriods.isEmpty ||
-                          selectedPeriods.contains(q['period']),
-                    )
-                    .length,
-                itemBuilder: (context, index) {
+              child: Builder(
+                builder: (context) {
                   final filteredQuestions = questions
                       .where(
                         (q) =>
@@ -211,16 +204,35 @@ class _QuestionScreenState extends State<QuestionScreen> {
                       )
                       .toList();
 
-                  return GestureDetector(
-                    onTap: () {
-                      setState(() {
-                        selectedIndex = index;
-                      });
+                  if (filteredQuestions.isEmpty && selectedPeriods.isNotEmpty) {
+                    // Nessuna domanda trovata con il filtro attivo
+                    return Center(
+                      child: Text(
+                        'Non sono presenti domande per il periodo storico: ${selectedPeriods.join(", ")}',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w600,
+                        ),
+                      ),
+                    );
+                  }
+
+                  return ListView.builder(
+                    itemCount: filteredQuestions.length,
+                    itemBuilder: (context, index) {
+                      return GestureDetector(
+                        onTap: () {
+                          setState(() {
+                            selectedIndex = index;
+                          });
+                        },
+                        child: _questionCard(
+                          filteredQuestions[index]['text']!,
+                          isSelected: selectedIndex == index,
+                        ),
+                      );
                     },
-                    child: _questionCard(
-                      filteredQuestions[index]['text']!,
-                      isSelected: selectedIndex == index,
-                    ),
                   );
                 },
               ),
