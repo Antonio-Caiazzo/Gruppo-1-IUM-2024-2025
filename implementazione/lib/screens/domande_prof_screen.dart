@@ -317,6 +317,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         return StatefulBuilder(
           builder: (BuildContext context, StateSetter setInnerState) {
             return AlertDialog(
+              backgroundColor: Colors.white,
               title: Text("Filtra per periodo"),
               shape: RoundedRectangleBorder(
                 borderRadius: BorderRadius.circular(16),
@@ -399,7 +400,6 @@ class _QuestionScreenState extends State<QuestionScreen> {
                   ],
                 ),
               ],
-
             );
           },
         );
