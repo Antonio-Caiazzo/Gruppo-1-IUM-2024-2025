@@ -6,7 +6,6 @@ import 'classi_screen.dart';
 import 'conversazioni_screen.dart';
 import 'domande_insegnante_screen.dart'; // Import the new screen
 
-
 class HomeTeacherScreen extends StatefulWidget {
   final String name;
   final String surname;
@@ -61,7 +60,9 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const ConversazioniScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => const ConversazioniScreen(),
+                      ),
                     );
                   },
                 ),
@@ -73,12 +74,11 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                       context,
 
                       MaterialPageRoute(
-                        builder: (_) => ClassSelectorScreen(
+                        builder: (_) => DomandeInsegnanteScreen(
                           name: widget.name,
                           surname: widget.surname,
                         ),
                       ),
-
                     );
                   },
                 ),

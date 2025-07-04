@@ -10,7 +10,11 @@ import 'dart:convert';
 // import '../constants/colors.dart';
 
 class DomandeInsegnanteScreen extends StatefulWidget {
-  const DomandeInsegnanteScreen({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+
+ 
+  const DomandeInsegnanteScreen({Key? key, required this.name, required this.surname}) : super(key: key);
 
   @override
   _DomandeInsegnanteScreenState createState() => _DomandeInsegnanteScreenState();
@@ -34,6 +38,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
     {'nome': 'I - C', 'anno': '2025'},
     {'nome': 'III - C', 'anno': '2025'},
   ];
+  
 
   @override
   void initState() {
@@ -114,9 +119,9 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                       context,
                       MaterialPageRoute(
                         builder: (_) => QuestionScreen(
-                          name: name,
-                          surname: surname,
-                          className: classe['name']!,
+                          name: widget.name,
+                          surname: widget.surname,
+                          className: classe['nome']!,
                         ),
 
                       ),
@@ -161,7 +166,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                           children: [
                             Text(
 
-                              classe['name']!,
+                              classe['nome']!,
 
                               style: const TextStyle(
                                 fontSize: 16,
@@ -172,7 +177,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                             const SizedBox(height: 4),
                             Text(
 
-                              classe['year']!,
+                              classe['anno']!,
 
                               style: const TextStyle(
                                 fontSize: 14,
@@ -194,8 +199,8 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
 
       bottomNavigationBar: TeacherBottomNavigationBar(
         currentIndex: 0,
-        name: name,
-        surname: surname,
+        name: widget.name,
+        surname: widget.surname,
       ),
     );
   }
