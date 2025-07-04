@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+
+import '../widgets/teacher_bottom_nav_bar.dart';
+import "domande_prof_screen.dart";
+
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
@@ -61,9 +65,11 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
     await prefs.setString('classiList', json.encode(classi));
   }
 
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+
       backgroundColor: Colors.white, // Assuming a white background
       appBar: AppBar(
         title: const Text('Domande Insegnante',
@@ -75,22 +81,19 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
+
       ),
       body: Column(
         children: [
           const Padding(
-            padding: EdgeInsets.all(20.0),
+
+            padding: EdgeInsets.symmetric(vertical: 12.0),
             child: Text(
-              'Seleziona una classe per visualizzare o assegnare le domande',
+              'Seleziona una classe per\nvisualizzare o assegnare le domande',
               textAlign: TextAlign.center,
-              style: TextStyle(
-                fontSize: 16,
-                color: Colors.black54,
-                fontWeight: FontWeight.normal,
-              ),
+              style: TextStyle(fontSize: 16),
             ),
           ),
-          const SizedBox(height: 10), // Space below the text
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -106,11 +109,16 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
 
                 return GestureDetector(
                   onTap: () {
-                    // TODO: Implement navigation to questions screen for the selected class
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text('Hai selezionato la classe: ${classe['nome']} per le domande.'),
-                        duration: const Duration(seconds: 1),
+
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuestionScreen(
+                          name: name,
+                          surname: surname,
+                          className: classe['name']!,
+                        ),
+
                       ),
                     );
                   },
@@ -121,7 +129,10 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                       color: Colors.white, // Card background
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: Colors.grey.shade300, // Always a light grey border
+
+                        color:
+                            Colors.grey.shade300, // Always a light grey border
+
                         width: 1,
                       ),
                       boxShadow: [
@@ -138,14 +149,20 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          color: const Color(0x472CBDFB), // Light blue background for the inner square
+
+                          color: const Color(
+                            0x472CBDFB,
+                          ), // Light blue background for the inner square
+
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              classe['nome']!,
+
+                              classe['name']!,
+
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -154,7 +171,9 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-                              classe['anno']!,
+
+                              classe['year']!,
+
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -172,42 +191,13 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 0, // Assuming 'Home' is the active tab when on this screen (as it's accessed from Home grid)
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacementNamed(context, '/home'); // Navigate to Home, replacing current route
-              break;
-            case 1:
-              Navigator.pushNamed(context, '/conversazioni'); // Assuming you have a route '/conversazioni'
-              break;
-            case 2:
-              Navigator.pushNamed(context, '/impostazioni');
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 24),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline, size: 24),
-            label: 'Conversazioni',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings, size: 24),
-            label: 'Impostazioni',
-          ),
-        ],
+
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: 0,
+        name: name,
+        surname: surname,
       ),
     );
   }
 }
+
