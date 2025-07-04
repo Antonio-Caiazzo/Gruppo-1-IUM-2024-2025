@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
+
 import 'classi_screen.dart';
 import 'conversazioni_screen.dart';
 import 'domande_insegnante_screen.dart'; // Import the new screen
+
 
 class HomeTeacherScreen extends StatefulWidget {
   final String name;
@@ -69,7 +71,14 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const DomandeInsegnanteScreen()), // Navigate to DomandeInsegnanteScreen
+
+                      MaterialPageRoute(
+                        builder: (_) => ClassSelectorScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                        ),
+                      ),
+
                     );
                   },
                 ),
