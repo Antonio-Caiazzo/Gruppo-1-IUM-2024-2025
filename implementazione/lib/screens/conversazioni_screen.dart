@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
-
-import '../widgets/teacher_bottom_nav_bar.dart';
-import "domande_prof_screen.dart";
-
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 // Assuming this path is correct for your constants
 // import '../constants/colors.dart';
 
-class DomandeInsegnanteScreen extends StatefulWidget {
-  const DomandeInsegnanteScreen({Key? key}) : super(key: key);
+class ConversazioniScreen extends StatefulWidget {
+  const ConversazioniScreen({Key? key}) : super(key: key);
 
   @override
-  _DomandeInsegnanteScreenState createState() => _DomandeInsegnanteScreenState();
+  _ConversazioniScreenState createState() => _ConversazioniScreenState();
 }
 
-class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
+class _ConversazioniScreenState extends State<ConversazioniScreen> {
   List<Map<String, String>> classi = [];
 
   // Default classes for initial load if no data is saved
@@ -65,14 +61,12 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
     await prefs.setString('classiList', json.encode(classi));
   }
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       backgroundColor: Colors.white, // Assuming a white background
       appBar: AppBar(
-        title: const Text('Domande Insegnante',
+        title: const Text('Conversazioni',
             style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
@@ -81,19 +75,22 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
-
       ),
       body: Column(
         children: [
           const Padding(
-
-            padding: EdgeInsets.symmetric(vertical: 12.0),
+            padding: EdgeInsets.all(20.0),
             child: Text(
-              'Seleziona una classe per\nvisualizzare o assegnare le domande',
+              'Seleziona una classe',
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 16),
+              style: TextStyle(
+                fontSize: 16,
+                color: Colors.black54,
+                fontWeight: FontWeight.normal,
+              ),
             ),
           ),
+          const SizedBox(height: 10), // Reduced height as no buttons below
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -106,19 +103,20 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
               itemCount: classi.length,
               itemBuilder: (context, index) {
                 final classe = classi[index];
+                // For ConversazioniScreen, we don't have a 'selectedIndex' for interactive selection
+                // but we keep the visual consistency for the card itself.
+                // We'll simulate a 'selected' state for the visual style, or remove it for simplicity.
+                // For now, let's keep the card style consistent but without actual selection logic.
+                // Or simply use a standard card without the selection highlights.
+                // Let's use a standard card without the complex selection visual effects.
 
                 return GestureDetector(
                   onTap: () {
-
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                        builder: (_) => QuestionScreen(
-                          name: name,
-                          surname: surname,
-                          className: classe['name']!,
-                        ),
-
+                    // TODO: Implement navigation to chat screen for the selected class
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(
+                        content: Text('Hai selezionato la classe: ${classe['nome']}'),
+                        duration: const Duration(seconds: 1),
                       ),
                     );
                   },
@@ -129,10 +127,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                       color: Colors.white, // Card background
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-
-                        color:
-                            Colors.grey.shade300, // Always a light grey border
-
+                        color: Colors.grey.shade300, // Always a light grey border
                         width: 1,
                       ),
                       boxShadow: [
@@ -149,20 +144,14 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-
-                          color: const Color(
-                            0x472CBDFB,
-                          ), // Light blue background for the inner square
-
+                          color: const Color(0x472CBDFB), // Light blue background for the inner square
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-
-                              classe['name']!,
-
+                              classe['nome']!,
                               style: const TextStyle(
                                 fontSize: 16,
                                 fontWeight: FontWeight.bold,
@@ -171,9 +160,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
                             ),
                             const SizedBox(height: 4),
                             Text(
-
-                              classe['year']!,
-
+                              classe['anno']!,
                               style: const TextStyle(
                                 fontSize: 14,
                                 fontWeight: FontWeight.w500,
@@ -191,13 +178,42 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> {
           ),
         ],
       ),
-
-      bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 0,
-        name: name,
-        surname: surname,
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: 1, // Set to 1 for "Conversazioni"
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        selectedItemColor: Colors.black,
+        unselectedItemColor: Colors.grey,
+        selectedLabelStyle: const TextStyle(fontSize: 12),
+        unselectedLabelStyle: const TextStyle(fontSize: 12),
+        onTap: (index) {
+          switch (index) {
+            case 0:
+              Navigator.pushReplacementNamed(context, '/home'); // Navigate to Home, replacing current route
+              break;
+            case 1:
+            // Conversazioni - already on this screen
+              break;
+            case 2:
+              Navigator.pushNamed(context, '/impostazioni');
+              break;
+          }
+        },
+        items: const [
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home, size: 24),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.chat_bubble_outline, size: 24),
+            label: 'Conversazioni',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings, size: 24),
+            label: 'Impostazioni',
+          ),
+        ],
       ),
     );
   }
 }
-
