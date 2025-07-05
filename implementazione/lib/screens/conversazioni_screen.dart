@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
 import '../widgets/teacher_bottom_nav_bar.dart';
+import 'conversazioni_teacher_list_screen.dart'; // ✅ Importa la schermata corretta
 
 class ConversazioniScreen extends StatefulWidget {
   final String name;
@@ -117,12 +118,14 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
 
                 return GestureDetector(
                   onTap: () {
-                    ScaffoldMessenger.of(context).showSnackBar(
-                      SnackBar(
-                        content: Text(
-                          'Hai selezionato la classe: ${classe['nome']}',
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ConversazioniTeacherListScreen(
+                          className: classe['nome']!,
+                          name: widget.name,
+                          surname: widget.surname,
                         ),
-                        duration: const Duration(seconds: 1),
                       ),
                     );
                   },
