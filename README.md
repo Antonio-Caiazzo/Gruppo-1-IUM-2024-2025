@@ -80,12 +80,6 @@ flutter run -d ios
 
 > 💡 Se incontri problemi su iOS, verifica che **shared_preferences** sia correttamente abilitato nel file `ios/Runner/Info.plist`. In caso contrario, segui la [guida ufficiale](https://pub.dev/packages/shared_preferences) per la configurazione su iOS.
 
-#### Web
-
-```bash
-flutter run -d chrome
-```
-
 ---
 
 ## 🔍 Architettura del progetto
