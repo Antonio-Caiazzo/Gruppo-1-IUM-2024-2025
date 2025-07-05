@@ -83,7 +83,7 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
         ),
         const SizedBox(height: 8),
         Text(
-          'Classe ${widget.classCode}',
+          'Classe 3C',
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
           textAlign: TextAlign.center,
         ),

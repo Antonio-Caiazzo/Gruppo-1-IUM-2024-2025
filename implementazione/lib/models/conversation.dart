@@ -4,6 +4,7 @@ class Conversation {
   final String imagePath;
   final DateTime date;
   final String? sharedBy;
+  final List<Map<String, String>> messages;
 
   Conversation({
     required this.title,
@@ -11,5 +12,6 @@ class Conversation {
     required this.imagePath,
     required this.date,
     this.sharedBy,
+    required this.messages,
   });
 }

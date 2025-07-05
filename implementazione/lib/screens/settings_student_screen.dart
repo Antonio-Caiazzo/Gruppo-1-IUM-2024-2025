@@ -3,6 +3,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../widgets/student_bottom_nav_bar.dart';
 import '../constants/colors.dart';
 import 'profile_selection_screen.dart';
+import 'home_student_screen.dart';
 
 class SettingsStudentScreen extends StatelessWidget {
   final String name;
@@ -32,13 +33,13 @@ class SettingsStudentScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Attenzione !',
+                  'Attenzione!',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
                 const SizedBox(height: 16),
                 const Text(
-                  'Sei sicuro di voler uscire?',
+                  'Se esci ora senza salvare o condividere, perderai definitivamente questa conversazione. Vuoi davvero uscire?',
                   style: TextStyle(fontSize: 14),
                   textAlign: TextAlign.center,
                 ),
@@ -140,6 +141,25 @@ class SettingsStudentScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HomeStudentScreen(
+                  name: name,
+                  surname: surname,
+                  classCode: classCode,
+                ),
+              ),
+            );
+          },
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
@@ -156,7 +176,7 @@ class SettingsStudentScreen extends StatelessWidget {
               const SizedBox(height: 32),
               _buildField("Cognome", surname),
               const SizedBox(height: 32),
-              _buildField("Classe", classCode),
+              _buildField("Classe", "3C"), // Usa classCode se vuoi dinamico
               const Spacer(),
               SizedBox(
                 width: double.infinity,
