@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-import '../constants/colors.dart';
 import 'aggiungi_classe_screen.dart';
 
 class ClassiScreen extends StatefulWidget {
@@ -44,7 +43,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
     if (savedClassi != null) {
       setState(() {
         classi = List<Map<String, String>>.from(
-            (json.decode(savedClassi) as List).map((e) => Map<String, String>.from(e)));
+          (json.decode(savedClassi) as List).map(
+            (e) => Map<String, String>.from(e),
+          ),
+        );
       });
     } else {
       setState(() {
@@ -74,20 +76,27 @@ class _ClassiScreenState extends State<ClassiScreen> {
   }
 
   // Helper function to show a SnackBar
-  void _showSnackBar(String message, {Color backgroundColor = Colors.black, Color textColor = Colors.white}) {
+  void _showSnackBar(
+    String message, {
+    Color backgroundColor = Colors.black,
+    Color textColor = Colors.white,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
-        content: Text(
-          message,
-          style: TextStyle(color: textColor),
-        ),
+        content: Text(message, style: TextStyle(color: textColor)),
         backgroundColor: backgroundColor,
-        duration: const Duration(seconds: 2), // How long the snackbar is visible
-        behavior: SnackBarBehavior.floating, // Makes it float above the bottom navigation bar
+        duration: const Duration(
+          seconds: 2,
+        ), // How long the snackbar is visible
+        behavior: SnackBarBehavior
+            .floating, // Makes it float above the bottom navigation bar
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10), // Rounded corners
         ),
-        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20), // Margin from edges
+        margin: const EdgeInsets.symmetric(
+          horizontal: 20,
+          vertical: 20,
+        ), // Margin from edges
       ),
     );
   }
@@ -95,13 +104,17 @@ class _ClassiScreenState extends State<ClassiScreen> {
   void _confermaEliminazione() async {
     if (selectedIndex == null) return;
 
-    final String classNameToDelete = classi[selectedIndex!]['nome']!; // Store name before deletion
+    final String classNameToDelete =
+        classi[selectedIndex!]['nome']!; // Store name before deletion
 
     final bool? conferma = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Attenzione ', textAlign: TextAlign.center),
-        content: const Text('Confermare l\'eliminazione ?', textAlign: TextAlign.center),
+        content: const Text(
+          'Confermare l\'eliminazione ?',
+          textAlign: TextAlign.center,
+        ),
         actions: [
           Container(
             height: 40,
@@ -109,11 +122,19 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFFFF5555),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 elevation: 0,
               ),
               onPressed: () => Navigator.pop(context, true),
-              child: const Text('Elimina', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+              child: const Text(
+                'Elimina',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
           const SizedBox(width: 8),
@@ -123,11 +144,19 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: const Color(0xFF2CBDFB),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(25),
+                ),
                 elevation: 0,
               ),
               onPressed: () => Navigator.pop(context, false),
-              child: const Text('Annulla', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+              child: const Text(
+                'Annulla',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
             ),
           ),
         ],
@@ -141,20 +170,24 @@ class _ClassiScreenState extends State<ClassiScreen> {
         isDeleteMode = false;
       });
       await _saveClassi();
-      _showSnackBar('Classe "$classNameToDelete" eliminata con successo!', backgroundColor: Colors.red.shade700);
+      _showSnackBar(
+        'Classe "$classNameToDelete" eliminata con successo!',
+        backgroundColor: Colors.red.shade700,
+      );
     }
   }
 
   Future<void> _navigateAndRefresh() async {
     final nuovaClasse = await Navigator.push<Map<String, String>>(
       context,
-      MaterialPageRoute(
-        builder: (_) => const AggiungiClasseScreen(),
-      ),
+      MaterialPageRoute(builder: (_) => const AggiungiClasseScreen()),
     );
     if (nuovaClasse != null) {
       _aggiungiClasse(nuovaClasse);
-      _showSnackBar('Classe "${nuovaClasse['nome']}" aggiunta con successo!', backgroundColor: Colors.green.shade700);
+      _showSnackBar(
+        'Classe "${nuovaClasse['nome']}" aggiunta con successo!',
+        backgroundColor: Colors.green.shade700,
+      );
     }
   }
 
@@ -163,8 +196,14 @@ class _ClassiScreenState extends State<ClassiScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Classi',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
+        title: const Text(
+          'Classi',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -180,8 +219,8 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: Text(
               isDeleteMode
                   ? (selectedIndex != null
-                  ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
-                  : 'Seleziona la classe da eliminare')
+                        ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
+                        : 'Seleziona la classe da eliminare')
                   : 'Seleziona una classe per\nvisualizzare il codice e gli alunni',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -205,7 +244,9 @@ class _ClassiScreenState extends State<ClassiScreen> {
                       backgroundColor: isDeleteMode
                           ? const Color(0xFFFF5555)
                           : const Color(0xFFFF5555),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: () {
@@ -219,7 +260,11 @@ class _ClassiScreenState extends State<ClassiScreen> {
                     },
                     child: Text(
                       isDeleteMode ? 'Conferma' : 'Elimina',
-                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: const TextStyle(
+                        fontSize: 15,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -232,7 +277,9 @@ class _ClassiScreenState extends State<ClassiScreen> {
                       backgroundColor: isDeleteMode
                           ? const Color(0xFF2CBDFB)
                           : const Color(0xFF2CBDFB),
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25),
+                      ),
                       elevation: 0,
                     ),
                     onPressed: () {
@@ -244,7 +291,11 @@ class _ClassiScreenState extends State<ClassiScreen> {
                     },
                     child: Text(
                       isDeleteMode ? 'Annulla' : 'Aggiungi',
-                      style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white),
+                      style: const TextStyle(
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white,
+                      ),
                     ),
                   ),
                 ),
@@ -307,7 +358,9 @@ class _ClassiScreenState extends State<ClassiScreen> {
                       ],
                     ),
                     child: Container(
-                      margin: isCurrentlySelected ? const EdgeInsets.all(0) : const EdgeInsets.all(1),
+                      margin: isCurrentlySelected
+                          ? const EdgeInsets.all(0)
+                          : const EdgeInsets.all(1),
                       decoration: BoxDecoration(
                         color: Colors.white,
                         borderRadius: BorderRadius.circular(11),
