@@ -122,7 +122,7 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
     final shared = [
       ...ConversationScreen.shared.reversed,
       Conversation(
-        title: "Condivisa 1",
+        title: "Ricetta baguette",
         preview: "Conversazione storica...",
         imagePath: "assets/generale.jpg",
         date: DateTime(2025, 6, 1),
@@ -133,7 +133,7 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
         ],
       ),
       Conversation(
-        title: "Condivisa 2",
+        title: "Ricetta Carbonara",
         preview: "Scoperta interessante...",
         imagePath: "assets/caesar.png",
         date: DateTime(2025, 6, 2),

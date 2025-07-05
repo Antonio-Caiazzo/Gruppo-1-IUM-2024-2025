@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import '../constants/colors.dart';
 import '../models/conversation.dart';
 import 'conversations_student_screen.dart';
+import '../widgets/student_bottom_nav_bar.dart';
 
 class ConversationScreen extends StatefulWidget {
   final String characterName;
@@ -49,31 +50,27 @@ class _ConversationScreenState extends State<ConversationScreen> {
     if (widget.messages != null && widget.messages!.isNotEmpty) {
       _messages.addAll(widget.messages!);
     } else {
-      _messages.add({"role": "bot", "text": getIntroMessage()});
+      _messages.add({"role": "bot", "text": _intro()});
     }
   }
 
-  String getIntroMessage() {
+  String _intro() {
     return widget.introMessage ??
-        (widget.characterName.toLowerCase().contains("napoleone")
-            ? "Sono Napoleone Bonaparte, imperatore dei francesi. Chiedimi pure."
-            : "Io sono Giulio Cesare, console di Roma. Cosa desideri sapere?");
+        (widget.characterName.toLowerCase().contains('napoleone')
+            ? 'Sono Napoleone Bonaparte, imperatore dei francesi. Chiedimi pure.'
+            : 'Io sono Giulio Cesare, console di Roma. Cosa desideri sapere?');
   }
 
   void _sendMessage() async {
-    final userMessage = _controller.text.trim();
-    if (userMessage.isEmpty) return;
-
+    final msg = _controller.text.trim();
+    if (msg.isEmpty) return;
     setState(() {
-      _messages.add({"role": "user", "text": userMessage});
+      _messages.add({"role": "user", "text": msg});
       _controller.clear();
     });
-
     try {
-      final botReply = await _askOllama(userMessage);
-      setState(() {
-        _messages.add({"role": "bot", "text": botReply});
-      });
+      final reply = await _askOllama(msg);
+      setState(() => _messages.add({"role": "bot", "text": reply}));
     } catch (_) {
       setState(() {
         _messages.add({
@@ -86,7 +83,7 @@ class _ConversationScreenState extends State<ConversationScreen> {
   }
 
   Future<String> _askOllama(String prompt) async {
-    final characterPrompt =
+    final promptHead =
         """
 Sei ${widget.characterName}, il vero personaggio storico.
 Rispondi sempre in prima persona, come se fossi realmente vissuto nel tuo periodo storico.
@@ -96,42 +93,33 @@ Parla in modo coerente con la tua epoca. Rimani sempre nel personaggio.
 Non dire mai che sei un’intelligenza artificiale.
 La tua risposta deve contenere tra le 20 e le 50 parole.
 """;
-
-    final fullPrompt = "$characterPrompt\nDomanda: $prompt\nRisposta:";
-
-    final response = await http.post(
+    final body = "$promptHead\nDomanda: $prompt\nRisposta:";
+    final res = await http.post(
       Uri.parse('http://localhost:11434/api/generate'),
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({
-        'model': 'llama3.2',
-        'prompt': fullPrompt,
-        'stream': false,
-      }),
+      body: jsonEncode({'model': 'llama3.2', 'prompt': body, 'stream': false}),
     );
-
-    if (response.statusCode == 200) {
-      final data = jsonDecode(response.body);
-      return data['response'].toString().trim();
-    } else {
-      throw Exception('Errore da Ollama: ${response.statusCode}');
+    if (res.statusCode == 200) {
+      return jsonDecode(res.body)['response'].toString().trim();
     }
+    throw Exception();
   }
 
-  Future<void> _speak(String text) async {
-    await flutterTts.setLanguage("it-IT");
-    await flutterTts.setPitch(1.0);
-    await flutterTts.speak(text);
+  Future<void> _speak(String t) async {
+    await flutterTts.setLanguage('it-IT');
+    await flutterTts.setPitch(1);
+    await flutterTts.speak(t);
   }
 
-  void _showTitleInputDialog(bool isSharing) {
-    final titleController = TextEditingController();
+  void _showInputDialog(bool share) {
+    final c = TextEditingController();
     showDialog(
       context: context,
       builder: (_) => Dialog(
         backgroundColor: Colors.white,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(20)),
         child: Padding(
-          padding: const EdgeInsets.all(24.0),
+          padding: const EdgeInsets.all(24),
           child: Column(
             mainAxisSize: MainAxisSize.min,
             children: [
@@ -142,8 +130,8 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
               ),
               const SizedBox(height: 16),
               TextField(
-                controller: titleController,
-                decoration: const InputDecoration(hintText: "Titolo"),
+                controller: c,
+                decoration: const InputDecoration(hintText: 'Titolo'),
               ),
               const SizedBox(height: 24),
               Row(
@@ -172,36 +160,33 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                   Expanded(
                     child: ElevatedButton(
                       onPressed: () {
-                        final title = titleController.text.trim();
-                        if (title.isEmpty) return;
-                        final fullText = _messages
+                        final t = c.text.trim();
+                        if (t.isEmpty) return;
+                        final preview = _messages
                             .map((m) => m['text'])
-                            .join("\n");
+                            .join('\n');
                         final conv = Conversation(
-                          title: title,
-                          preview: fullText.length > 80
-                              ? fullText.substring(0, 80).split("\n").first +
-                                    '...'
-                              : fullText,
+                          title: t,
+                          preview: preview.length > 80
+                              ? '${preview.substring(0, 80).split('\n').first}...'
+                              : preview,
                           imagePath:
                               widget.characterName.toLowerCase().contains(
-                                "napoleone",
+                                'napoleone',
                               )
-                              ? "assets/generale.jpg"
-                              : "assets/caesar.png",
+                              ? 'assets/generale.jpg'
+                              : 'assets/caesar.png',
                           date: DateTime.now(),
-                          sharedBy: isSharing
-                              ? "${widget.name} ${widget.surname}"
+                          sharedBy: share
+                              ? '${widget.name} ${widget.surname}'
                               : null,
                           messages: List<Map<String, String>>.from(_messages),
                         );
-
-                        if (isSharing) {
+                        if (share) {
                           ConversationScreen.shared.add(conv);
                         } else {
                           ConversationScreen.saved.add(conv);
                         }
-
                         Navigator.pop(context);
                         Navigator.pushReplacement(
                           context,
@@ -210,8 +195,8 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                               name: widget.name,
                               surname: widget.surname,
                               classCode: widget.classCode,
-                              highlightTitle: title,
-                              isSharedTab: isSharing,
+                              highlightTitle: t,
+                              isSharedTab: share,
                             ),
                           ),
                         );
@@ -225,7 +210,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                         elevation: 0,
                       ),
                       child: Text(
-                        isSharing ? 'Condividi' : 'Salva',
+                        share ? 'Condividi' : 'Salva',
                         style: const TextStyle(
                           color: Colors.white,
                           fontWeight: FontWeight.bold,
@@ -243,8 +228,10 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
   }
 
   Future<bool> _onWillPop() async {
-    if (!widget.isReadOnly && _messages.length > 1) {
-      return await showDialog(
+    if (!widget.isReadOnly &&
+        _messages.where((m) => m['role'] == 'user').isNotEmpty) {
+      final res =
+          await showDialog<bool>(
             context: context,
             builder: (_) => Dialog(
               backgroundColor: Colors.white,
@@ -252,7 +239,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                 borderRadius: BorderRadius.circular(20),
               ),
               child: Padding(
-                padding: const EdgeInsets.all(24.0),
+                padding: const EdgeInsets.all(24),
                 child: Column(
                   mainAxisSize: MainAxisSize.min,
                   children: [
@@ -269,7 +256,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                       children: [
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).pop(false),
+                            onPressed: () => Navigator.pop(context, false),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: AppColors.primary,
                               shape: RoundedRectangleBorder(
@@ -290,7 +277,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
                         const SizedBox(width: 12),
                         Expanded(
                           child: ElevatedButton(
-                            onPressed: () => Navigator.of(context).pop(true),
+                            onPressed: () => Navigator.pop(context, true),
                             style: ElevatedButton.styleFrom(
                               backgroundColor: const Color(0xFFDF1818),
                               shape: RoundedRectangleBorder(
@@ -316,6 +303,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
             ),
           ) ??
           false;
+      return res;
     }
     return true;
   }
@@ -326,79 +314,79 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
       onWillPop: _onWillPop,
       child: Scaffold(
         backgroundColor: Colors.white,
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          elevation: 0,
-          leading: const BackButton(color: Colors.black),
-          centerTitle: true,
-          title: Text(
-            widget.customTitle ?? widget.characterName,
-            style: const TextStyle(
-              color: Colors.black,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          actions: [
-            if (!widget.isReadOnly)
-              IconButton(
-                icon: Icon(
-                  _showMenu ? Icons.close : Icons.menu,
-                  color: Colors.black,
-                ),
-                onPressed: () => setState(() => _showMenu = !_showMenu),
-              ),
-          ],
-        ),
-        body: Stack(
-          children: [
-            Column(
-              children: [
-                const SizedBox(height: 8),
-                ClipRRect(
-                  borderRadius: BorderRadius.circular(16),
-                  child: Image.asset(widget.characterImage, height: 160),
-                ),
-                const SizedBox(height: 16),
-                Expanded(
-                  child: ListView.builder(
-                    padding: const EdgeInsets.all(16),
-                    itemCount: _messages.length,
-                    itemBuilder: (_, i) {
-                      final msg = _messages[i];
-                      return msg['role'] == 'user'
-                          ? _buildUserMessage(msg['text']!)
-                          : _buildCharacterMessage(msg['text']!);
-                    },
-                  ),
-                ),
-                _buildInputArea(),
-              ],
-            ),
-            if (_showMenu && !widget.isReadOnly)
-              Positioned(
-                top: 12,
-                right: 12,
-                child: Column(
-                  children: [
-                    _buildMenuButton(
-                      "Salva",
-                      () => _showTitleInputDialog(false),
-                    ),
-                    const SizedBox(height: 8),
-                    _buildMenuButton(
-                      "Condividi",
-                      () => _showTitleInputDialog(true),
-                    ),
-                  ],
-                ),
-              ),
-          ],
-        ),
+        appBar: _appBar(),
+        body: _body(),
+        bottomNavigationBar: widget.isReadOnly
+            ? StudentBottomNavigationBar(
+                currentIndex: -1,
+                name: widget.name,
+                surname: widget.surname,
+                classCode: widget.classCode,
+              )
+            : null,
       ),
     );
   }
 
-  Widget _buildCharacterMessage(String text) => Row(
+  AppBar _appBar() => AppBar(
+    backgroundColor: Colors.white,
+    elevation: 0,
+    leading: const BackButton(color: Colors.black),
+    centerTitle: true,
+    title: Text(
+      widget.customTitle ?? widget.characterName,
+      style: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+    ),
+    actions: [
+      if (!widget.isReadOnly)
+        IconButton(
+          icon: Icon(_showMenu ? Icons.close : Icons.menu, color: Colors.black),
+          onPressed: () => setState(() => _showMenu = !_showMenu),
+        ),
+    ],
+  );
+
+  Widget _body() => Stack(
+    children: [
+      Column(
+        children: [
+          const SizedBox(height: 8),
+          ClipRRect(
+            borderRadius: BorderRadius.circular(16),
+            child: Image.asset(widget.characterImage, height: 160),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: ListView.builder(
+              padding: const EdgeInsets.all(16),
+              itemCount: _messages.length,
+              itemBuilder: (_, i) {
+                final m = _messages[i];
+                return m['role'] == 'user'
+                    ? _userMsg(m['text']!)
+                    : _botMsg(m['text']!);
+              },
+            ),
+          ),
+          _inputArea(),
+        ],
+      ),
+      if (_showMenu && !widget.isReadOnly)
+        Positioned(
+          top: 12,
+          right: 12,
+          child: Column(
+            children: [
+              _menuBtn('Salva', () => _showInputDialog(false)),
+              const SizedBox(height: 8),
+              _menuBtn('Condividi', () => _showInputDialog(true)),
+            ],
+          ),
+        ),
+    ],
+  );
+
+  Widget _botMsg(String t) => Row(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
       CircleAvatar(
@@ -417,12 +405,12 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(text),
+              Text(t),
               Align(
                 alignment: Alignment.centerRight,
                 child: IconButton(
                   icon: const Icon(Icons.play_arrow, size: 20),
-                  onPressed: () => _speak(text),
+                  onPressed: () => _speak(t),
                 ),
               ),
             ],
@@ -432,7 +420,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
     ],
   );
 
-  Widget _buildUserMessage(String text) => Align(
+  Widget _userMsg(String t) => Align(
     alignment: Alignment.centerRight,
     child: Container(
       margin: const EdgeInsets.only(bottom: 12, left: 60),
@@ -444,17 +432,17 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.end,
         children: [
-          Text(text, style: const TextStyle(color: Colors.white)),
+          Text(t, style: const TextStyle(color: Colors.white)),
           IconButton(
             icon: const Icon(Icons.play_arrow, color: Colors.white, size: 20),
-            onPressed: () => _speak(text),
+            onPressed: () => _speak(t),
           ),
         ],
       ),
     ),
   );
 
-  Widget _buildInputArea() {
+  Widget _inputArea() {
     if (widget.isReadOnly) return const SizedBox.shrink();
     return Container(
       padding: const EdgeInsets.all(16),
@@ -467,7 +455,7 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
               controller: _controller,
               onSubmitted: (_) => _sendMessage(),
               decoration: InputDecoration(
-                hintText: "Scrivi qui...",
+                hintText: 'Scrivi qui...',
                 filled: true,
                 fillColor: const Color(0xFFF5F5F5),
                 border: OutlineInputBorder(
@@ -494,17 +482,17 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
     );
   }
 
-  Widget _buildMenuButton(String label, VoidCallback onTap) => SizedBox(
+  Widget _menuBtn(String l, VoidCallback f) => SizedBox(
     width: 110,
     child: ElevatedButton(
-      onPressed: onTap,
+      onPressed: f,
       style: ElevatedButton.styleFrom(
         backgroundColor: AppColors.primary,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
       ),
       child: FittedBox(
         fit: BoxFit.scaleDown,
-        child: Text(label, style: const TextStyle(color: Colors.white)),
+        child: Text(l, style: const TextStyle(color: Colors.white)),
       ),
     ),
   );
