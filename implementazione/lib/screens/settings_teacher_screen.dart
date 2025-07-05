@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../constants/colors.dart';
-import 'profile_selection_screen.dart';
+import '../screens/profile_selection_screen.dart';
+import '../screens/home_teacher_screen.dart';
+import '../widgets/teacher_bottom_nav_bar.dart';
 
 class SettingsTeacherScreen extends StatelessWidget {
   final String name;
@@ -16,7 +18,7 @@ class SettingsTeacherScreen extends StatelessWidget {
   void _showExitDialog(BuildContext context) {
     showDialog(
       context: context,
-      barrierDismissible: false, // impedisce la chiusura toccando fuori
+      barrierDismissible: false,
       builder: (_) {
         return Dialog(
           backgroundColor: Colors.white,
@@ -29,7 +31,7 @@ class SettingsTeacherScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: [
                 const Text(
-                  'Attenzione !',
+                  'Attenzione!',
                   style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
                   textAlign: TextAlign.center,
                 ),
@@ -107,22 +109,29 @@ class SettingsTeacherScreen extends StatelessWidget {
   }
 
   Widget _buildField(String label, String value) {
-    return RichText(
-      textAlign: TextAlign.center,
-      text: TextSpan(
-        text: "$label: ",
-        style: const TextStyle(
-          fontSize: 24,
-          fontWeight: FontWeight.bold,
-          color: Colors.black,
-        ),
-        children: [
-          TextSpan(
-            text: value,
-            style: const TextStyle(fontWeight: FontWeight.normal, fontSize: 24),
+    return Column(
+      children: [
+        RichText(
+          textAlign: TextAlign.center,
+          text: TextSpan(
+            text: "$label: ",
+            style: const TextStyle(
+              fontSize: 24,
+              fontWeight: FontWeight.bold,
+              color: Colors.black,
+            ),
+            children: [
+              TextSpan(
+                text: value,
+                style: const TextStyle(
+                  fontWeight: FontWeight.normal,
+                  fontSize: 24,
+                ),
+              ),
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 
@@ -130,6 +139,21 @@ class SettingsTeacherScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.white,
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        elevation: 0,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HomeTeacherScreen(name: name, surname: surname),
+              ),
+            );
+          },
+        ),
+      ),
       body: SafeArea(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 32),
@@ -149,7 +173,6 @@ class SettingsTeacherScreen extends StatelessWidget {
               SizedBox(
                 width: double.infinity,
                 child: ElevatedButton(
-                  onPressed: () => _showExitDialog(context),
                   style: ElevatedButton.styleFrom(
                     backgroundColor: Colors.redAccent,
                     padding: const EdgeInsets.symmetric(vertical: 20),
@@ -157,6 +180,7 @@ class SettingsTeacherScreen extends StatelessWidget {
                       borderRadius: BorderRadius.circular(40),
                     ),
                   ),
+                  onPressed: () => _showExitDialog(context),
                   child: const Text(
                     "Esci",
                     style: TextStyle(
@@ -170,6 +194,11 @@ class SettingsTeacherScreen extends StatelessWidget {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: 2,
+        name: name,
+        surname: surname,
       ),
     );
   }

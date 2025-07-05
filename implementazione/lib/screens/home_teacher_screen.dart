@@ -61,7 +61,10 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                     Navigator.push(
                       context,
                       MaterialPageRoute(
-                        builder: (_) => const ConversazioniScreen(),
+                        builder: (_) => ConversazioniScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                        ),
                       ),
                     );
                   },
