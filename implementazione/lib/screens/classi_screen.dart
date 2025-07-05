@@ -2,10 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
+import '../widgets/teacher_bottom_nav_bar.dart';
 import 'aggiungi_classe_screen.dart';
+import 'dettaglio_classe_screen.dart'; // Aggiungi questo import
 
 class ClassiScreen extends StatefulWidget {
-  const ClassiScreen({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+
+  const ClassiScreen({
+    super.key,
+    required this.name,
+    required this.surname,
+  });
 
   @override
   _ClassiScreenState createState() => _ClassiScreenState();
@@ -14,7 +23,7 @@ class ClassiScreen extends StatefulWidget {
 class _ClassiScreenState extends State<ClassiScreen> {
   List<Map<String, String>> classi = [];
   int? selectedIndex;
-  bool isDeleteMode = false; // Modalità eliminazione
+  bool isDeleteMode = false;
 
   final List<Map<String, String>> defaultClassi = [
     {'nome': 'I - A', 'anno': '2025'},
@@ -44,7 +53,7 @@ class _ClassiScreenState extends State<ClassiScreen> {
       setState(() {
         classi = List<Map<String, String>>.from(
           (json.decode(savedClassi) as List).map(
-            (e) => Map<String, String>.from(e),
+                (e) => Map<String, String>.from(e),
           ),
         );
       });
@@ -75,28 +84,21 @@ class _ClassiScreenState extends State<ClassiScreen> {
     });
   }
 
-  // Helper function to show a SnackBar
   void _showSnackBar(
-    String message, {
-    Color backgroundColor = Colors.black,
-    Color textColor = Colors.white,
-  }) {
+      String message, {
+        Color backgroundColor = Colors.black,
+        Color textColor = Colors.white,
+      }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: TextStyle(color: textColor)),
         backgroundColor: backgroundColor,
-        duration: const Duration(
-          seconds: 2,
-        ), // How long the snackbar is visible
-        behavior: SnackBarBehavior
-            .floating, // Makes it float above the bottom navigation bar
+        duration: const Duration(seconds: 2),
+        behavior: SnackBarBehavior.floating,
         shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // Rounded corners
+          borderRadius: BorderRadius.circular(10),
         ),
-        margin: const EdgeInsets.symmetric(
-          horizontal: 20,
-          vertical: 20,
-        ), // Margin from edges
+        margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       ),
     );
   }
@@ -104,60 +106,32 @@ class _ClassiScreenState extends State<ClassiScreen> {
   void _confermaEliminazione() async {
     if (selectedIndex == null) return;
 
-    final String classNameToDelete =
-        classi[selectedIndex!]['nome']!; // Store name before deletion
+    final String classNameToDelete = classi[selectedIndex!]['nome']!;
 
     final bool? conferma = await showDialog(
       context: context,
       builder: (context) => AlertDialog(
-        title: const Text('Attenzione ', textAlign: TextAlign.center),
-        content: const Text(
-          'Confermare l\'eliminazione ?',
-          textAlign: TextAlign.center,
-        ),
+        title: const Text('Attenzione', textAlign: TextAlign.center),
+        content: const Text('Confermare l\'eliminazione?', textAlign: TextAlign.center),
         actions: [
-          Container(
-            height: 40,
-            width: 100,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFFFF5555),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                elevation: 0,
-              ),
-              onPressed: () => Navigator.pop(context, true),
-              child: const Text(
-                'Elimina',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFFFF5555),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              elevation: 0,
             ),
+            onPressed: () => Navigator.pop(context, true),
+            child: const Text('Elimina', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ),
           const SizedBox(width: 8),
-          Container(
-            height: 40,
-            width: 100,
-            child: ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: const Color(0xFF2CBDFB),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(25),
-                ),
-                elevation: 0,
-              ),
-              onPressed: () => Navigator.pop(context, false),
-              child: const Text(
-                'Annulla',
-                style: TextStyle(
-                  color: Colors.white,
-                  fontWeight: FontWeight.w600,
-                ),
-              ),
+          ElevatedButton(
+            style: ElevatedButton.styleFrom(
+              backgroundColor: const Color(0xFF2CBDFB),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              elevation: 0,
             ),
+            onPressed: () => Navigator.pop(context, false),
+            child: const Text('Annulla', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
           ),
         ],
       ),
@@ -170,24 +144,46 @@ class _ClassiScreenState extends State<ClassiScreen> {
         isDeleteMode = false;
       });
       await _saveClassi();
-      _showSnackBar(
-        'Classe "$classNameToDelete" eliminata con successo!',
-        backgroundColor: Colors.red.shade700,
-      );
+      _showSnackBar('Classe "$classNameToDelete" eliminata con successo!', backgroundColor: Colors.red.shade700);
     }
   }
 
   Future<void> _navigateAndRefresh() async {
     final nuovaClasse = await Navigator.push<Map<String, String>>(
       context,
-      MaterialPageRoute(builder: (_) => const AggiungiClasseScreen()),
+      MaterialPageRoute(
+        builder: (_) => AggiungiClasseScreen(
+          name: widget.name,
+          surname: widget.surname,
+        ),
+      ),
     );
     if (nuovaClasse != null) {
       _aggiungiClasse(nuovaClasse);
-      _showSnackBar(
-        'Classe "${nuovaClasse['nome']}" aggiunta con successo!',
-        backgroundColor: Colors.green.shade700,
-      );
+      _showSnackBar('Classe "${nuovaClasse['nome']}" aggiunta con successo!', backgroundColor: Colors.green.shade700);
+    }
+  }
+
+  // Nuova funzione per navigare al dettaglio della classe
+  Future<void> _navigateToClasseDettaglio(int index) async {
+    final result = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => DettaglioClasseScreen(
+          name: widget.name,
+          surname: widget.surname,
+          classe: classi[index],
+          classeIndex: index,
+        ),
+      ),
+    );
+
+    // Se la classe è stata eliminata, ricarica l'elenco
+    if (result == true) {
+      await _loadClassi();
+    } else {
+      // Ricarica comunque per eventuali modifiche
+      await _loadClassi();
     }
   }
 
@@ -196,14 +192,7 @@ class _ClassiScreenState extends State<ClassiScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text(
-          'Classi',
-          style: TextStyle(
-            fontSize: 24,
-            fontWeight: FontWeight.bold,
-            color: Colors.black,
-          ),
-        ),
+        title: const Text('Classi', style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -218,9 +207,7 @@ class _ClassiScreenState extends State<ClassiScreen> {
             padding: const EdgeInsets.all(20.0),
             child: Text(
               isDeleteMode
-                  ? (selectedIndex != null
-                        ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
-                        : 'Seleziona la classe da eliminare')
+                  ? (selectedIndex != null ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata' : 'Seleziona la classe da eliminare')
                   : 'Seleziona una classe per\nvisualizzare il codice e gli alunni',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -235,69 +222,39 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                // Left Button: Elimina (normal mode) / Conferma (delete mode)
-                Container(
-                  height: 51,
-                  width: 117,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isDeleteMode
-                          ? const Color(0xFFFF5555)
-                          : const Color(0xFFFF5555),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      elevation: 0,
-                    ),
-                    onPressed: () {
-                      if (isDeleteMode) {
-                        if (selectedIndex != null) {
-                          _confermaEliminazione();
-                        }
-                      } else {
-                        _toggleDeleteMode();
-                      }
-                    },
-                    child: Text(
-                      isDeleteMode ? 'Conferma' : 'Elimina',
-                      style: const TextStyle(
-                        fontSize: 15,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFFFF5555),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    elevation: 0,
+                    fixedSize: const Size(117, 51),
                   ),
+                  onPressed: () {
+                    if (isDeleteMode) {
+                      if (selectedIndex != null) {
+                        _confermaEliminazione();
+                      }
+                    } else {
+                      _toggleDeleteMode();
+                    }
+                  },
+                  child: Text(isDeleteMode ? 'Conferma' : 'Elimina', style: const TextStyle(fontSize: 15, fontWeight: FontWeight.w600, color: Colors.white)),
                 ),
-                // Right Button: Aggiungi (normal mode) / Annulla (delete mode)
-                Container(
-                  height: 51,
-                  width: 117,
-                  child: ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                      backgroundColor: isDeleteMode
-                          ? const Color(0xFF2CBDFB)
-                          : const Color(0xFF2CBDFB),
-                      shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(25),
-                      ),
-                      elevation: 0,
-                    ),
-                    onPressed: () {
-                      if (isDeleteMode) {
-                        _toggleDeleteMode();
-                      } else {
-                        _navigateAndRefresh();
-                      }
-                    },
-                    child: Text(
-                      isDeleteMode ? 'Annulla' : 'Aggiungi',
-                      style: const TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w600,
-                        color: Colors.white,
-                      ),
-                    ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: const Color(0xFF2CBDFB),
+                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    elevation: 0,
+                    fixedSize: const Size(117, 51),
                   ),
+                  onPressed: () {
+                    if (isDeleteMode) {
+                      _toggleDeleteMode();
+                    } else {
+                      _navigateAndRefresh();
+                    }
+                  },
+                  child: Text(isDeleteMode ? 'Annulla' : 'Aggiungi', style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.white)),
                 ),
               ],
             ),
@@ -320,25 +277,21 @@ class _ClassiScreenState extends State<ClassiScreen> {
                 return GestureDetector(
                   onTap: () {
                     if (isDeleteMode) {
+                      // In modalità eliminazione, seleziona la classe
                       setState(() {
                         selectedIndex = isCurrentlySelected ? null : index;
                       });
                     } else {
-                      setState(() {
-                        selectedIndex = isCurrentlySelected ? null : index;
-                      });
+                      // In modalità normale, naviga al dettaglio
+                      _navigateToClasseDettaglio(index);
                     }
                   },
                   child: AnimatedContainer(
                     duration: const Duration(milliseconds: 200),
-                    width: 100,
-                    height: 100,
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: isCurrentlySelected
-                            ? const Color(0xFF2CBDFB)
-                            : Colors.grey.shade300,
+                        color: isCurrentlySelected ? const Color(0xFF2CBDFB) : Colors.grey.shade300,
                         width: isCurrentlySelected ? 4 : 1,
                       ),
                       boxShadow: [
@@ -356,51 +309,37 @@ class _ClassiScreenState extends State<ClassiScreen> {
                             offset: const Offset(0, 4),
                           ),
                       ],
+                      color: Colors.white,
                     ),
-                    child: Container(
-                      margin: isCurrentlySelected
-                          ? const EdgeInsets.all(0)
-                          : const EdgeInsets.all(1),
-                      decoration: BoxDecoration(
-                        color: Colors.white,
-                        borderRadius: BorderRadius.circular(11),
-                      ),
-                      child: Center(
-                        child: Container(
-                          width: 96,
-                          height: 96,
-                          decoration: BoxDecoration(
-                            color: isCurrentlySelected
-                                ? const Color(0xFF2CBDFB).withOpacity(0.4)
-                                : const Color(0x472CBDFB),
-                            borderRadius: BorderRadius.circular(8),
-                          ),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Text(
-                                classe['nome']!,
-                                style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold,
-                                  color: isCurrentlySelected
-                                      ? const Color(0xFF1565C0)
-                                      : const Color(0xFF0277BD),
-                                ),
+                    child: Center(
+                      child: Container(
+                        width: 96,
+                        height: 96,
+                        decoration: BoxDecoration(
+                          color: isCurrentlySelected ? const Color(0xFF2CBDFB).withOpacity(0.4) : const Color(0x472CBDFB),
+                          borderRadius: BorderRadius.circular(8),
+                        ),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              classe['nome']!,
+                              style: TextStyle(
+                                fontSize: 16,
+                                fontWeight: FontWeight.bold,
+                                color: isCurrentlySelected ? const Color(0xFF1565C0) : const Color(0xFF0277BD),
                               ),
-                              const SizedBox(height: 4),
-                              Text(
-                                classe['anno']!,
-                                style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w500,
-                                  color: isCurrentlySelected
-                                      ? const Color(0xFF1565C0)
-                                      : const Color(0xFF0277BD),
-                                ),
+                            ),
+                            const SizedBox(height: 4),
+                            Text(
+                              classe['anno']!,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontWeight: FontWeight.w500,
+                                color: isCurrentlySelected ? const Color(0xFF1565C0) : const Color(0xFF0277BD),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
                     ),
@@ -411,54 +350,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: Container(
-        height: 80,
-        decoration: BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
-            BoxShadow(
-              color: Colors.black.withOpacity(0.1),
-              spreadRadius: 1,
-              blurRadius: 3,
-              offset: const Offset(0, -2),
-            ),
-          ],
-        ),
-        child: BottomNavigationBar(
-          currentIndex: 0,
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          selectedItemColor: Colors.black,
-          unselectedItemColor: Colors.grey,
-          selectedLabelStyle: const TextStyle(fontSize: 12),
-          unselectedLabelStyle: const TextStyle(fontSize: 12),
-          onTap: (index) {
-            switch (index) {
-              case 0:
-                break;
-              case 1:
-                Navigator.pushNamed(context, '/conversazioni');
-                break;
-              case 2:
-                Navigator.pushNamed(context, '/impostazioni');
-                break;
-            }
-          },
-          items: const [
-            BottomNavigationBarItem(
-              icon: Icon(Icons.home, size: 24),
-              label: 'Home',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.chat_bubble_outline, size: 24),
-              label: 'Conversazioni',
-            ),
-            BottomNavigationBarItem(
-              icon: Icon(Icons.settings, size: 24),
-              label: 'Impostazioni',
-            ),
-          ],
-        ),
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: 0,
+        name: widget.name,
+        surname: widget.surname,
       ),
     );
   }
