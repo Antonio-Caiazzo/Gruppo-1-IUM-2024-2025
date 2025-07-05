@@ -1,6 +1,8 @@
 # HistorIA
 
-![Conversazione](docs/assets/napoleon_chat.png)
+<p align="center">
+  <img src="docs/assets/conversation.gif" width="320" />
+</p>
 
 > "La Storia raccontata da chi l’ha vissuta!"
 
@@ -22,9 +24,9 @@ HistorIA è un'applicazione Flutter per Android e iOS progettata per rivoluziona
 
 ## 📱 Screenshot
 
-| Conversazione                         |
-| ------------------------------------- |
-| ![Chat](docs/assets/conversation.gif) |
+| Quiz                                           | Domande                                             | Conversazioni                                           | Classi                                            | Gestione Domande                                           |
+| ---------------------------------------------- | --------------------------------------------------- | ------------------------------------------------------- | ------------------------------------------------- | ---------------------------------------------------------- |
+| <img src="docs/assets/quiz.png" width="200" /> | <img src="docs/assets/questions.png" width="200" /> | <img src="docs/assets/conversations.png" width="200" /> | <img src="docs/assets/classes.png" width="200" /> | <img src="docs/assets/manage_questions.png" width="200" /> |
 
 ---
 
@@ -99,7 +101,7 @@ lib/
 
 ---
 
-## 👨‍👩‍👧 Ruoli
+## 👨‍👧 Ruoli
 
 ### 👨‍🏫 Studente
 
@@ -116,6 +118,7 @@ lib/
 - Visualizza le domande inserite
 - Consulta le domande condivise dagli studenti
 - Può accedere alle conversazioni condivise
+- Visualizza le domande condivise dagli studenti per analizzare il loro coinvolgimento
 
 ---
 
@@ -148,7 +151,7 @@ Mantieni uno stile coerente e nomi descrittivi per PR e commit.
   - **Professoressa**: Giuliana Vitiello
   - **Tutor**: Andrea Antonio Cantone
 
-- LLM: [LLaMA 3.2](https://ollama.com/library/llama3) via [Ollama](https://ollama.com)
+- LLM: [LLaMA 3.2](https://ollama.com/library/llama3.2) via [Ollama](https://ollama.com)
 
 - Icone: [Material Icons](https://fonts.google.com/icons)
 
