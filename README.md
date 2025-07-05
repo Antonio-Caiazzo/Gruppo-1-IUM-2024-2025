@@ -1,10 +1,10 @@
 # HistorIA
 
+> "La Storia raccontata da chi l’ha vissuta!"
+
 <p align="center">
   <img src="docs/assets/conversation.gif" width="320" />
 </p>
-
-> "La Storia raccontata da chi l’ha vissuta!"
 
 HistorIA è un'applicazione Flutter per Android e iOS progettata per rivoluzionare l'apprendimento della storia attraverso un'interazione esperienziale con personaggi storici virtuali. Gli studenti possono parlare con Giulio Cesare o Napoleone, affrontare quiz coinvolgenti e salvare le loro conversazioni per riflettere o condividerle. L'insegnante può inoltre visualizzare le domande condivise dagli studenti per monitorare l'interesse e il coinvolgimento.
 
@@ -147,7 +147,7 @@ Mantieni uno stile coerente e nomi descrittivi per PR e commit.
 
 - **Università degli Studi di Salerno**
 
-  - Corso: _Interazione Uomo-Macchina_
+  - **Corso**: Interazione Uomo-Macchina
   - **Professoressa**: Giuliana Vitiello
   - **Tutor**: Andrea Antonio Cantone
 

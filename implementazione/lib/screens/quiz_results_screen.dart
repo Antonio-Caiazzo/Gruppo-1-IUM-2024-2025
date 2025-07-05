@@ -178,7 +178,7 @@ class QuizResultsScreen extends StatelessWidget {
         ),
       ),
       bottomNavigationBar: StudentBottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: -1,
         name: name,
         surname: surname,
         classCode: classCode,
