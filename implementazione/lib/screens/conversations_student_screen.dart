@@ -79,7 +79,9 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
             subtitle: Text(
               isShared && conv.sharedBy != null
                   ? "Condivisa da ${conv.sharedBy}"
-                  : conv.preview,
+                  : _shortenPreview(conv.preview),
+              maxLines: 2,
+              overflow: TextOverflow.ellipsis,
             ),
             trailing: Text(
               "${conv.date.day.toString().padLeft(2, '0')}/${conv.date.month.toString().padLeft(2, '0')}/${conv.date.year}",
@@ -97,6 +99,7 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
                     isReadOnly: true,
                     customTitle: conv.title,
                     introMessage: conv.preview,
+                    messages: conv.messages,
                   ),
                 ),
               );
@@ -107,24 +110,38 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
     );
   }
 
+  String _shortenPreview(String text, {int maxChars = 80}) {
+    if (text.length <= maxChars) return text;
+    return text.substring(0, maxChars).trim() + '...';
+  }
+
   @override
   Widget build(BuildContext context) {
-    final saved = ConversationScreen.saved;
+    final saved = [...ConversationScreen.saved.reversed];
+
     final shared = [
-      ...ConversationScreen.shared,
+      ...ConversationScreen.shared.reversed,
       Conversation(
         title: "Condivisa 1",
-        preview: "Conversazione storica.",
+        preview: "Conversazione storica...",
         imagePath: "assets/generale.jpg",
         date: DateTime(2025, 6, 1),
         sharedBy: "Elena Bianchi",
+        messages: [
+          {"role": "bot", "text": "Conversazione storica..."},
+          {"role": "user", "text": "Cosa hai fatto nell'antica Roma?"},
+        ],
       ),
       Conversation(
         title: "Condivisa 2",
-        preview: "Scoperta interessante.",
+        preview: "Scoperta interessante...",
         imagePath: "assets/caesar.png",
         date: DateTime(2025, 6, 2),
         sharedBy: "Riccardo Gialli",
+        messages: [
+          {"role": "user", "text": "Come hai vinto la guerra?"},
+          {"role": "bot", "text": "Con strategia, alleanze e coraggio."},
+        ],
       ),
     ];
 
