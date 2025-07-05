@@ -116,9 +116,7 @@ lib/
 - Seleziona profilo "Insegnante"
 - Inserisce domande personalizzate
 - Visualizza le domande inserite
-- Consulta le domande condivise dagli studenti
-- Può accedere alle conversazioni condivise
-- Visualizza le domande condivise dagli studenti per analizzare il loro coinvolgimento
+- Visualizza le domande condivise dagli studenti con il personaggio storico per analizzare il loro coinvolgimento
 
 ---
 
