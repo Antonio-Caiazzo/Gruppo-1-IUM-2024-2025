@@ -5,6 +5,7 @@ class Conversation {
   final DateTime date;
   final String? sharedBy;
   final List<Map<String, String>> messages;
+  final String? period;
 
   Conversation({
     required this.title,
@@ -13,5 +14,6 @@ class Conversation {
     required this.date,
     this.sharedBy,
     required this.messages,
+    this.period,
   });
 }
