@@ -23,11 +23,13 @@ class StudentBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: currentIndex < 0 ? 0 : currentIndex, // evita crash
+      currentIndex: currentIndex < 0 ? 0 : currentIndex,
       selectedItemColor: currentIndex < 0 ? Colors.grey : AppColors.primary,
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       onTap: (index) {
+        if (index == currentIndex) return; // Evita la navigazione ridondante
+
         if (onTap != null) {
           onTap!(index);
         } else {

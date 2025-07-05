@@ -2,20 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:convert';
 
-// Assuming this path is correct for your constants
-// import '../constants/colors.dart';
+import '../widgets/teacher_bottom_nav_bar.dart';
 
 class ConversazioniScreen extends StatefulWidget {
-  const ConversazioniScreen({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+
+  const ConversazioniScreen({
+    super.key,
+    required this.name,
+    required this.surname,
+  });
 
   @override
-  _ConversazioniScreenState createState() => _ConversazioniScreenState();
+  State<ConversazioniScreen> createState() => _ConversazioniScreenState();
 }
 
 class _ConversazioniScreenState extends State<ConversazioniScreen> {
   List<Map<String, String>> classi = [];
 
-  // Default classes for initial load if no data is saved
   final List<Map<String, String>> defaultClassi = [
     {'nome': 'I - A', 'anno': '2025'},
     {'nome': 'II - A', 'anno': '2025'},
@@ -37,25 +42,25 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
     _loadClassi();
   }
 
-  // Loads classes from SharedPreferences
   Future<void> _loadClassi() async {
     final prefs = await SharedPreferences.getInstance();
     final savedClassi = prefs.getString('classiList');
     if (savedClassi != null) {
       setState(() {
         classi = List<Map<String, String>>.from(
-            (json.decode(savedClassi) as List).map((e) => Map<String, String>.from(e)));
+          (json.decode(savedClassi) as List).map(
+            (e) => Map<String, String>.from(e),
+          ),
+        );
       });
     } else {
-      // If no saved classes, load default and save them
       setState(() {
         classi = defaultClassi;
       });
-      await _saveClassi(); // Save default classes for future loads
+      await _saveClassi();
     }
   }
 
-  // Saves classes to SharedPreferences (useful if default classes are loaded for the first time)
   Future<void> _saveClassi() async {
     final prefs = await SharedPreferences.getInstance();
     await prefs.setString('classiList', json.encode(classi));
@@ -64,10 +69,16 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.white, // Assuming a white background
+      backgroundColor: Colors.white,
       appBar: AppBar(
-        title: const Text('Conversazioni',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
+        title: const Text(
+          'Conversazioni',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -90,7 +101,7 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
               ),
             ),
           ),
-          const SizedBox(height: 10), // Reduced height as no buttons below
+          const SizedBox(height: 10),
           Expanded(
             child: GridView.builder(
               padding: const EdgeInsets.symmetric(horizontal: 20),
@@ -103,33 +114,23 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
               itemCount: classi.length,
               itemBuilder: (context, index) {
                 final classe = classi[index];
-                // For ConversazioniScreen, we don't have a 'selectedIndex' for interactive selection
-                // but we keep the visual consistency for the card itself.
-                // We'll simulate a 'selected' state for the visual style, or remove it for simplicity.
-                // For now, let's keep the card style consistent but without actual selection logic.
-                // Or simply use a standard card without the selection highlights.
-                // Let's use a standard card without the complex selection visual effects.
 
                 return GestureDetector(
                   onTap: () {
-                    // TODO: Implement navigation to chat screen for the selected class
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text('Hai selezionato la classe: ${classe['nome']}'),
+                        content: Text(
+                          'Hai selezionato la classe: ${classe['nome']}',
+                        ),
                         duration: const Duration(seconds: 1),
                       ),
                     );
                   },
                   child: Container(
-                    width: 100,
-                    height: 100,
                     decoration: BoxDecoration(
-                      color: Colors.white, // Card background
+                      color: Colors.white,
                       borderRadius: BorderRadius.circular(12),
-                      border: Border.all(
-                        color: Colors.grey.shade300, // Always a light grey border
-                        width: 1,
-                      ),
+                      border: Border.all(color: Colors.grey.shade300, width: 1),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withOpacity(0.1),
@@ -144,7 +145,7 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
                         width: 90,
                         height: 90,
                         decoration: BoxDecoration(
-                          color: const Color(0x472CBDFB), // Light blue background for the inner square
+                          color: const Color(0x472CBDFB),
                           borderRadius: BorderRadius.circular(8),
                         ),
                         child: Column(
@@ -178,41 +179,10 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
           ),
         ],
       ),
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: 1, // Set to 1 for "Conversazioni"
-        backgroundColor: Colors.transparent,
-        elevation: 0,
-        selectedItemColor: Colors.black,
-        unselectedItemColor: Colors.grey,
-        selectedLabelStyle: const TextStyle(fontSize: 12),
-        unselectedLabelStyle: const TextStyle(fontSize: 12),
-        onTap: (index) {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacementNamed(context, '/home'); // Navigate to Home, replacing current route
-              break;
-            case 1:
-            // Conversazioni - already on this screen
-              break;
-            case 2:
-              Navigator.pushNamed(context, '/impostazioni');
-              break;
-          }
-        },
-        items: const [
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home, size: 24),
-            label: 'Home',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.chat_bubble_outline, size: 24),
-            label: 'Conversazioni',
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.settings, size: 24),
-            label: 'Impostazioni',
-          ),
-        ],
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: 1,
+        name: widget.name,
+        surname: widget.surname,
       ),
     );
   }

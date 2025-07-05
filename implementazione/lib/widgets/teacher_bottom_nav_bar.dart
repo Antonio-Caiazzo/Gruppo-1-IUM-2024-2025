@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../screens/home_teacher_screen.dart';
 import '../screens/settings_teacher_screen.dart';
-import '../screens/conversations_student_screen.dart'; // Sostituisci con uno specifico per docenti
+import '../screens/conversazioni_screen.dart'; // Conversazioni docenti
 
 class TeacherBottomNavigationBar extends StatelessWidget {
   final int currentIndex;
@@ -26,6 +26,9 @@ class TeacherBottomNavigationBar extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       onTap: (index) {
+        // Evita navigazione ridondante
+        if (index == currentIndex) return;
+
         if (onTap != null) {
           onTap!(index);
         } else {
@@ -43,11 +46,8 @@ class TeacherBottomNavigationBar extends StatelessWidget {
               Navigator.pushReplacement(
                 context,
                 MaterialPageRoute(
-                  builder: (_) => ConversationsStudentScreen(
-                    name: name,
-                    surname: surname,
-                    classCode: '',
-                  ),
+                  builder: (_) =>
+                      ConversazioniScreen(name: name, surname: surname),
                 ),
               );
               break;
