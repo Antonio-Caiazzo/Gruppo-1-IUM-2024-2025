@@ -9,15 +9,30 @@
     <option name="autoReloadType" value="NONE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes.">
-      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/domande_insegnante_screen.dart" afterDir="false" />
+    <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Integrate DomandeInsegnanteScreen into HomeTeacherScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to navigate to the `DomandeInsegnanteScreen` when the &quot;Domande&quot; grid tile is tapped.&#10;&#10;The `_selectedIndex` is now used to manage the active state in the `TeacherBottomNavigationBar`.">
+      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/dettaglio_classe_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_arm64_v8a_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_armeabi_v7a_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_flutter_embedding_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_64_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/aggiungi_classe_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/aggiungi_classe_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/classi_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/classi_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +413,39 @@
       <option name="project" value="LOCAL" />
       <updated>1750725680349</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="Add Android Gradle module files for shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the `shared_preferences_android` module:&#10;&#10;- `android.shared_preferences_android.iml`: Main module definition.&#10;- `android.shared_preferences_android.main.iml`: Configuration for the main source set.&#10;- `android.shared_preferences_android.unitTest.iml`: Configuration for unit tests.&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes.&#10;&#10;Additionally, a device configuration for &quot;Galaxy A51&quot; was removed from `deviceStreaming.xml`.">
+      <option name="closed" value="true" />
+      <created>1750726580512</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1750726580512</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Update &quot;Seleziona una classe&quot; text&#10;&#10;The text displayed when no class is selected in `ConversazioniScreen` has been shortened from &quot;Seleziona una classe per avviare una conversazione&quot; to &quot;Seleziona una classe&quot;.">
+      <option name="closed" value="true" />
+      <created>1750726591744</created>
+      <option name="number" value="00024" />
+      <option name="presentableId" value="LOCAL-00024" />
+      <option name="project" value="LOCAL" />
+      <updated>1750726591744</updated>
+    </task>
+    <task id="LOCAL-00025" summary="Create DomandeInsegnanteScreen&#10;&#10;This commit introduces the `DomandeInsegnanteScreen` widget, which allows teachers to select a class to view or assign questions.&#10;&#10;Key features:&#10;- Displays a grid of available classes.&#10;- Loads class data from `SharedPreferences` or uses a default list if no data is found.&#10;- Saves class data to `SharedPreferences` upon initial load of default classes.&#10;- Each class is represented by a card showing its name and year.&#10;- Tapping on a class card displays a temporary snackbar (navigation to be implemented).&#10;- Includes a bottom navigation bar for navigating to Home, Conversazioni, and Impostazioni.">
+      <option name="closed" value="true" />
+      <created>1750726599514</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1750726599514</updated>
+    </task>
+    <task id="LOCAL-00026" summary="Integrate DomandeInsegnanteScreen into HomeTeacherScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to navigate to the `DomandeInsegnanteScreen` when the &quot;Domande&quot; grid tile is tapped.&#10;&#10;The `_selectedIndex` is now used to manage the active state in the `TeacherBottomNavigationBar`.">
+      <option name="closed" value="true" />
+      <created>1750726609323</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1750726609323</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -461,6 +508,10 @@
     <MESSAGE value="Create ConversazioniScreen&#10;&#10;This commit introduces the `ConversazioniScreen` widget, which displays a grid of classes and allows users to select a class to start a conversation.&#10;&#10;Key features of this screen include:&#10;- Loads a list of classes from `SharedPreferences`. If no saved classes are found, it loads a default list and saves it for future use.&#10;- Displays classes in a `GridView` with 3 columns.&#10;- Each class is represented by a card showing its name and year.&#10;- Tapping on a class card currently shows a `SnackBar` indicating the selection (TODO: implement navigation to a chat screen).&#10;- Includes an app bar with a title &quot;Conversazioni&quot; and a back button.&#10;- Provides a bottom navigation bar with &quot;Home&quot;, &quot;Conversazioni&quot;, and &quot;Impostazioni&quot; options. &quot;Conversazioni&quot; is the active tab.&#10;&#10;The screen loads class data from `SharedPreferences` upon initialization. If no data is found, it populates the list with default class values and saves them." />
     <MESSAGE value="Enable navigation to ConversazioniScreen and ClassiScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to allow navigation to `ConversazioniScreen` and `ClassiScreen` when the respective grid tiles are tapped.&#10;&#10;Specifically:&#10;- Tapping the &quot;Conversazioni&quot; tile now navigates to `ConversazioniScreen`.&#10;- Tapping the &quot;Classi&quot; tile now navigates to `ClassiScreen`.&#10;- A TODO comment has been added for implementing navigation for the &quot;Domande&quot; tile." />
     <MESSAGE value="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes." />
-    <option name="LAST_COMMIT_MESSAGE" value="Add Android Gradle module files for app and shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the Android modules:&#10;&#10;- **app module:**&#10;    - `android.app.iml`: Main module definition.&#10;    - `android.app.main.iml`: Configuration for the main source set.&#10;    - `android.app.androidTest.iml`: Configuration for Android tests.&#10;    - `android.app.unitTest.iml`: Configuration for unit tests.&#10;- **shared_preferences_android module:**&#10;    - `android.shared_preferences_android.androidTest.iml`: Configuration for Android tests (note: this seems to be the only `.iml` file added for this plugin module in this commit, implying others might exist or are not relevant to the current changes).&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes." />
+    <MESSAGE value="Add Android Gradle module files for shared_preferences_android&#10;&#10;This commit introduces the necessary `.iml` files for IntelliJ/Android Studio to correctly recognize and build the `shared_preferences_android` module:&#10;&#10;- `android.shared_preferences_android.iml`: Main module definition.&#10;- `android.shared_preferences_android.main.iml`: Configuration for the main source set.&#10;- `android.shared_preferences_android.unitTest.iml`: Configuration for unit tests.&#10;&#10;These files define aspects like source paths, dependencies, Kotlin compiler settings, and Android facet configurations, enabling the IDE to manage the project structure and build processes.&#10;&#10;Additionally, a device configuration for &quot;Galaxy A51&quot; was removed from `deviceStreaming.xml`." />
+    <MESSAGE value="Update &quot;Seleziona una classe&quot; text&#10;&#10;The text displayed when no class is selected in `ConversazioniScreen` has been shortened from &quot;Seleziona una classe per avviare una conversazione&quot; to &quot;Seleziona una classe&quot;." />
+    <MESSAGE value="Create DomandeInsegnanteScreen&#10;&#10;This commit introduces the `DomandeInsegnanteScreen` widget, which allows teachers to select a class to view or assign questions.&#10;&#10;Key features:&#10;- Displays a grid of available classes.&#10;- Loads class data from `SharedPreferences` or uses a default list if no data is found.&#10;- Saves class data to `SharedPreferences` upon initial load of default classes.&#10;- Each class is represented by a card showing its name and year.&#10;- Tapping on a class card displays a temporary snackbar (navigation to be implemented).&#10;- Includes a bottom navigation bar for navigating to Home, Conversazioni, and Impostazioni." />
+    <MESSAGE value="Integrate DomandeInsegnanteScreen into HomeTeacherScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to navigate to the `DomandeInsegnanteScreen` when the &quot;Domande&quot; grid tile is tapped.&#10;&#10;The `_selectedIndex` is now used to manage the active state in the `TeacherBottomNavigationBar`." />
+    <option name="LAST_COMMIT_MESSAGE" value="Integrate DomandeInsegnanteScreen into HomeTeacherScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to navigate to the `DomandeInsegnanteScreen` when the &quot;Domande&quot; grid tile is tapped.&#10;&#10;The `_selectedIndex` is now used to manage the active state in the `TeacherBottomNavigationBar`." />
   </component>
 </project>

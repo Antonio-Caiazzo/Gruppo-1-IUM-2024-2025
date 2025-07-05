@@ -4,14 +4,10 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/Gruppo-1-IUM-2024-2025.iml" filepath="$PROJECT_DIR$/.idea/Gruppo-1-IUM-2024-2025.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/android.iml" filepath="$PROJECT_DIR$/.idea/modules/android.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" filepath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" filepath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" filepath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" filepath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1798006677/gradle.iml" filepath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1798006677/gradle.main.iml" filepath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.main.iml" />
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/1798006677/gradle.test.iml" filepath="$PROJECT_DIR$/.idea/modules/1798006677/gradle.test.iml" />
