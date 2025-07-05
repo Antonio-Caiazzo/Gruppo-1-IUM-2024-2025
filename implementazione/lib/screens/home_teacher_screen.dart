@@ -1,10 +1,11 @@
+
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
 import '../widgets/teacher_bottom_nav_bar.dart';
 
 import 'classi_screen.dart';
 import 'conversazioni_screen.dart';
-import 'domande_insegnante_screen.dart'; // Import the new screen
+import 'domande_insegnante_screen.dart';
 
 class HomeTeacherScreen extends StatefulWidget {
   final String name;
@@ -75,7 +76,6 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-
                       MaterialPageRoute(
                         builder: (_) => DomandeInsegnanteScreen(
                           name: widget.name,
@@ -91,7 +91,12 @@ class _HomeTeacherScreenState extends State<HomeTeacherScreen> {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (_) => const ClassiScreen()),
+                      MaterialPageRoute(
+                        builder: (_) => ClassiScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                        ),
+                      ),
                     );
                   },
                 ),
