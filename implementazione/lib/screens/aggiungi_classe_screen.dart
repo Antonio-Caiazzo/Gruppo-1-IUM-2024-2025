@@ -1,8 +1,16 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
+import '../widgets/teacher_bottom_nav_bar.dart';
 
 class AggiungiClasseScreen extends StatefulWidget {
-  const AggiungiClasseScreen({Key? key}) : super(key: key);
+  final String name;
+  final String surname;
+
+  const AggiungiClasseScreen({
+    Key? key,
+    required this.name,
+    required this.surname,
+  }) : super(key: key);
 
   @override
   _AggiungiClasseScreenState createState() => _AggiungiClasseScreenState();
@@ -28,9 +36,11 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
     return Scaffold(
       backgroundColor: AppColors.background,
       appBar: AppBar(
-        title: const Text('Aggiungi classe',
-            style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold)),
-        leading: BackButton(),
+        title: const Text(
+          'Aggiungi classe',
+          style: TextStyle(fontSize: 30, fontWeight: FontWeight.bold),
+        ),
+        leading: const BackButton(),
         backgroundColor: Colors.white,
         elevation: 0,
         centerTitle: true,
@@ -58,7 +68,8 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                     hintText: 'Sezione',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -86,7 +97,8 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                     hintText: 'Anno',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -106,13 +118,17 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2CBDFB),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(25)),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   onPressed: _salvaClasse,
                   child: const Text(
                     'Aggiungi',
-                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600, color: Colors.white),
+                    style: TextStyle(
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -120,6 +136,11 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
             ],
           ),
         ),
+      ),
+      bottomNavigationBar: TeacherBottomNavigationBar(
+        currentIndex: 0, // Imposta 0 per Home, puoi cambiarlo se necessario
+        name: widget.name,
+        surname: widget.surname,
       ),
     );
   }
