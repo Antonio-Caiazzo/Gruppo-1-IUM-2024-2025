@@ -19,28 +19,45 @@ class ConversazioniScreen extends StatefulWidget {
   State<ConversazioniScreen> createState() => _ConversazioniScreenState();
 }
 
-class _ConversazioniScreenState extends State<ConversazioniScreen> {
-  List<Map<String, String>> classi = [];
+class _ConversazioniScreenState extends State<ConversazioniScreen> with WidgetsBindingObserver {
+  // Modificato a dynamic per supportare la lista studenti
+  List<Map<String, dynamic>> classi = [];
 
-  final List<Map<String, String>> defaultClassi = [
-    {'nome': 'I - A', 'anno': '2025'},
-    {'nome': 'II - A', 'anno': '2025'},
-    {'nome': 'III - A', 'anno': '2025'},
-    {'nome': 'IV - A', 'anno': '2025'},
-    {'nome': 'V - A', 'anno': '2025'},
-    {'nome': 'I - B', 'anno': '2025'},
-    {'nome': 'II - B', 'anno': '2025'},
-    {'nome': 'III - B', 'anno': '2025'},
-    {'nome': 'IV - B', 'anno': '2025'},
-    {'nome': 'V - B', 'anno': '2025'},
-    {'nome': 'I - C', 'anno': '2025'},
-    {'nome': 'III - C', 'anno': '2025'},
+  final List<Map<String, dynamic>> defaultClassi = [
+    {'nome': 'I - A', 'anno': '2025', 'studenti': []}, // Aggiunto 'studenti'
+    {'nome': 'II - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'III - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'IV - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'V - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'I - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'II - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'III - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'IV - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'V - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'I - C', 'anno': '2025', 'studenti': []},
+    {'nome': 'III - C', 'anno': '2025', 'studenti': []},
   ];
 
   @override
   void initState() {
     super.initState();
+    WidgetsBinding.instance.addObserver(this); // Aggiungi l'observer
     _loadClassi();
+  }
+
+  @override
+  void dispose() {
+    WidgetsBinding.instance.removeObserver(this); // Rimuovi l'observer
+    super.dispose();
+  }
+
+  // Questo metodo viene chiamato quando il ciclo di vita dell'app cambia
+  @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    if (state == AppLifecycleState.resumed) {
+      // Quando l'app torna in primo piano, ricarica le classi
+      _loadClassi();
+    }
   }
 
   Future<void> _loadClassi() async {
@@ -48,9 +65,9 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
     final savedClassi = prefs.getString('classiList');
     if (savedClassi != null) {
       setState(() {
-        classi = List<Map<String, String>>.from(
+        classi = List<Map<String, dynamic>>.from(
           (json.decode(savedClassi) as List).map(
-            (e) => Map<String, String>.from(e),
+                (e) => Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []), // Assicura 'studenti'
           ),
         );
       });
@@ -183,7 +200,7 @@ class _ConversazioniScreenState extends State<ConversazioniScreen> {
         ],
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 1,
+        currentIndex: 1, // Assicurati che l'indice sia corretto per questa tab
         name: widget.name,
         surname: widget.surname,
       ),
