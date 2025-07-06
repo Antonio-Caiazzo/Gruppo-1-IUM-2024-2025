@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:historia/screens/home_teacher_screen.dart';
 import '../models/conversation.dart';
 import '../constants/colors.dart';
 import 'conversation_detail_teacher_screen.dart';
@@ -189,8 +190,22 @@ class _ConversazioniTeacherListScreenState
         backgroundColor: AppColors.background,
         foregroundColor: Colors.black,
         elevation: 0,
-        leading: const BackButton(),
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HomeTeacherScreen(
+                  name: widget.name,
+                  surname: widget.surname,
+                ),
+              ),
+            );
+          },
+        ),
       ),
+
       body: Column(
         children: [
           Padding(
