@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import '../widgets/teacher_bottom_nav_bar.dart';
 import 'aggiungi_classe_screen.dart';
-import 'dettaglio_classe_screen.dart'; // Aggiungi questo import
+import 'dettaglio_classe_screen.dart';
 
 class ClassiScreen extends StatefulWidget {
   final String name;
@@ -17,23 +17,23 @@ class ClassiScreen extends StatefulWidget {
 }
 
 class _ClassiScreenState extends State<ClassiScreen> {
-  List<Map<String, String>> classi = [];
+  List<Map<String, dynamic>> classi = []; // Changed to dynamic for students list
   int? selectedIndex;
   bool isDeleteMode = false;
 
-  final List<Map<String, String>> defaultClassi = [
-    {'nome': 'I - A', 'anno': '2025'},
-    {'nome': 'II - A', 'anno': '2025'},
-    {'nome': 'III - A', 'anno': '2025'},
-    {'nome': 'IV - A', 'anno': '2025'},
-    {'nome': 'V - A', 'anno': '2025'},
-    {'nome': 'I - B', 'anno': '2025'},
-    {'nome': 'II - B', 'anno': '2025'},
-    {'nome': 'III - B', 'anno': '2025'},
-    {'nome': 'IV - B', 'anno': '2025'},
-    {'nome': 'V - B', 'anno': '2025'},
-    {'nome': 'I - C', 'anno': '2025'},
-    {'nome': 'III - C', 'anno': '2025'},
+  final List<Map<String, dynamic>> defaultClassi = [
+    {'nome': 'I - A', 'anno': '2025', 'studenti': ['Bianchi Luigi', 'Rossi Mario', 'Verdi Luca']},
+    {'nome': 'II - A', 'anno': '2025', 'studenti': []}, // Example with empty students
+    {'nome': 'III - A', 'anno': '2025', 'studenti': ['Gialli Anna']},
+    {'nome': 'IV - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'V - A', 'anno': '2025', 'studenti': []},
+    {'nome': 'I - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'II - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'III - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'IV - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'V - B', 'anno': '2025', 'studenti': []},
+    {'nome': 'I - C', 'anno': '2025', 'studenti': []},
+    {'nome': 'III - C', 'anno': '2025', 'studenti': []},
   ];
 
   @override
@@ -47,9 +47,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
     final savedClassi = prefs.getString('classiList');
     if (savedClassi != null) {
       setState(() {
-        classi = List<Map<String, String>>.from(
+        classi = List<Map<String, dynamic>>.from(
           (json.decode(savedClassi) as List).map(
-            (e) => Map<String, String>.from(e),
+            // Ensure student lists are also correctly deserialized
+                (e) => Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []),
           ),
         );
       });
@@ -66,9 +67,14 @@ class _ClassiScreenState extends State<ClassiScreen> {
     await prefs.setString('classiList', json.encode(classi));
   }
 
+  // _aggiungiClasse is no longer directly called for adding, but useful if needed elsewhere
   void _aggiungiClasse(Map<String, String> nuovaClasse) async {
     setState(() {
-      classi.add(nuovaClasse);
+      classi.add({
+        'nome': nuovaClasse['nome']!,
+        'anno': nuovaClasse['anno']!,
+        'studenti': [], // New classes start with empty student list by default
+      });
     });
     await _saveClassi();
   }
@@ -81,10 +87,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
   }
 
   void _showSnackBar(
-    String message, {
-    Color backgroundColor = Colors.black,
-    Color textColor = Colors.white,
-  }) {
+      String message, {
+        Color backgroundColor = Colors.black,
+        Color textColor = Colors.white,
+      }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: TextStyle(color: textColor)),
@@ -164,6 +170,7 @@ class _ClassiScreenState extends State<ClassiScreen> {
     }
   }
 
+  // *** MODIFICA QUI per il ricaricamento dopo l'aggiunta ***
   Future<void> _navigateAndRefresh() async {
     final nuovaClasse = await Navigator.push<Map<String, String>>(
       context,
@@ -172,8 +179,11 @@ class _ClassiScreenState extends State<ClassiScreen> {
             AggiungiClasseScreen(name: widget.name, surname: widget.surname),
       ),
     );
+    // Indipendentemente dal fatto che una nuova classe sia stata aggiunta o meno,
+    // ricarica sempre le classi per riflettere lo stato attuale.
+    await _loadClassi();
+
     if (nuovaClasse != null) {
-      _aggiungiClasse(nuovaClasse);
       _showSnackBar(
         'Classe "${nuovaClasse['nome']}" aggiunta con successo!',
         backgroundColor: Colors.green.shade700,
@@ -181,9 +191,9 @@ class _ClassiScreenState extends State<ClassiScreen> {
     }
   }
 
-  // Nuova funzione per navigare al dettaglio della classe
+  // Questa funzione è già corretta per il ricaricamento
   Future<void> _navigateToClasseDettaglio(int index) async {
-    final result = await Navigator.push<bool>(
+    await Navigator.push( // Non abbiamo bisogno del risultato specifico true/false qui, basta che ritorni
       context,
       MaterialPageRoute(
         builder: (_) => DettaglioClasseScreen(
@@ -194,14 +204,9 @@ class _ClassiScreenState extends State<ClassiScreen> {
         ),
       ),
     );
-
-    // Se la classe è stata eliminata, ricarica l'elenco
-    if (result == true) {
-      await _loadClassi();
-    } else {
-      // Ricarica comunque per eventuali modifiche
-      await _loadClassi();
-    }
+    // Dopo essere tornati da DettaglioClasseScreen, ricarica sempre la lista
+    // per riflettere eventuali modifiche (nome, anno, studenti) o eliminazioni.
+    await _loadClassi();
   }
 
   @override
@@ -232,8 +237,8 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: Text(
               isDeleteMode
                   ? (selectedIndex != null
-                        ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
-                        : 'Seleziona la classe da eliminare')
+                  ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
+                  : 'Seleziona la classe da eliminare')
                   : 'Seleziona una classe per\nvisualizzare il codice e gli alunni',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -321,12 +326,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
                 return GestureDetector(
                   onTap: () {
                     if (isDeleteMode) {
-                      // In modalità eliminazione, seleziona la classe
                       setState(() {
                         selectedIndex = isCurrentlySelected ? null : index;
                       });
                     } else {
-                      // In modalità normale, naviga al dettaglio
                       _navigateToClasseDettaglio(index);
                     }
                   },
