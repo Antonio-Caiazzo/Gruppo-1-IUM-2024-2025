@@ -49,8 +49,14 @@ class _ConversationScreenState extends State<ConversationScreen> {
     super.initState();
     if (widget.messages != null && widget.messages!.isNotEmpty) {
       _messages.addAll(widget.messages!);
-    } else {
+    } else if (widget.introMessage == null) {
+      // Aggiungi un messaggio introduttivo solo se non c'è una introMessage precompilata
       _messages.add({"role": "bot", "text": _intro()});
+    }
+
+    // Mostra la introMessage solo nella TextField, ma non aggiungerla come messaggio
+    if (widget.introMessage != null) {
+      _controller.text = widget.introMessage!;
     }
   }
 
@@ -85,14 +91,30 @@ class _ConversationScreenState extends State<ConversationScreen> {
   Future<String> _askOllama(String prompt) async {
     final promptHead =
         """
-Sei ${widget.characterName}, il vero personaggio storico.
-Rispondi sempre in prima persona, come se fossi realmente vissuto nel tuo periodo storico.
-Non sai nulla del futuro o di eventi successivi alla tua epoca.
-Non rispondere a domande fuori contesto storico. Se ti vengono poste, rispondi cortesemente che non ne sei a conoscenza.
-Parla in modo coerente con la tua epoca. Rimani sempre nel personaggio.
-Non dire mai che sei un’intelligenza artificiale.
-La tua risposta deve contenere tra le 20 e le 50 parole.
+Sei ${widget.characterName}, un vero personaggio storico realmente esistito.  
+Ti trovi nel tuo tempo e stai dialogando con un giovane studente curioso.
+
+Rispondi sempre in prima persona, con il linguaggio, la mentalità e i riferimenti tipici della tua epoca.  
+Mostra la tua personalità, le tue convinzioni e il tuo ruolo storico (generale, imperatore, ecc.).
+
+Non sei a conoscenza di eventi futuri rispetto alla tua epoca e non devi mai menzionare o fare riferimento a concetti moderni come tecnologia, intelligenza artificiale, social network o cose che non esistevano al tuo tempo.
+
+Mantieni sempre il tono coerente con il tuo status storico: autorevole, riflessivo, diretto o militare, secondo il tuo personaggio.  
+Non uscire mai dal ruolo, anche se ricevi domande strane o fuori contesto: rispondi con garbo dicendo che non puoi saperlo.
+
+### Requisiti formali:
+- Non usare mai virgolette (“ ” o " ") nella tua risposta  
+- La risposta deve essere lunga tra le **20 e le 50 parole**
+- Non dire mai che sei un’intelligenza artificiale o un assistente virtuale
+- Rispondi utilizzando sempre emoji nelle tue risposte, per rendere il messaggio più chiaro, divertente o espressivo per uno studente.
+
+### Contesto:
+Stai parlando a uno studente interessato a conoscerti. Sii coinvolgente, chiaro e fedele al tuo tempo.
+
+Domanda: {domanda_utente}  
+Risposta:
 """;
+
     final body = "$promptHead\nDomanda: $prompt\nRisposta:";
     final res = await http.post(
       Uri.parse('http://localhost:11434/api/generate'),
@@ -228,83 +250,94 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
   }
 
   Future<bool> _onWillPop() async {
-    if (!widget.isReadOnly &&
-        _messages.where((m) => m['role'] == 'user').isNotEmpty) {
-      final res =
-          await showDialog<bool>(
-            context: context,
-            builder: (_) => Dialog(
-              backgroundColor: Colors.white,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(20),
-              ),
-              child: Padding(
-                padding: const EdgeInsets.all(24),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  children: [
-                    const Text(
-                      'Attenzione!\nSe esci senza salvare o condividere, perderai la conversazione.',
-                      style: TextStyle(
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
+    if (!widget.isReadOnly) {
+      final hasUserMessage = _messages.any((m) => m['role'] == 'user');
+
+      if (hasUserMessage) {
+        final confirm = await showDialog<bool>(
+          context: context,
+          builder: (_) => Dialog(
+            backgroundColor: Colors.white,
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(20),
+            ),
+            child: Padding(
+              padding: const EdgeInsets.all(24),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  const Text(
+                    'Attenzione!\nSe esci senza salvare o condividere, perderai la conversazione.',
+                    style: TextStyle(fontSize: 18, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
+                  ),
+                  const SizedBox(height: 24),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () => Navigator.pop(context, false),
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: AppColors.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
+                            ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            elevation: 0,
+                          ),
+                          child: const Text(
+                            'Rimani in chat',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
+                            ),
+                          ),
+                        ),
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 24),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context, false),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: AppColors.primary,
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              elevation: 0,
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: ElevatedButton(
+                          onPressed: () =>
+                              Navigator.pop(context, true), // Conferma uscita
+                          style: ElevatedButton.styleFrom(
+                            backgroundColor: const Color(0xFFDF1818),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(16),
                             ),
-                            child: const Text(
-                              'Rimani in chat',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
+                            padding: const EdgeInsets.symmetric(vertical: 14),
+                            elevation: 0,
+                          ),
+                          child: const Text(
+                            'Esci',
+                            style: TextStyle(
+                              color: Colors.white,
+                              fontWeight: FontWeight.bold,
                             ),
                           ),
                         ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: ElevatedButton(
-                            onPressed: () => Navigator.pop(context, true),
-                            style: ElevatedButton.styleFrom(
-                              backgroundColor: const Color(0xFFDF1818),
-                              shape: RoundedRectangleBorder(
-                                borderRadius: BorderRadius.circular(16),
-                              ),
-                              padding: const EdgeInsets.symmetric(vertical: 14),
-                              elevation: 0,
-                            ),
-                            child: const Text(
-                              'Esci',
-                              style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                    ],
+                  ),
+                ],
               ),
             ),
-          ) ??
-          false;
-      return res;
+          ),
+        );
+
+        if (confirm == true) {
+          Navigator.pop(context, true); // Domanda completata
+        } else {
+          // L’utente ha scelto di restare
+        }
+
+        return false;
+      }
+
+      // Se non ha mai scritto nulla → esce senza dialogo
+      Navigator.pop(context, false); // Domanda incompleta
+      return false;
     }
+
     return true;
   }
 
@@ -331,7 +364,14 @@ La tua risposta deve contenere tra le 20 e le 50 parole.
   AppBar _appBar() => AppBar(
     backgroundColor: Colors.white,
     elevation: 0,
-    leading: const BackButton(color: Colors.black),
+    leading: IconButton(
+      icon: const Icon(Icons.arrow_back, color: Colors.black),
+      onPressed: () async {
+        final res = await _onWillPop();
+        if (res) Navigator.pop(context);
+      },
+    ),
+
     centerTitle: true,
     title: Text(
       widget.customTitle ?? widget.characterName,
