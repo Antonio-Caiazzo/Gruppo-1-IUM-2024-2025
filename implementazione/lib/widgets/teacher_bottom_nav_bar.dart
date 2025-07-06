@@ -18,6 +18,25 @@ class TeacherBottomNavigationBar extends StatelessWidget {
     this.onTap,
   });
 
+  void _navigate(BuildContext context, int index) {
+    Widget screen;
+    switch (index) {
+      case 0:
+        screen = HomeTeacherScreen(name: name, surname: surname);
+        break;
+      case 1:
+        screen = ConversazioniScreen(name: name, surname: surname);
+        break;
+      case 2:
+        screen = SettingsTeacherScreen(name: name, surname: surname);
+        break;
+      default:
+        return;
+    }
+
+    Navigator.of(context).push(MaterialPageRoute(builder: (_) => screen));
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -26,41 +45,12 @@ class TeacherBottomNavigationBar extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       onTap: (index) {
-        // Evita navigazione ridondante
         if (index == currentIndex) return;
 
         if (onTap != null) {
           onTap!(index);
         } else {
-          switch (index) {
-            case 0:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      HomeTeacherScreen(name: name, surname: surname),
-                ),
-              );
-              break;
-            case 1:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      ConversazioniScreen(name: name, surname: surname),
-                ),
-              );
-              break;
-            case 2:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) =>
-                      SettingsTeacherScreen(name: name, surname: surname),
-                ),
-              );
-              break;
-          }
+          _navigate(context, index);
         }
       },
       items: const [
