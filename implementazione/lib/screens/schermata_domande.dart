@@ -1,86 +1,81 @@
 import 'package:flutter/material.dart';
 import '../models/domanda_model.dart';
-import 'schermata_conversazione.dart';
+import 'conversation_screen.dart';
 import '../widgets/student_bottom_nav_bar.dart';
 
 class SchermataDomande extends StatefulWidget {
-  const SchermataDomande({super.key});
+  final String name;
+  final String surname;
+  final String classCode;
+  final List<DomandaModel> domande;
+
+  const SchermataDomande({
+    super.key,
+    required this.name,
+    required this.surname,
+    required this.classCode,
+    required this.domande,
+  });
 
   @override
   State<SchermataDomande> createState() => _SchermataDomandeState();
 }
 
 class _SchermataDomandeState extends State<SchermataDomande> {
-  final List<DomandaModel> domande = [
-    DomandaModel(
-      testo: "Come hanno costruito il Colosseo i romani?",
-      data: DateTime(2025, 4, 15, 10, 30),
-      stato: StatoDomanda.completa,
-      personaggio: "Colosseo",
-      immagineAsset: "assets/colosseum.png",
-    ),
-    DomandaModel(
-      testo: "Come hanno costruito il Foro i romani?",
-      data: DateTime(2025, 4, 17, 16, 40),
-      stato: StatoDomanda.incompleta,
-      personaggio: "Foro Romano",
-      immagineAsset: "assets/forum.png",
-    ),
-    DomandaModel(
-      testo: "Dove è nato Giulio Cesare?",
-      data: DateTime(2025, 4, 17, 16, 40),
-      stato: StatoDomanda.completa,
-      personaggio: "Giulio Cesare",
-      immagineAsset: "assets/caesar.png",
-    ),
-  ];
+  List<DomandaModel> get domande => widget.domande;
+
+  bool get hasPendingQuestions => domande.any(
+    (d) => d.stato == StatoDomanda.nuova || d.stato == StatoDomanda.incompleta,
+  );
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.white,
-      appBar: AppBar(
-        elevation: 0,
+    return WillPopScope(
+      onWillPop: () async {
+        Navigator.pop(context, hasPendingQuestions);
+        return false;
+      },
+      child: Scaffold(
         backgroundColor: Colors.white,
-        leading: IconButton(
-          icon: const Icon(
-            Icons.arrow_back_ios,
-            color: Colors.black87,
-            size: 20,
+        appBar: AppBar(
+          elevation: 0,
+          backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: const Icon(Icons.arrow_back_ios, color: Colors.black87),
+            onPressed: () => Navigator.pop(context, hasPendingQuestions),
           ),
-          onPressed: () => Navigator.pop(context),
+          title: const Text(
+            "Domande",
+            style: TextStyle(
+              fontSize: 36,
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+          ),
+          centerTitle: true,
         ),
-        title: const Text(
-          "Domande",
-          style: TextStyle(
-            fontSize: 36,
-            fontWeight: FontWeight.bold,
-            color: Colors.black87,
+        body: SingleChildScrollView(
+          padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
+          child: Column(
+            children: domande.asMap().entries.map((entry) {
+              final index = entry.key;
+              final domanda = entry.value;
+              return Padding(
+                padding: const EdgeInsets.only(bottom: 40),
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxWidth: 380),
+                  child: _buildDomandaCard(domanda, index),
+                ),
+              );
+            }).toList(),
           ),
         ),
-        centerTitle: true,
-      ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 16),
-        child: Column(
-          children: domande.asMap().entries.map((entry) {
-            final index = entry.key;
-            final domanda = entry.value;
-            return Padding(
-              padding: const EdgeInsets.only(bottom: 40),
-              child: ConstrainedBox(
-                constraints: const BoxConstraints(maxWidth: 380),
-                child: _buildDomandaCard(domanda, index),
-              ),
-            );
-          }).toList(),
+        bottomNavigationBar: StudentBottomNavigationBar(
+          currentIndex: -1,
+          name: widget.name,
+          surname: widget.surname,
+          classCode: widget.classCode,
         ),
-      ),
-      bottomNavigationBar: const StudentBottomNavigationBar(
-        currentIndex: -1,
-        name: 'Mario',
-        surname: 'Rossi',
-        classCode: '3C',
       ),
     );
   }
@@ -126,7 +121,6 @@ class _SchermataDomandeState extends State<SchermataDomande> {
             const SizedBox(height: 8),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              crossAxisAlignment: CrossAxisAlignment.end,
               children: [
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
@@ -135,7 +129,6 @@ class _SchermataDomandeState extends State<SchermataDomande> {
                       _formatData(domanda.data),
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Colors.black87,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -143,7 +136,6 @@ class _SchermataDomandeState extends State<SchermataDomande> {
                       _formatOrario(domanda.data),
                       style: const TextStyle(
                         fontSize: 13,
-                        color: Colors.black87,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -165,6 +157,33 @@ class _SchermataDomandeState extends State<SchermataDomande> {
         ),
       ),
     );
+  }
+
+  void _onDomandaTapped(DomandaModel domanda, int index) async {
+    final result = await Navigator.push<bool>(
+      context,
+      MaterialPageRoute(
+        builder: (_) => ConversationScreen(
+          characterName: domanda.personaggio,
+          characterImage: domanda.immagineAsset,
+          name: widget.name,
+          surname: widget.surname,
+          classCode: widget.classCode,
+          isReadOnly: false,
+          customTitle: domanda.personaggio,
+          introMessage: domanda.testo,
+          messages: [],
+        ),
+      ),
+    );
+
+    setState(() {
+      if (result == true) {
+        domande[index].stato = StatoDomanda.completa;
+      } else {
+        domande[index].stato = StatoDomanda.incompleta;
+      }
+    });
   }
 
   Widget _buildStatoChip(StatoDomanda stato) {
@@ -202,23 +221,6 @@ class _SchermataDomandeState extends State<SchermataDomande> {
           fontSize: 12,
           fontWeight: FontWeight.w600,
           color: textColor,
-        ),
-        textAlign: TextAlign.center,
-      ),
-    );
-  }
-
-  void _onDomandaTapped(DomandaModel domanda, int index) {
-    Navigator.push(
-      context,
-      MaterialPageRoute(
-        builder: (context) => SchermataConversazione(
-          domanda: domanda,
-          onRispostaInviata: (aggiornata) {
-            setState(() {
-              domande[index] = aggiornata;
-            });
-          },
         ),
       ),
     );

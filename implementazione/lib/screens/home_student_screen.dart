@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../constants/colors.dart';
+import '../models/domanda_model.dart';
 import '../screens/quiz_selection_screen.dart';
 import '../widgets/student_bottom_nav_bar.dart';
 import 'conversations_student_screen.dart';
@@ -23,8 +24,90 @@ class HomeStudentScreen extends StatefulWidget {
   State<HomeStudentScreen> createState() => _HomeStudentScreenState();
 }
 
-class _HomeStudentScreenState extends State<HomeStudentScreen> {
+class _HomeStudentScreenState extends State<HomeStudentScreen>
+    with SingleTickerProviderStateMixin {
   int _selectedIndex = 0;
+  late AnimationController _controller;
+  late Animation<double> _animation;
+
+  // Lista condivisa di domande
+  static final List<DomandaModel> domande = [
+    DomandaModel(
+      testo: "Come hanno costruito il Colosseo i romani?",
+      data: DateTime(2025, 4, 15, 10, 30),
+      stato: StatoDomanda.nuova,
+      personaggio: "Giulio Cesare",
+      immagineAsset: "assets/caesar.png",
+    ),
+    DomandaModel(
+      testo: "Come hanno costruito il Foro i romani?",
+      data: DateTime(2025, 4, 17, 16, 40),
+      stato: StatoDomanda.incompleta,
+      personaggio: "Giulio Cesare",
+      immagineAsset: "assets/caesar.png",
+    ),
+    DomandaModel(
+      testo: "Dove è nato Giulio Cesare?",
+      data: DateTime(2025, 4, 17, 16, 40),
+      stato: StatoDomanda.completa,
+      personaggio: "Giulio Cesare",
+      immagineAsset: "assets/caesar.png",
+    ),
+  ];
+
+  bool get _hasPendingDomande {
+    return domande.any(
+      (d) =>
+          d.stato == StatoDomanda.nuova || d.stato == StatoDomanda.incompleta,
+    );
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    _controller = AnimationController(
+      duration: const Duration(milliseconds: 1000),
+      vsync: this,
+    )..repeat(reverse: true);
+
+    _animation = Tween<double>(
+      begin: 0.7,
+      end: 1.2,
+    ).animate(CurvedAnimation(parent: _controller, curve: Curves.easeInOut));
+  }
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  void _navigateToIndex(int index) {
+    if (_selectedIndex == index) return;
+    setState(() => _selectedIndex = index);
+
+    Widget page;
+    switch (index) {
+      case 1:
+        page = ConversationsStudentScreen(
+          name: widget.name,
+          surname: widget.surname,
+          classCode: widget.classCode,
+        );
+        break;
+      case 2:
+        page = SettingsStudentScreen(
+          name: widget.name,
+          surname: widget.surname,
+          classCode: widget.classCode,
+        );
+        break;
+      default:
+        return;
+    }
+
+    Navigator.pushReplacement(context, MaterialPageRoute(builder: (_) => page));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -36,38 +119,7 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
         name: widget.name,
         surname: widget.surname,
         classCode: widget.classCode,
-        onTap: (index) {
-          if (index == _selectedIndex) return;
-
-          switch (index) {
-            case 0:
-              break; // già in home
-            case 1:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => ConversationsStudentScreen(
-                    name: widget.name,
-                    surname: widget.surname,
-                    classCode: widget.classCode,
-                  ),
-                ),
-              );
-              break;
-            case 2:
-              Navigator.pushReplacement(
-                context,
-                MaterialPageRoute(
-                  builder: (_) => SettingsStudentScreen(
-                    name: widget.name,
-                    surname: widget.surname,
-                    classCode: widget.classCode,
-                  ),
-                ),
-              );
-              break;
-          }
-        },
+        onTap: _navigateToIndex,
       ),
     );
   }
@@ -79,13 +131,11 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
         Text(
           'Benvenuto ${widget.name} 😀',
           style: const TextStyle(fontSize: 32, fontWeight: FontWeight.bold),
-          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 8),
         Text(
           'Classe 3C',
           style: const TextStyle(fontSize: 24, fontWeight: FontWeight.w500),
-          textAlign: TextAlign.center,
         ),
         const SizedBox(height: 40),
         Expanded(
@@ -99,52 +149,92 @@ class _HomeStudentScreenState extends State<HomeStudentScreen> {
                 _GridTile(
                   label: "Nuova\nconversazione",
                   assetPath: "assets/nuova_conversazione.png",
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ConversationPeriodSelectionScreen(
-                        name: widget.name,
-                        surname: widget.surname,
-                        classCode: widget.classCode,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ConversationPeriodSelectionScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                          classCode: widget.classCode,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 _GridTile(
                   label: "Quiz",
                   assetPath: "assets/quiz.png",
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => QuizSelectionScreen(
-                        name: widget.name,
-                        surname: widget.surname,
-                        classCode: widget.classCode,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => QuizSelectionScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                          classCode: widget.classCode,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
                 _GridTile(
                   label: "Conversazioni",
                   assetPath: "assets/conversazioni.png",
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => ConversationsStudentScreen(
-                        name: widget.name,
-                        surname: widget.surname,
-                        classCode: widget.classCode,
+                  onTap: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => ConversationsStudentScreen(
+                          name: widget.name,
+                          surname: widget.surname,
+                          classCode: widget.classCode,
+                        ),
                       ),
-                    ),
-                  ),
+                    );
+                  },
                 ),
-                _GridTile(
-                  label: "Domande",
-                  assetPath: "assets/domande.png",
-                  onTap: () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => SchermataDomande()),
-                  ),
+                Stack(
+                  children: [
+                    _GridTile(
+                      label: "Domande",
+                      assetPath: "assets/domande.png",
+                      onTap: () async {
+                        final result = await Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: (_) => SchermataDomande(
+                              name: widget.name,
+                              surname: widget.surname,
+                              classCode: widget.classCode,
+                              domande: domande, // Passiamo la lista
+                            ),
+                          ),
+                        );
+
+                        // Se c'è stato un aggiornamento (es. domanda completata)
+                        if (result == true) {
+                          setState(() {});
+                        }
+                      },
+                    ),
+                    if (_hasPendingDomande)
+                      Positioned(
+                        top: 8,
+                        right: 8,
+                        child: ScaleTransition(
+                          scale: _animation,
+                          child: Container(
+                            width: 14,
+                            height: 14,
+                            decoration: const BoxDecoration(
+                              color: Colors.red,
+                              shape: BoxShape.circle,
+                            ),
+                          ),
+                        ),
+                      ),
+                  ],
                 ),
               ],
             ),
