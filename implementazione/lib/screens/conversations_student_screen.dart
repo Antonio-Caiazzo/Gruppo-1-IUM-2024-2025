@@ -3,6 +3,7 @@ import '../constants/colors.dart';
 import '../models/conversation.dart';
 import 'conversation_screen.dart';
 import 'conversation_period_selection_screen.dart';
+import 'home_student_screen.dart';
 import '../widgets/student_bottom_nav_bar.dart';
 
 class ConversationsStudentScreen extends StatefulWidget {
@@ -148,6 +149,21 @@ class _ConversationsStudentScreenState extends State<ConversationsStudentScreen>
     return Scaffold(
       backgroundColor: Colors.white,
       appBar: AppBar(
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back, color: Colors.black),
+          onPressed: () {
+            Navigator.pushReplacement(
+              context,
+              MaterialPageRoute(
+                builder: (_) => HomeStudentScreen(
+                  name: widget.name,
+                  surname: widget.surname,
+                  classCode: widget.classCode,
+                ),
+              ),
+            );
+          },
+        ),
         title: const Text(
           "Conversazioni",
           style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),

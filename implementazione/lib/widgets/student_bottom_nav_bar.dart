@@ -20,6 +20,13 @@ class StudentBottomNavigationBar extends StatelessWidget {
     this.onTap,
   });
 
+  void _navigateAndRemovePrevious(BuildContext context, Widget screen) {
+    Navigator.of(context).pushAndRemoveUntil(
+      MaterialPageRoute(builder: (_) => screen),
+      (route) => false,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
@@ -28,45 +35,39 @@ class StudentBottomNavigationBar extends StatelessWidget {
       unselectedItemColor: Colors.grey,
       backgroundColor: Colors.white,
       onTap: (index) {
-        if (index == currentIndex) return; // Evita la navigazione ridondante
+        if (index == currentIndex) return; // Evita navigazione ridondante
 
         if (onTap != null) {
-          onTap!(index);
+          onTap!(index); // Usa callback se fornita (es. IndexedStack)
         } else {
           switch (index) {
             case 0:
-              Navigator.pushReplacement(
+              _navigateAndRemovePrevious(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => HomeStudentScreen(
-                    name: name,
-                    surname: surname,
-                    classCode: classCode,
-                  ),
+                HomeStudentScreen(
+                  name: name,
+                  surname: surname,
+                  classCode: classCode,
                 ),
               );
               break;
             case 1:
-              Navigator.pushReplacement(
+              _navigateAndRemovePrevious(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => ConversationsStudentScreen(
-                    name: name,
-                    surname: surname,
-                    classCode: classCode,
-                  ),
+                ConversationsStudentScreen(
+                  name: name,
+                  surname: surname,
+                  classCode: classCode,
                 ),
               );
               break;
             case 2:
-              Navigator.pushReplacement(
+              _navigateAndRemovePrevious(
                 context,
-                MaterialPageRoute(
-                  builder: (_) => SettingsStudentScreen(
-                    name: name,
-                    surname: surname,
-                    classCode: classCode,
-                  ),
+                SettingsStudentScreen(
+                  name: name,
+                  surname: surname,
+                  classCode: classCode,
                 ),
               );
               break;
