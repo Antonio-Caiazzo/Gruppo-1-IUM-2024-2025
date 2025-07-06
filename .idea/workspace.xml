@@ -10,28 +10,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="838d436b-234a-48f3-8e44-311aea9d695e" name="Changes" comment="Integrate DomandeInsegnanteScreen into HomeTeacherScreen&#10;&#10;This commit updates the `HomeTeacherScreen` to navigate to the `DomandeInsegnanteScreen` when the &quot;Domande&quot; grid tile is tapped.&#10;&#10;The `_selectedIndex` is now used to manage the active state in the `TeacherBottomNavigationBar`.">
-      <change afterPath="$PROJECT_DIR$/implementazione/lib/screens/dettaglio_classe_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/caches/deviceStreaming.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/libraries/Dart_Packages.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_arm64_v8a_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_armeabi_v7a_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_flutter_embedding_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/libraries/Gradle__io_flutter_x86_64_debug_1_0_0_8cd19e509d6bece8ccd74aef027c4ca947363095.xml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/17431987/android.shared_preferences_android.unitTest.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.androidTest.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.main.iml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/modules/app/android.app.unitTest.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/aggiungi_classe_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/aggiungi_classe_screen.dart" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/classi_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/classi_screen.dart" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/home_teacher_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/conversazioni_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/dettaglio_classe_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/dettaglio_classe_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/lib/screens/domande_insegnante_screen.dart" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/lib/screens/domande_insegnante_screen.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugin_registrant.h" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/linux/flutter/generated_plugins.cmake" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/macos/Flutter/GeneratedPluginRegistrant.swift" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.cc" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.cc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.h" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugin_registrant.h" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugins.cmake" beforeDir="false" afterPath="$PROJECT_DIR$/implementazione/windows/flutter/generated_plugins.cmake" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -79,6 +68,7 @@
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RESET_MODE" value="HARD" />
     <option name="ROOT_SYNC" value="DONT_SYNC" />
   </component>
   <component name="GitHubPullRequestSearchHistory">{
