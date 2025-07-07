@@ -18,7 +18,7 @@ class ClassiScreen extends StatefulWidget {
 
 class _ClassiScreenState extends State<ClassiScreen> {
   List<Map<String, dynamic>> classi =
-  []; // Changed to dynamic for students list
+      []; // Changed to dynamic for students list
   int? selectedIndex;
   bool isDeleteMode = false;
 
@@ -63,8 +63,8 @@ class _ClassiScreenState extends State<ClassiScreen> {
         classi = List<Map<String, dynamic>>.from(
           (json.decode(savedClassi) as List).map(
             // Ensure student lists are also correctly deserialized
-                (e) =>
-            Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []),
+            (e) =>
+                Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []),
           ),
         );
       });
@@ -101,10 +101,10 @@ class _ClassiScreenState extends State<ClassiScreen> {
   }
 
   void _showSnackBar(
-      String message, {
-        Color backgroundColor = Colors.black,
-        Color textColor = Colors.white,
-      }) {
+    String message, {
+    Color backgroundColor = Colors.black,
+    Color textColor = Colors.white,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: TextStyle(color: textColor)),
@@ -250,8 +250,8 @@ class _ClassiScreenState extends State<ClassiScreen> {
             child: Text(
               isDeleteMode
                   ? (selectedIndex != null
-                  ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
-                  : 'Seleziona la classe da eliminare')
+                        ? 'Classe "${classi[selectedIndex!]['nome']}" selezionata'
+                        : 'Seleziona la classe da eliminare')
                   : 'Seleziona una classe per\nvisualizzare il codice e gli alunni',
               textAlign: TextAlign.center,
               style: TextStyle(
@@ -419,7 +419,7 @@ class _ClassiScreenState extends State<ClassiScreen> {
         ],
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: -1,
         name: widget.name,
         surname: widget.surname,
       ),
