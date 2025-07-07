@@ -3,6 +3,7 @@
   <component name="CompilerConfiguration">
     <bytecodeTargetLevel>
       <module name="android.app" target="21" />
+      <module name="android.flutter_tts" target="21" />
       <module name="android.shared_preferences_android" target="21" />
       <module name="gradle" target="21" />
       <module name="gradle.main" target="11" />

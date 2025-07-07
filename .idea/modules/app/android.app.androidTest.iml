@@ -45,6 +45,7 @@
     <orderEntry type="jdk" jdkName="Android API 35, extension level 13 Platform" jdkType="Android SDK" />
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="module" module-name="android.app.main" scope="TEST" />
+    <orderEntry type="module" module-name="android.flutter_tts.main" scope="TEST" />
     <orderEntry type="module" module-name="android.shared_preferences_android.main" scope="TEST" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-process:2.7.0@aar" level="project" />
     <orderEntry type="library" scope="TEST" name="Gradle: androidx.lifecycle:lifecycle-runtime:2.7.0@aar" level="project" />

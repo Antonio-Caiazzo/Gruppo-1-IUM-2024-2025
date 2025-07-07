@@ -20,6 +20,7 @@
         <option name="gradleJvm" value="#JAVA_HOME" />
         <option name="modules">
           <set>
+            <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/flutter_tts-3.8.5/android" />
             <option value="$USER_HOME$/AppData/Local/Pub/Cache/hosted/pub.dev/shared_preferences_android-2.4.10/android" />
             <option value="$PROJECT_DIR$/implementazione/android" />
             <option value="$PROJECT_DIR$/implementazione/android/app" />
