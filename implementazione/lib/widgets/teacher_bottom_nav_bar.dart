@@ -40,9 +40,14 @@ class TeacherBottomNavigationBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BottomNavigationBar(
-      currentIndex: currentIndex < 0 ? 0 : currentIndex,
-      selectedItemColor: AppColors.primary,
+      currentIndex: currentIndex >= 0 && currentIndex <= 2 ? currentIndex : 0,
+      selectedItemColor: currentIndex == -1 ? Colors.grey : AppColors.primary,
+      selectedLabelStyle: TextStyle(
+        color: currentIndex == -1 ? Colors.grey : AppColors.primary,
+      ),
       unselectedItemColor: Colors.grey,
+      showSelectedLabels: true,
+      showUnselectedLabels: true,
       backgroundColor: Colors.white,
       onTap: (index) {
         if (index == currentIndex) return;

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:historia/screens/home_teacher_screen.dart';
 import '../models/conversation.dart';
 import '../constants/colors.dart';
 import 'conversation_detail_teacher_screen.dart';
@@ -193,15 +192,7 @@ class _ConversazioniTeacherListScreenState
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () {
-            Navigator.pushReplacement(
-              context,
-              MaterialPageRoute(
-                builder: (_) => HomeTeacherScreen(
-                  name: widget.name,
-                  surname: widget.surname,
-                ),
-              ),
-            );
+            Navigator.pop(context);
           },
         ),
       ),
@@ -251,7 +242,7 @@ class _ConversazioniTeacherListScreenState
       bottomNavigationBar: TeacherBottomNavigationBar(
         name: widget.name,
         surname: widget.surname,
-        currentIndex: 1, // Conversazioni
+        currentIndex: -1, // Conversazioni
       ),
     );
   }

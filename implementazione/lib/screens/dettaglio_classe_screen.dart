@@ -41,8 +41,11 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
     _nomeController.text = classeCorrente['nome']!;
     _annoController.text = classeCorrente['anno']!;
 
-    if (classeCorrente['studenti'] == null || (classeCorrente['studenti'] as List).isEmpty) {
-      classeCorrente['studenti'] = List<String>.from(_defaultStudentsForNewClasses);
+    if (classeCorrente['studenti'] == null ||
+        (classeCorrente['studenti'] as List).isEmpty) {
+      classeCorrente['studenti'] = List<String>.from(
+        _defaultStudentsForNewClasses,
+      );
     }
   }
 
@@ -53,22 +56,21 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
     super.dispose();
   }
 
-  String get codiceClasse => '${classeCorrente['nome']}${classeCorrente['anno']}';
+  String get codiceClasse =>
+      '${classeCorrente['nome']}${classeCorrente['anno']}';
 
   void _showSnackBar(
-      String message, {
-        Color backgroundColor = Colors.black,
-        Color textColor = Colors.white,
-      }) {
+    String message, {
+    Color backgroundColor = Colors.black,
+    Color textColor = Colors.white,
+  }) {
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(message, style: TextStyle(color: textColor)),
         backgroundColor: backgroundColor,
         duration: const Duration(seconds: 2),
         behavior: SnackBarBehavior.floating,
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10),
-        ),
+        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         margin: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
       ),
     );
@@ -81,7 +83,8 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
     if (savedClassi != null) {
       List<Map<String, dynamic>> classi = List<Map<String, dynamic>>.from(
         (json.decode(savedClassi) as List).map(
-              (e) => Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []),
+          (e) =>
+              Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []),
         ),
       );
 
@@ -102,26 +105,45 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
       context: context,
       builder: (context) => AlertDialog(
         title: const Text('Attenzione', textAlign: TextAlign.center),
-        content: const Text('Confermare l\'eliminazione?', textAlign: TextAlign.center),
+        content: const Text(
+          'Confermare l\'eliminazione?',
+          textAlign: TextAlign.center,
+        ),
         actions: [
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFFFF5555),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
               elevation: 0,
             ),
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Elimina', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            child: const Text(
+              'Elimina',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
           const SizedBox(width: 8),
           ElevatedButton(
             style: ElevatedButton.styleFrom(
               backgroundColor: const Color(0xFF2CBDFB),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(25),
+              ),
               elevation: 0,
             ),
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Annulla', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+            child: const Text(
+              'Annulla',
+              style: TextStyle(
+                color: Colors.white,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
           ),
         ],
       ),
@@ -144,7 +166,7 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
     if (savedClassi != null) {
       List<Map<String, dynamic>> classi = List<Map<String, dynamic>>.from(
         (json.decode(savedClassi) as List).map(
-              (e) => Map<String, dynamic>.from(e),
+          (e) => Map<String, dynamic>.from(e),
         ),
       );
 
@@ -155,7 +177,9 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
 
   void _mostraDialogModifica() {
     // Creiamo una copia della lista degli studenti
-    List<String> tempStudentNames = List<String>.from(classeCorrente['studenti'] as List<dynamic>);
+    List<String> tempStudentNames = List<String>.from(
+      classeCorrente['studenti'] as List<dynamic>,
+    );
 
     showDialog(
       context: context,
@@ -184,7 +208,8 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                       decoration: InputDecoration(
                         labelText: 'Anno (parte del codice)',
                         border: const OutlineInputBorder(),
-                        helperText: 'Codice Classe: ${_nomeController.text}${_annoController.text}',
+                        helperText:
+                            'Codice Classe: ${_nomeController.text}${_annoController.text}',
                       ),
                       onChanged: (value) {
                         setStateDialog(() {});
@@ -225,7 +250,10 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                               ),
                               const SizedBox(width: 8),
                               IconButton(
-                                icon: const Icon(Icons.delete_forever, color: Colors.red),
+                                icon: const Icon(
+                                  Icons.delete_forever,
+                                  color: Colors.red,
+                                ),
                                 onPressed: () {
                                   setStateDialog(() {
                                     tempStudentNames.removeAt(index);
@@ -242,7 +270,6 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                         style: TextStyle(fontSize: 14, color: Colors.grey),
                         textAlign: TextAlign.center,
                       ),
-
                   ],
                 ),
               ),
@@ -250,13 +277,18 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2CBDFB),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
                     elevation: 0,
                   ),
                   onPressed: () {
-                    if (_nomeController.text.trim().isNotEmpty && _annoController.text.trim().isNotEmpty) {
+                    if (_nomeController.text.trim().isNotEmpty &&
+                        _annoController.text.trim().isNotEmpty) {
                       // Filtra gli studenti vuoti
-                      final List<String> finalStudentNames = tempStudentNames.where((name) => name.isNotEmpty).toList();
+                      final List<String> finalStudentNames = tempStudentNames
+                          .where((name) => name.isNotEmpty)
+                          .toList();
 
                       setState(() {
                         classeCorrente['nome'] = _nomeController.text.trim();
@@ -267,16 +299,27 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                       _salvaModifiche();
                       Navigator.pop(context);
                     } else {
-                      _showSnackBar('Nome e Anno della classe non possono essere vuoti!', backgroundColor: Colors.orange.shade700);
+                      _showSnackBar(
+                        'Nome e Anno della classe non possono essere vuoti!',
+                        backgroundColor: Colors.orange.shade700,
+                      );
                     }
                   },
-                  child: const Text('Conferma', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                  child: const Text(
+                    'Conferma',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
                 const SizedBox(width: 8),
                 ElevatedButton(
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFFFF5555),
-                    shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(25),
+                    ),
                     elevation: 0,
                   ),
                   onPressed: () {
@@ -285,7 +328,13 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                     _annoController.text = widget.classe['anno']!;
                     Navigator.pop(context);
                   },
-                  child: const Text('Annulla', style: TextStyle(color: Colors.white, fontWeight: FontWeight.w600)),
+                  child: const Text(
+                    'Annulla',
+                    style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w600,
+                    ),
+                  ),
                 ),
               ],
             );
@@ -297,9 +346,11 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final List<String> studentsToDisplay = (classeCorrente['studenti'] as List<dynamic>?)
-        ?.map((s) => s.toString())
-        .toList() ?? [];
+    final List<String> studentsToDisplay =
+        (classeCorrente['studenti'] as List<dynamic>?)
+            ?.map((s) => s.toString())
+            .toList() ??
+        [];
 
     return Scaffold(
       backgroundColor: Colors.white,
@@ -334,10 +385,7 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                 textAlign: TextAlign.center,
                 text: TextSpan(
                   text: 'Codice: ',
-                  style: const TextStyle(
-                    fontSize: 16,
-                    color: Colors.black,
-                  ),
+                  style: const TextStyle(fontSize: 16, color: Colors.black),
                   children: [
                     TextSpan(
                       text: codiceClasse,
@@ -357,10 +405,7 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                     padding: const EdgeInsets.only(bottom: 16.0),
                     child: Text(
                       '${entry.key + 1}. ${entry.value}',
-                      style: const TextStyle(
-                        fontSize: 18,
-                        color: Colors.black,
-                      ),
+                      style: const TextStyle(fontSize: 18, color: Colors.black),
                       textAlign: TextAlign.center,
                     ),
                   );
@@ -381,7 +426,9 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFF2CBDFB),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
                         elevation: 0,
                       ),
                       onPressed: _mostraDialogModifica,
@@ -402,7 +449,9 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
                     child: ElevatedButton(
                       style: ElevatedButton.styleFrom(
                         backgroundColor: const Color(0xFFFF5555),
-                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(25)),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(25),
+                        ),
                         elevation: 0,
                       ),
                       onPressed: _confermaEliminazione,
@@ -424,7 +473,7 @@ class _DettaglioClasseScreenState extends State<DettaglioClasseScreen> {
         ),
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: -1,
         name: widget.name,
         surname: widget.surname,
       ),

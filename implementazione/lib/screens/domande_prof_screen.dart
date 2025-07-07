@@ -241,7 +241,7 @@ class _QuestionScreenState extends State<QuestionScreen> {
         ),
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 0,
+        currentIndex: -1,
         name: widget.name,
         surname: widget.surname,
       ),

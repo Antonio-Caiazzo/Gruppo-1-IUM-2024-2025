@@ -9,13 +9,19 @@ class DomandeInsegnanteScreen extends StatefulWidget {
   final String name;
   final String surname;
 
-  const DomandeInsegnanteScreen({Key? key, required this.name, required this.surname}) : super(key: key);
+  const DomandeInsegnanteScreen({
+    Key? key,
+    required this.name,
+    required this.surname,
+  }) : super(key: key);
 
   @override
-  _DomandeInsegnanteScreenState createState() => _DomandeInsegnanteScreenState();
+  _DomandeInsegnanteScreenState createState() =>
+      _DomandeInsegnanteScreenState();
 }
 
-class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> with WidgetsBindingObserver {
+class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen>
+    with WidgetsBindingObserver {
   // Modificato a dynamic per supportare la lista studenti
   List<Map<String, dynamic>> classi = [];
 
@@ -65,7 +71,9 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> with 
       setState(() {
         classi = List<Map<String, dynamic>>.from(
           (json.decode(savedClassi) as List).map(
-                (e) => Map<String, dynamic>.from(e)..putIfAbsent('studenti', () => []), // Assicura 'studenti'
+            (e) =>
+                Map<String, dynamic>.from(e)
+                  ..putIfAbsent('studenti', () => []), // Assicura 'studenti'
           ),
         );
       });
@@ -89,8 +97,14 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> with 
     return Scaffold(
       backgroundColor: Colors.white, // Assuming a white background
       appBar: AppBar(
-        title: const Text('Domande Insegnante',
-            style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold, color: Colors.black)),
+        title: const Text(
+          'Domande Insegnante',
+          style: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.black,
+          ),
+        ),
         leading: IconButton(
           icon: const Icon(Icons.arrow_back, color: Colors.black),
           onPressed: () => Navigator.pop(context),
@@ -142,7 +156,8 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> with 
                       color: Colors.white, // Card background
                       borderRadius: BorderRadius.circular(12),
                       border: Border.all(
-                        color: Colors.grey.shade300, // Always a light grey border
+                        color:
+                            Colors.grey.shade300, // Always a light grey border
                         width: 1,
                       ),
                       boxShadow: [
@@ -196,7 +211,7 @@ class _DomandeInsegnanteScreenState extends State<DomandeInsegnanteScreen> with 
         ],
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: 0, // Assicurati che l'indice sia corretto per questa tab
+        currentIndex: -1, // Assicurati che l'indice sia corretto per questa tab
         name: widget.name,
         surname: widget.surname,
       ),
