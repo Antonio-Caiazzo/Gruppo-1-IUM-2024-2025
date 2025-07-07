@@ -68,10 +68,8 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                     hintText: 'Sezione',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -99,10 +97,8 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                     hintText: 'Anno',
                     hintStyle: TextStyle(color: Colors.grey),
                     border: InputBorder.none,
-                    contentPadding: EdgeInsets.symmetric(
-                      horizontal: 16,
-                      vertical: 16,
-                    ),
+                    contentPadding:
+                    EdgeInsets.symmetric(horizontal: 16, vertical: 16),
                   ),
                   validator: (value) {
                     if (value == null || value.isEmpty) {
@@ -123,18 +119,16 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
                   style: ElevatedButton.styleFrom(
                     backgroundColor: const Color(0xFF2CBDFB),
                     shape: RoundedRectangleBorder(
-                      borderRadius: BorderRadius.circular(25),
-                    ),
+                        borderRadius: BorderRadius.circular(25)),
                     padding: const EdgeInsets.symmetric(vertical: 16),
                   ),
                   onPressed: _salvaClasse,
                   child: const Text(
                     'Aggiungi',
                     style: TextStyle(
-                      fontSize: 18,
-                      fontWeight: FontWeight.w600,
-                      color: Colors.white,
-                    ),
+                        fontSize: 18,
+                        fontWeight: FontWeight.w600,
+                        color: Colors.white),
                   ),
                 ),
               ),
@@ -144,7 +138,7 @@ class _AggiungiClasseScreenState extends State<AggiungiClasseScreen> {
         ),
       ),
       bottomNavigationBar: TeacherBottomNavigationBar(
-        currentIndex: -1, // Imposta 0 per Home, puoi cambiarlo se necessario
+        currentIndex: 0, // Imposta 0 per Home, puoi cambiarlo se necessario
         name: widget.name,
         surname: widget.surname,
       ),
